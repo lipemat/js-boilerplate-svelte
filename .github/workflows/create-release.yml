@@ -1,3 +1,5 @@
+# @notice You must enable write permissions for this action to work.
+# @see /settings/actions in your repo.
 name: Create GitHub Release
 run-name: Create release for ${{ github.ref }} on GitHub.
 env:
