@@ -2131,7 +2131,7 @@ __metadata:
     "@lipemat/js-boilerplate": ^10.3.1
     "@tsconfig/svelte": ^5.0.0
     "@types/jest": ^29.5.3
-    "@types/node": ^20.4.6
+    "@types/node": ^16
     eslint: ^8
     eslint-plugin-svelte: ^2.32.2
     jest: ^29
@@ -2613,10 +2613,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.4.6":
+"@types/node@npm:*":
   version: 20.4.6
   resolution: "@types/node@npm:20.4.6"
   checksum: 28dfc13da87f579264840bc5b8a2cde2dcb93662464a0d58f0fa98eba1aae978e3c73e893474238c4a1226d0b1a14e3936520ff9795e1c4e06fad3282be83d18
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^16":
+  version: 16.18.39
+  resolution: "@types/node@npm:16.18.39"
+  checksum: eac9b202b76013256cb517ca8d3e3f61df206edb1615ca8d8df4c80616e92879fe4d3f8570a11d60f4216a82724a3265d5888b24c6994c80b057a0423c9ff1d2
   languageName: node
   linkType: hard
 
