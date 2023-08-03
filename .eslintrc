@@ -1,5 +1,5 @@
 {
   "extends": [
-    "@lipemat"
+    "./config/eslint-config"
   ]
 }

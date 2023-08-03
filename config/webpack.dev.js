@@ -7,7 +7,7 @@ const {getTypeScriptConfig} = require( '../helpers/config' );
 const postcssOptions = {...getConfig( 'postcss.config.js' )};
 postcssOptions.parser = require( 'postcss-scss' );
 
-module.exports = function ( config ) {
+module.exports = function( config ) {
 	if ( ! config.resolve.mainFields ) {
 		// Webpack Defaults.
 		config.resolve.mainFields = [ 'browser', 'module', 'main' ];
@@ -53,7 +53,6 @@ module.exports = function ( config ) {
 			},
 		},
 	} );
-
 
 
 	return {

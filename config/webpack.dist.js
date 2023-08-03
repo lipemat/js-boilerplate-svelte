@@ -10,7 +10,7 @@ const postcssOptions = getConfig( 'postcss.config.js' );
 postcssOptions.parser = require( 'postcss-scss' );
 
 
-module.exports = function ( config ) {
+module.exports = function( config ) {
 	if ( ! config.resolve.mainFields ) {
 		// Webpack Defaults.
 		config.resolve.mainFields = [ 'browser', 'module', 'main' ];
@@ -33,7 +33,8 @@ module.exports = function ( config ) {
 			loader: 'svelte-loader',
 			options: {
 				compilerOptions: {
-					dev: false, /**
+					dev: false,
+					/**
 					 * Strip the `svelte-` prefix from CSS class names.
 					 * Hash the CSS with base52 to prevent leading numbers or dashes.
 					 */
@@ -46,13 +47,13 @@ module.exports = function ( config ) {
 
 						// Mimic `localIdentName` from `css-loader`.
 						return interpolateName( {
-								resourcePath: filename,
-							},
-							'[contenthash:base52:5]',
-							{
-								content: css,
-								context: process.cwd(),
-							} );
+							resourcePath: filename,
+						},
+						'[contenthash:base52:5]',
+						{
+							content: css,
+							context: process.cwd(),
+						} );
 					},
 				},
 				emitCss: true,
@@ -72,6 +73,7 @@ module.exports = function ( config ) {
 			},
 		},
 	} );
+
 
 	return {
 		resolve: {

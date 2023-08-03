@@ -17,18 +17,18 @@ describe( 'webpack.dist.js', () => {
 	test( 'Rules', () => {
 		const rules = getWebpackConfig().module.rules;
 		expect( rules ).toHaveLength( 5 );
-		expect( rules[0].test ).toEqual( /\.(html|svelte)$/ );
-		expect( rules[1].test ).toEqual( /node_modules\/svelte\/.*\.mjs$/ );
+		expect( rules[ 0 ].test ).toEqual( /\.(html|svelte)$/ );
+		expect( rules[ 1 ].test ).toEqual( /node_modules\/svelte\/.*\.mjs$/ );
 
 		const mainRule = rules[ 0 ].use;
 		expect( mainRule.options.emitCss ).toEqual( true );
 		expect( mainRule.options.hotReload ).not.toBeDefined();
-	});
+	} );
 
 	test( 'Extensions', () => {
 		const extensions = getWebpackConfig().resolve.extensions;
 		expect( extensions ).toHaveLength( 8 );
-		expect( extensions ).toEqual( [ ".ts", ".tsx", ".js", ".jsx", ".json", ".pcss", ".svelte", ".mjs" ] );
+		expect( extensions ).toEqual( [ '.ts', '.tsx', '.js', '.jsx', '.json', '.pcss', '.svelte', '.mjs' ] );
 	} );
 
 	test( 'mainFields', () => {

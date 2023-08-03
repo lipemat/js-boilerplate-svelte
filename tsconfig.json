@@ -1,6 +1,7 @@
 {
   "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
   "include": [
+    "config/**/*",
     "helpers/**/*",
     "tests/**/*"
   ]
