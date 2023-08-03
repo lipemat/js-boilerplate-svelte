@@ -1,0 +1,33 @@
+{
+  "name": "@lipemat/js-boilerplate-svelte",
+  "version": "0.0.0",
+  "description": "Svelte extension for @lipemat/js-boilerplate",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.14.2"
+  },
+  "files": [
+    "config/",
+    "helpers/"
+  ],
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lipemat/js-boilerplate-svelte.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lipemat/js-boilerplate-svelte/issues"
+  },
+  "homepage": "https://github.com/lipemat/js-boilerplate-svelte#readme",
+  "scripts": {
+    "postprepare": "lipemat-js-boilerplate fix-pnp",
+    "test": "lipemat-js-boilerplate test"
+  },
+  "devDependencies": {
+    "@lipemat/js-boilerplate": "^10.3.0"
+  },
+  "peerDependencies": {
+    "@lipemat/js-boilerplate": ">=10.3.0"
+  },
+  "packageManager": "yarn@3.6.1"
+}
