@@ -4,6 +4,7 @@ const interpolateName = require( 'loader-utils/lib/interpolateName' );
 
 const {getConfig} = require( '@lipemat/js-boilerplate/helpers/config' );
 const {getLocalIdent, usingShortCssClasses} = require( '@lipemat/js-boilerplate/helpers/css-classnames' );
+const {getTypeScriptConfig} = require( '../helpers/config' );
 
 const postcssOptions = getConfig( 'postcss.config.js' );
 postcssOptions.parser = require( 'postcss-scss' );
@@ -16,8 +17,19 @@ module.exports = function ( config ) {
 	}
 
 	const rules = [ ...config.module.rules ];
+
+	// Required to prevent errors from Svelte on Webpack 5.
 	rules.unshift( {
-		test: /\.(html|svelte)$/, use: {
+		test: /node_modules\/svelte\/.*\.mjs$/,
+		resolve: {
+			fullySpecified: false,
+		},
+	} );
+
+	// Main svelte rule.
+	rules.unshift( {
+		test: /\.(html|svelte)$/,
+		use: {
 			loader: 'svelte-loader',
 			options: {
 				compilerOptions: {
@@ -47,7 +59,7 @@ module.exports = function ( config ) {
 				preprocess: [
 					sveltePreprocess( {
 						postcss: postcssOptions,
-						typescript: require( '@tsconfig/svelte' ),
+						typescript: getTypeScriptConfig(),
 					} ),
 					// CSS module support for local <style> tags.
 					cssModules( {
@@ -58,12 +70,6 @@ module.exports = function ( config ) {
 					} ),
 				],
 			},
-		},
-	} );
-	rules.unshift( {
-		// required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4
-		test: /node_modules\/svelte\/.*\.mjs$/, resolve: {
-			fullySpecified: false,
 		},
 	} );
 

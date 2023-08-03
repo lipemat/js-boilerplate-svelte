@@ -1,7 +1,8 @@
 const sveltePreprocess = require( 'svelte-preprocess' );
 const {cssModules} = require( 'svelte-preprocess-cssmodules' );
-const {getConfig} = require( '@lipemat/js-boilerplate/helpers/config' );
 
+const {getConfig} = require( '@lipemat/js-boilerplate/helpers/config' );
+const {getTypeScriptConfig} = require( '../helpers/config' );
 
 const postcssOptions = {...getConfig( 'postcss.config.js' )};
 postcssOptions.parser = require( 'postcss-scss' );
@@ -13,6 +14,16 @@ module.exports = function ( config ) {
 	}
 
 	const rules = [ ...config.module.rules ];
+
+	// Required to prevent errors from Svelte on Webpack 5.
+	rules.unshift( {
+		test: /node_modules\/svelte\/.*\.mjs$/,
+		resolve: {
+			fullySpecified: false,
+		},
+	} );
+
+	// Main svelte rule.
 	rules.unshift( {
 		test: /\.(html|svelte)$/,
 		use: {
@@ -30,7 +41,7 @@ module.exports = function ( config ) {
 				preprocess: [
 					sveltePreprocess( {
 						postcss: postcssOptions,
-						typescript: require( '@tsconfig/svelte' )
+						typescript: getTypeScriptConfig(),
 					} ),
 					// CSS module support for local <style> tags.
 					cssModules( {
@@ -42,13 +53,8 @@ module.exports = function ( config ) {
 			},
 		},
 	} );
-	rules.unshift( {
-		// required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4
-		test: /node_modules\/svelte\/.*\.mjs$/,
-		resolve: {
-			fullySpecified: false,
-		},
-	} );
+
+
 
 	return {
 		// eval source map does not work with svelte.
