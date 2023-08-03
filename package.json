@@ -23,8 +23,18 @@
     "postprepare": "lipemat-js-boilerplate fix-pnp",
     "test": "lipemat-js-boilerplate test"
   },
+  "dependencies": {
+    "@tsconfig/svelte": "^5.0.0",
+    "eslint-plugin-svelte": "^2.32.2",
+    "loader-utils": "^3.2.1",
+    "svelte": "^4.0.5",
+    "svelte-loader": "^3.1.9",
+    "svelte-preprocess": "^5.0.4",
+    "svelte-preprocess-cssmodules": "^2.2.4"
+  },
   "devDependencies": {
-    "@lipemat/js-boilerplate": "^10.3.0"
+    "@lipemat/js-boilerplate": "^10.3.0",
+    "postcss-scss": "^4.0.4"
   },
   "peerDependencies": {
     "@lipemat/js-boilerplate": ">=10.3.0"
