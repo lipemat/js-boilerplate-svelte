@@ -24,6 +24,7 @@
     "test": "lipemat-js-boilerplate test"
   },
   "dependencies": {
+    "@lipemat/eslint-config": "^3.1.1",
     "@tsconfig/svelte": "^5.0.0",
     "eslint-plugin-svelte": "^2.32.2",
     "loader-utils": "^3.2.1",

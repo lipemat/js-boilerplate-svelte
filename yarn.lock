@@ -2124,10 +2124,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lipemat/eslint-config@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@lipemat/eslint-config@npm:3.1.1"
+  dependencies:
+    "@wordpress/eslint-plugin": ^12.2.0
+    eslint: ^8
+  peerDependencies:
+    "@lipemat/js-boilerplate": ^10.3.1
+  checksum: c234f231538b5b31daf64690a7ffb644aaa2af8bff8fe2504ab5034a37f4655852cbe61f75f0c28b4fa3b7ab07612f51fd3093e9cf33cba9f8e402c897ddf6d7
+  languageName: node
+  linkType: hard
+
 "@lipemat/js-boilerplate-svelte@workspace:.":
   version: 0.0.0-use.local
   resolution: "@lipemat/js-boilerplate-svelte@workspace:."
   dependencies:
+    "@lipemat/eslint-config": ^3.1.1
     "@lipemat/js-boilerplate": ^10.3.1
     "@tsconfig/svelte": ^5.0.0
     "@types/jest": ^29.5.3

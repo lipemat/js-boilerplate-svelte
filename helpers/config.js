@@ -14,4 +14,4 @@ function getTypeScriptConfig() {
 
 module.exports = {
 	getTypeScriptConfig,
-}
+};

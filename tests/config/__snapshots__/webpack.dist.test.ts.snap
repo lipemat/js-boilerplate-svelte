@@ -40,7 +40,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
         "test": /node_modules\\\\/svelte\\\\/\\.\\*\\\\\\.mjs\\$/,
       },
       {
-        "exclude": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]\\(\\?!\\(eslint-plugin-svelte\\|loader-utils\\|require-json5\\|svelte\\|svelte-preprocess\\|svelte-preprocess-cssmodules\\)\\[\\\\\\\\/\\]\\)/,
+        "exclude": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]\\(\\?!\\(@lipemat\\\\/eslint-config\\|eslint-plugin-svelte\\|loader-utils\\|require-json5\\|svelte\\|svelte-preprocess\\|svelte-preprocess-cssmodules\\)\\[\\\\\\\\/\\]\\)/,
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
@@ -417,7 +417,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
         "test": /node_modules\\\\/svelte\\\\/\\.\\*\\\\\\.mjs\\$/,
       },
       {
-        "exclude": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]\\(\\?!\\(eslint-plugin-svelte\\|loader-utils\\|require-json5\\|svelte\\|svelte-preprocess\\|svelte-preprocess-cssmodules\\)\\[\\\\\\\\/\\]\\)/,
+        "exclude": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]\\(\\?!\\(@lipemat\\\\/eslint-config\\|eslint-plugin-svelte\\|loader-utils\\|require-json5\\|svelte\\|svelte-preprocess\\|svelte-preprocess-cssmodules\\)\\[\\\\\\\\/\\]\\)/,
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
