@@ -37,7 +37,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
       },
       {
         "exclude": /node_modules/,
-        "include": "E:\\SVN\\js-boilerplate-svelte\\src",
+        "include": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\src",
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
@@ -278,7 +278,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
       "main",
     ],
     "modules": [
-      "E:\\SVN\\js-boilerplate-svelte\\src",
+      "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\src",
       "node_modules",
     ],
   },
@@ -327,7 +327,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
       },
       {
         "exclude": /node_modules/,
-        "include": "E:\\SVN\\js-boilerplate-svelte\\src",
+        "include": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\src",
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
@@ -557,7 +557,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
   "output": {
     "chunkFilename": "[name].js",
     "filename": "[name].js",
-    "path": "E:\\SVN\\js-boilerplate-svelte\\dist",
+    "path": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\dist",
     "publicPath": "http://localhost:3000/js/dist/",
   },
   "plugins": [
@@ -572,8 +572,8 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
         "exclude": /node_modules/i,
         "include": /\\\\\\.\\(\\[cm\\]js\\|\\[jt\\]sx\\?\\|flow\\)\\$/i,
         "overlay": {
-          "entry": "E:\\SVN\\js-boilerplate-svelte\\node_modules\\@pmmmwh\\react-refresh-webpack-plugin\\client\\ErrorOverlayEntry.js",
-          "module": "E:\\SVN\\js-boilerplate-svelte\\node_modules\\@pmmmwh\\react-refresh-webpack-plugin\\overlay\\index.js",
+          "entry": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\@pmmmwh\\react-refresh-webpack-plugin\\client\\ErrorOverlayEntry.js",
+          "module": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\@pmmmwh\\react-refresh-webpack-plugin\\overlay\\index.js",
           "sockIntegration": "wds",
         },
       },
@@ -583,7 +583,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
         "devServer": false,
         "formatter": "basic",
         "typescript": {
-          "configFile": "E:\\SVN\\js-boilerplate-svelte\\tsconfig.json",
+          "configFile": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\tsconfig.json",
         },
       },
     },
@@ -606,7 +606,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
       "main",
     ],
     "modules": [
-      "E:\\SVN\\js-boilerplate-svelte\\src",
+      "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\src",
       "node_modules",
     ],
   },

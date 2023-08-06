@@ -89,14 +89,14 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       {
         "test": /\\\\\\.css\\$/,
         "use": [
-          "E:\\SVN\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
         ],
       },
       {
         "test": /\\\\\\.pcss\\$/,
         "use": [
-          "E:\\SVN\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           {
             "loader": "css-loader",
             "options": {
@@ -264,7 +264,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
     "chunkFilename": "[name].[contenthash].js",
     "crossOriginLoading": "anonymous",
     "filename": "[name].js",
-    "path": "E:\\SVN\\js-boilerplate-svelte\\dist",
+    "path": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\dist",
     "publicPath": "auto",
   },
   "performance": {
@@ -314,7 +314,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       "options": {
         "formatter": "basic",
         "typescript": {
-          "configFile": "E:\\SVN\\js-boilerplate-svelte\\tsconfig.json",
+          "configFile": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\tsconfig.json",
         },
       },
     },
@@ -357,7 +357,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       "main",
     ],
     "modules": [
-      "E:\\SVN\\js-boilerplate-svelte\\src",
+      "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\src",
       "node_modules",
     ],
   },
@@ -466,14 +466,14 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
       {
         "test": /\\\\\\.css\\$/,
         "use": [
-          "E:\\SVN\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
         ],
       },
       {
         "test": /\\\\\\.pcss\\$/,
         "use": [
-          "E:\\SVN\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           {
             "loader": "css-loader",
             "options": {
@@ -652,7 +652,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
       "main",
     ],
     "modules": [
-      "E:\\SVN\\js-boilerplate-svelte\\src",
+      "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\src",
       "node_modules",
     ],
   },
