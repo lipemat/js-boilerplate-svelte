@@ -2114,6 +2114,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@lipemat/eslint-config@npm:^3.0.1":
+  version: 3.0.2
+  resolution: "@lipemat/eslint-config@npm:3.0.2"
+  dependencies:
+    "@wordpress/eslint-plugin": ^12.2.0
+    eslint: ^8.8.0
+  checksum: bb2a92c1c235fca91958612a077fdd802632f3a7b6d87f22a5c93d35ba048d4ef43314e7f730c39f6c0c258a00dc0992e9321008375659baaf28d348794faccf
+  languageName: node
+  linkType: hard
+
 "@lipemat/eslint-config@npm:^3.1.1":
   version: 3.1.1
   resolution: "@lipemat/eslint-config@npm:3.1.1"
@@ -2151,9 +2161,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lipemat/js-boilerplate@portal:../js-boilerplate::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@lipemat/js-boilerplate@portal:../js-boilerplate::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
+"@lipemat/js-boilerplate@npm:^10.3.1":
+  version: 10.3.1
+  resolution: "@lipemat/js-boilerplate@npm:10.3.1"
   dependencies:
     "@babel/core": ^7.4.3
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
@@ -2163,7 +2173,7 @@ __metadata:
     "@babel/preset-typescript": ^7.12.7
     "@csstools/postcss-global-data": 2.0.0
     "@lipemat/css-mqpacker": ^9.0.0
-    "@lipemat/eslint-config": ^3.1.1
+    "@lipemat/eslint-config": ^3.0.1
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.10
     "@wordpress/browserslist-config": ^5.19.0
     are-you-es5: ^2.1.1
@@ -2204,8 +2214,9 @@ __metadata:
     webpack-subresource-integrity: ^5.1.0
   bin:
     lipemat-js-boilerplate: bin/lipemat-js-boilerplate.js
+  checksum: ece43c010c9b759a76470dc9703869017a79cd9e0d92cc598a55e7807f3e46352bd2142eda913e970460ea6b961056c856caab9fb4cacdd42782a71d67f4a5c7
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@nicolo-ribaudo/eslint-scope-5-internals@npm:5.1.1-v1":
   version: 5.1.1-v1
@@ -5614,7 +5625,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8":
+"eslint@npm:^8, eslint@npm:^8.8.0":
   version: 8.46.0
   resolution: "eslint@npm:8.46.0"
   dependencies:
