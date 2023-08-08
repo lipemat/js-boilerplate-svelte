@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-svelte#readme",
   "scripts": {
-    "postprepare": "lipemat-js-boilerplate fix-pnp",
     "test": "lipemat-js-boilerplate test"
   },
   "dependencies": {
