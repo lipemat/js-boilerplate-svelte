@@ -1,4 +1,4 @@
-const {dirname, basename} = require( 'path' );
+import {basename, dirname} from 'path';
 
 /**
  * Custom module resolver for Jest snapshots.
@@ -38,53 +38,57 @@ const filesWithPaths = [
  * path will change, and the snapshots will fail.
  */
 function getCurrentDirectoryHash( dir: string ) {
-	return require( 'crypto' ).createHash( 'md4' ).update( dir ).digest( 'hex' );
+	return require( 'crypto' ).createHash( 'md5' ).update( dir ).digest( 'hex' );
 }
 
 
-module.exports = {
-	/**
-	 * Convert the test file path to the path of its snapshot.
-	 */
-	resolveSnapshotPath: ( testPath, snapshotExtension ) => {
-		const normalizedPath = testPath.replace( /\\/g, '/' );
-		const filePath = dirname( normalizedPath ) + '/__snapshots__/' + basename( normalizedPath );
-		if ( filesWithPaths.includes( basename( testPath ) ) ) {
-			return filePath + '.' + getCurrentDirectoryHash( dirname( normalizedPath ) ) + snapshotExtension + '.js';
-		}
+/**
+ * Convert the test file path to the path of its snapshot.
+ */
+export function resolveSnapshotPath( testPath, snapshotExtension ) {
+	const normalizedPath = testPath.replace( /\\/g, '/' );
+	const filePath = dirname( normalizedPath ) + '/__snapshots__/' + basename( normalizedPath );
+	if ( filesWithPaths.includes( basename( testPath ) ) ) {
+		return filePath + '.' + getCurrentDirectoryHash( dirname( normalizedPath ) ) + snapshotExtension + '.js';
+	}
 
-		return filePath + snapshotExtension;
-	},
+	return filePath + snapshotExtension;
+}
 
-	/**
-	 * Convert the path of a snapshot to the path of the original test file.
-	 */
-	resolveTestPath: ( snapshotFilePath, snapshotExtension ) => {
-		const normalizedPath = snapshotFilePath.replace( /\\/g, '/' );
-		const hash = getCurrentDirectoryHash( dirname( normalizedPath.replace( '__snapshots__/', '' ) ) );
+/**
+ * Convert the path of a snapshot to the path of the original test file.
+ */
+export function resolveTestPath( snapshotFilePath, snapshotExtension ) {
+	const normalizedPath = snapshotFilePath.replace( /\\/g, '/' );
+	const hash = getCurrentDirectoryHash( dirname( normalizedPath.replace( '__snapshots__/', '' ) ) );
 
-		let newPath = normalizedPath
-			.replace( '__snapshots__/', '' );
+	let newPath = normalizedPath
+		.replace( '__snapshots__/', '' );
 
-		const fileWithoutHash = basename( newPath )
+	const fileWithoutHash = basename( newPath )
+		.replace( '.' + hash, '' )
+		.slice( 0, -snapshotExtension.length - 3 )
+
+	if ( filesWithPaths.includes( fileWithoutHash ) ) {
+		newPath = newPath
 			.replace( '.' + hash, '' )
-			.slice( 0, -snapshotExtension.length - 3 )
-
-		if ( filesWithPaths.includes( fileWithoutHash ) ) {
-			newPath = newPath
-				.replace( '.' + hash, '' )
-				.slice( 0, -snapshotExtension.length - 3 );
-		} else {
-			newPath = newPath
-				.slice( 0, -snapshotExtension.length );
-		}
+			.slice( 0, -snapshotExtension.length - 3 );
+	} else {
+		newPath = newPath
+			.slice( 0, -snapshotExtension.length );
+	}
 
 
-		return newPath;
-	},
+	return newPath;
+}
 
-	/**
-	 * Test to make sure the resolves are mapping back and forth correctly.
-	 */
-	testPathForConsistencyCheck: 'some/__tests__/webpack.dist.test.ts',
-};
+/**
+ * Test to make sure the resolves are mapping back and forth correctly.
+ */
+export const testPathForConsistencyCheck = 'some/__tests__/webpack.dist.test.ts';
+
+module.exports = {
+	resolveSnapshotPath,
+	resolveTestPath,
+	testPathForConsistencyCheck,
+}

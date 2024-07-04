@@ -6,15 +6,13 @@ exports[`config.js Default TSConfig 1`] = `
   "_version": "5.0.0",
   "compilerOptions": {
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": false,
+    "strict": true,
     "target": "es2017",
     "verbatimModuleSyntax": true,
   },
-  "display": "Svelte",
 }
 `;
