@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ~~ mklink E:\SVN\js-boilerplate-svelte\.git\hooks\pre-commit E:\SVN\js-boilerplate-svelte\git-hooks\pre-commit
+# ~~ mklink E:\SVN\the-boilerplate\.git\modules\packages\js-boilerplate-svelte\.git\hooks\pre-commit E:\SVN\the-boilerplate\.git\modules\packages\js-boilerplate-svelte\git-hooks\pre-commit
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null && pwd)"
 GREEN="$(tput setaf 2)"
