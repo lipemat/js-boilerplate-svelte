@@ -34,7 +34,7 @@
     "svelte-preprocess-cssmodules": "^2.2.5"
   },
   "devDependencies": {
-    "@lipemat/js-boilerplate": "^10.9.2",
+    "@lipemat/js-boilerplate": "^10.10.3",
     "@types/jest": "^29.5.3",
     "@types/node": "~20.11.0",
     "eslint": "^8",
@@ -43,10 +43,7 @@
     "typescript": "^5.5.3"
   },
   "peerDependencies": {
-    "@lipemat/js-boilerplate": ">=10.3.1"
+    "@lipemat/js-boilerplate": ">=10.10.3"
   },
-  "packageManager": "yarn@4.5.1",
-  "resolutions": {
-    "@lipemat/js-boilerplate": "portal:/E:/SVN/the-boilerplate/packages/js-boilerplate"
-  }
+  "packageManager": "yarn@4.5.1"
 }

@@ -54,7 +54,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.37.1",
+                  "version": "3.39.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -91,7 +91,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       {
         "test": /\\\\\\.css\\$/,
         "use": [
-          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
           {
             "loader": "clean-css-loader",
@@ -105,7 +105,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       {
         "test": /\\\\\\.pcss\\$/,
         "use": [
-          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           {
             "loader": "css-loader",
             "options": {
@@ -432,7 +432,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.37.1",
+                  "version": "3.39.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -469,7 +469,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
       {
         "test": /\\\\\\.css\\$/,
         "use": [
-          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
           {
             "loader": "clean-css-loader",
@@ -483,7 +483,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
       {
         "test": /\\\\\\.pcss\\$/,
         "use": [
-          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           {
             "loader": "css-loader",
             "options": {

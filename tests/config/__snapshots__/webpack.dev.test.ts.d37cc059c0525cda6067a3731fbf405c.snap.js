@@ -53,7 +53,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.37.1",
+                  "version": "3.39.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -337,7 +337,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.37.1",
+                  "version": "3.39.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -560,8 +560,8 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
         "exclude": /node_modules/i,
         "include": /\\\\\\.\\(\\[cm\\]js\\|\\[jt\\]sx\\?\\|flow\\)\\$/i,
         "overlay": {
-          "entry": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\@pmmmwh\\react-refresh-webpack-plugin\\client\\ErrorOverlayEntry.js",
-          "module": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\@pmmmwh\\react-refresh-webpack-plugin\\overlay\\index.js",
+          "entry": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\@pmmmwh\\react-refresh-webpack-plugin\\client\\ErrorOverlayEntry.js",
+          "module": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\@pmmmwh\\react-refresh-webpack-plugin\\overlay\\index.js",
           "sockIntegration": "wds",
         },
       },
