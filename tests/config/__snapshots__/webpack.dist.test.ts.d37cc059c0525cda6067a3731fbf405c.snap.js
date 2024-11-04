@@ -40,7 +40,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
         "test": /node_modules\\\\/svelte\\\\/\\.\\*\\\\\\.mjs\\$/,
       },
       {
-        "exclude": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]\\(\\?!\\(@lipemat\\\\/eslint-config\\|eslint-plugin-svelte\\|loader-utils\\|require-json5\\|svelte\\|svelte-preprocess\\|svelte-preprocess-cssmodules\\)\\[\\\\\\\\/\\]\\)/,
+        "exclude": /node_modules/,
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
@@ -70,7 +70,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                     "last 2 iOS versions",
                     "last 2 Edge versions",
                     "last 2 Opera versions",
-                    "not op_mini all",
+                    "not and_uc 15.5",
                   ],
                 },
                 "useBuiltIns": "usage",
@@ -91,7 +91,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       {
         "test": /\\\\\\.css\\$/,
         "use": [
-          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
           {
             "loader": "clean-css-loader",
@@ -105,7 +105,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       {
         "test": /\\\\\\.pcss\\$/,
         "use": [
-          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           {
             "loader": "css-loader",
             "options": {
@@ -209,7 +209,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                           "last 2 iOS versions",
                           "last 2 Edge versions",
                           "last 2 Opera versions",
-                          "not op_mini all",
+                          "not and_uc 15.5",
                         ],
                         "info": [Function],
                         "options": {
@@ -223,7 +223,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                             "last 2 iOS versions",
                             "last 2 Edge versions",
                             "last 2 Opera versions",
-                            "not op_mini all",
+                            "not and_uc 15.5",
                           ],
                         },
                         "postcssPlugin": "autoprefixer",
@@ -380,7 +380,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
     "timings": false,
     "version": false,
   },
-  "target": "browserslist:> 1%, last 1 Android versions, last 1 ChromeAndroid versions, last 2 Chrome versions, last 2 Firefox versions, last 2 Safari versions, last 2 iOS versions, last 2 Edge versions, last 2 Opera versions, not op_mini all",
+  "target": "browserslist:> 1%, last 1 Android versions, last 1 ChromeAndroid versions, last 2 Chrome versions, last 2 Firefox versions, last 2 Safari versions, last 2 iOS versions, last 2 Edge versions, last 2 Opera versions, not and_uc 15.5",
 }
 `;
 
@@ -418,7 +418,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
         "test": /node_modules\\\\/svelte\\\\/\\.\\*\\\\\\.mjs\\$/,
       },
       {
-        "exclude": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]\\(\\?!\\(@lipemat\\\\/eslint-config\\|eslint-plugin-svelte\\|loader-utils\\|require-json5\\|svelte\\|svelte-preprocess\\|svelte-preprocess-cssmodules\\)\\[\\\\\\\\/\\]\\)/,
+        "exclude": /node_modules/,
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
@@ -448,7 +448,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                     "last 2 iOS versions",
                     "last 2 Edge versions",
                     "last 2 Opera versions",
-                    "not op_mini all",
+                    "not and_uc 15.5",
                   ],
                 },
                 "useBuiltIns": "usage",
@@ -469,7 +469,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
       {
         "test": /\\\\\\.css\\$/,
         "use": [
-          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
           {
             "loader": "clean-css-loader",
@@ -483,7 +483,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
       {
         "test": /\\\\\\.pcss\\$/,
         "use": [
-          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           {
             "loader": "css-loader",
             "options": {
@@ -587,7 +587,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                           "last 2 iOS versions",
                           "last 2 Edge versions",
                           "last 2 Opera versions",
-                          "not op_mini all",
+                          "not and_uc 15.5",
                         ],
                         "info": [Function],
                         "options": {
@@ -601,7 +601,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                             "last 2 iOS versions",
                             "last 2 Edge versions",
                             "last 2 Opera versions",
-                            "not op_mini all",
+                            "not and_uc 15.5",
                           ],
                         },
                         "postcssPlugin": "autoprefixer",
