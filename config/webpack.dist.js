@@ -1,4 +1,4 @@
-const sveltePreprocess = require( 'svelte-preprocess' );
+const sveltePreprocess = require( 'svelte-preprocess' ).sveltePreprocess;
 const {cssModules} = require( 'svelte-preprocess-cssmodules' );
 const interpolateName = require( 'loader-utils/lib/interpolateName' );
 
