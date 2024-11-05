@@ -11,7 +11,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(html\\|svelte\\)\\$/,
+        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
         "use": {
           "loader": "svelte-loader",
           "options": {
@@ -389,7 +389,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(html\\|svelte\\)\\$/,
+        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
         "use": {
           "loader": "svelte-loader",
           "options": {

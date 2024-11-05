@@ -6,7 +6,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(html\\|svelte\\)\\$/,
+        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
         "use": {
           "loader": "svelte-loader",
           "options": {
@@ -290,7 +290,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(html\\|svelte\\)\\$/,
+        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
         "use": {
           "loader": "svelte-loader",
           "options": {

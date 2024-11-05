@@ -43,7 +43,7 @@ module.exports = function( config: Configuration ) {
 
 	// Main svelte rule.
 	rules.unshift( {
-		test: /\.(html|svelte)$/,
+		test: /\.(svelte|svelte\.ts)$/,
 		use: {
 			loader: 'svelte-loader',
 			options: {
