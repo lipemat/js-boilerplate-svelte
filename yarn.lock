@@ -2051,7 +2051,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jridgewell/trace-mapping@npm:^0.3.12, @jridgewell/trace-mapping@npm:^0.3.18, @jridgewell/trace-mapping@npm:^0.3.20, @jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25":
+"@jridgewell/trace-mapping@npm:^0.3.12, @jridgewell/trace-mapping@npm:^0.3.17, @jridgewell/trace-mapping@npm:^0.3.18, @jridgewell/trace-mapping@npm:^0.3.20, @jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25":
   version: 0.3.25
   resolution: "@jridgewell/trace-mapping@npm:0.3.25"
   dependencies:
@@ -2091,6 +2091,7 @@ __metadata:
     "@tsconfig/svelte": "npm:^5.0.4"
     "@types/jest": "npm:^29.5.3"
     "@types/node": "npm:~20.11.0"
+    cross-spawn: "npm:^7.0.3"
     eslint: "npm:^8"
     eslint-plugin-svelte: "npm:^2.46.0"
     jest: "npm:^29"
@@ -2098,12 +2099,15 @@ __metadata:
     postcss-scss: "npm:^4.0.4"
     require-json5: "npm:^1.3.0"
     svelte: "npm:^4.2.19"
+    svelte-check: "npm:^3.0.0"
     svelte-loader: "npm:^3.1.9"
     svelte-preprocess: "npm:^6.0.3"
     svelte-preprocess-cssmodules: "npm:^2.2.5"
     typescript: "npm:^5.5.3"
   peerDependencies:
     "@lipemat/js-boilerplate": ">=10.10.3"
+  bin:
+    lipemat-js-boilerplate-svelte: ./bin/lipemat-js-boilerplate-svelte
   languageName: unknown
   linkType: soft
 
@@ -2911,6 +2915,13 @@ __metadata:
   version: 15.7.13
   resolution: "@types/prop-types@npm:15.7.13"
   checksum: 10c0/1b20fc67281902c6743379960247bc161f3f0406ffc0df8e7058745a85ea1538612109db0406290512947f9632fe9e10e7337bf0ce6338a91d6c948df16a7c61
+  languageName: node
+  linkType: hard
+
+"@types/pug@npm:^2.0.6":
+  version: 2.0.10
+  resolution: "@types/pug@npm:2.0.10"
+  checksum: 10c0/6fac37fd84ad4bcf755061caad274db70591699739070bc30c5c1b5f0aecf98646dc29ec8da11cfca82a2b7cc57d949a3ae50aba2f88bf098751ebdd25d9aaea
   languageName: node
   linkType: hard
 
@@ -4289,6 +4300,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"buffer-crc32@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "buffer-crc32@npm:1.0.0"
+  checksum: 10c0/8b86e161cee4bb48d5fa622cbae4c18f25e4857e5203b89e23de59e627ab26beb82d9d7999f2b8de02580165f61f83f997beaf02980cdf06affd175b651921ab
+  languageName: node
+  linkType: hard
+
 "buffer-from@npm:^1.0.0":
   version: 1.1.2
   resolution: "buffer-from@npm:1.1.2"
@@ -4429,7 +4447,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.5.3":
+"chokidar@npm:^3.4.1, chokidar@npm:^3.5.3":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
   dependencies:
@@ -5178,6 +5196,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"detect-indent@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "detect-indent@npm:6.1.0"
+  checksum: 10c0/dd83cdeda9af219cf77f5e9a0dc31d828c045337386cfb55ce04fad94ba872ee7957336834154f7647b89b899c3c7acc977c57a79b7c776b506240993f97acc7
+  languageName: node
+  linkType: hard
+
 "detect-newline@npm:^3.0.0":
   version: 3.1.0
   resolution: "detect-newline@npm:3.1.0"
@@ -5589,6 +5614,13 @@ __metadata:
     is-date-object: "npm:^1.0.1"
     is-symbol: "npm:^1.0.2"
   checksum: 10c0/0886572b8dc075cb10e50c0af62a03d03a68e1e69c388bd4f10c0649ee41b1fbb24840a1b7e590b393011b5cdbe0144b776da316762653685432df37d6de60f1
+  languageName: node
+  linkType: hard
+
+"es6-promise@npm:^3.1.2":
+  version: 3.3.1
+  resolution: "es6-promise@npm:3.3.1"
+  checksum: 10c0/b4fc87cb8509c001f62f860f97b05d1fd3f87220c8b832578e6a483c719ca272b73a77f2231cb26395fa865e1cab2fd4298ab67786b69e97b8d757b938f4fc1f
   languageName: node
   linkType: hard
 
@@ -6676,7 +6708,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.11, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6, graceful-fs@npm:^4.2.9":
+"graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.3, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.11, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6, graceful-fs@npm:^4.2.9":
   version: 4.2.11
   resolution: "graceful-fs@npm:4.2.11"
   checksum: 10c0/386d011a553e02bc594ac2ca0bd6d9e4c22d7fa8cfbfc448a6d148c59ea881b092db9dbe3547ae4b88e55f1b01f7c4a2ecc53b310c042793e63aa44cf6c257f2
@@ -8549,7 +8581,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.4":
+"magic-string@npm:^0.30.4, magic-string@npm:^0.30.5":
   version: 0.30.12
   resolution: "magic-string@npm:0.30.12"
   dependencies:
@@ -8723,6 +8755,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"min-indent@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "min-indent@npm:1.0.1"
+  checksum: 10c0/7e207bd5c20401b292de291f02913230cb1163abca162044f7db1d951fa245b174dc00869d40dd9a9f32a885ad6a5f3e767ee104cf278f399cb4e92d3f582d5c
+  languageName: node
+  linkType: hard
+
 "mini-css-extract-plugin@npm:^1.3.3":
   version: 1.6.2
   resolution: "mini-css-extract-plugin@npm:1.6.2"
@@ -8861,12 +8900,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mkdirp@npm:^0.5.1":
+  version: 0.5.6
+  resolution: "mkdirp@npm:0.5.6"
+  dependencies:
+    minimist: "npm:^1.2.6"
+  bin:
+    mkdirp: bin/cmd.js
+  checksum: 10c0/e2e2be789218807b58abced04e7b49851d9e46e88a2f9539242cc8a92c9b5c3a0b9bab360bd3014e02a140fc4fbc58e31176c408b493f8a2a6f4986bd7527b01
+  languageName: node
+  linkType: hard
+
 "mkdirp@npm:^1.0.3":
   version: 1.0.4
   resolution: "mkdirp@npm:1.0.4"
   bin:
     mkdirp: bin/cmd.js
   checksum: 10c0/46ea0f3ffa8bc6a5bc0c7081ffc3907777f0ed6516888d40a518c5111f8366d97d2678911ad1a6882bf592fa9de6c784fea32e1687bb94e1f4944170af48a5cf
+  languageName: node
+  linkType: hard
+
+"mri@npm:^1.1.0":
+  version: 1.2.0
+  resolution: "mri@npm:1.2.0"
+  checksum: 10c0/a3d32379c2554cf7351db6237ddc18dc9e54e4214953f3da105b97dc3babe0deb3ffe99cf409b38ea47cc29f9430561ba6b53b24ab8f9ce97a4b50409e4a50e7
   languageName: node
   linkType: hard
 
@@ -10600,7 +10657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^2.6.3":
+"rimraf@npm:^2.5.2, rimraf@npm:^2.6.3":
   version: 2.7.1
   resolution: "rimraf@npm:2.7.1"
   dependencies:
@@ -10628,6 +10685,15 @@ __metadata:
   dependencies:
     queue-microtask: "npm:^1.2.2"
   checksum: 10c0/200b5ab25b5b8b7113f9901bfe3afc347e19bb7475b267d55ad0eb86a62a46d77510cb0f232507c9e5d497ebda569a08a9867d0d14f57a82ad5564d991588b39
+  languageName: node
+  linkType: hard
+
+"sade@npm:^1.7.4":
+  version: 1.8.1
+  resolution: "sade@npm:1.8.1"
+  dependencies:
+    mri: "npm:^1.1.0"
+  checksum: 10c0/da8a3a5d667ad5ce3bf6d4f054bbb9f711103e5df21003c5a5c1a8a77ce12b640ed4017dd423b13c2307ea7e645adee7c2ae3afe8051b9db16a6f6d3da3f90b1
   languageName: node
   linkType: hard
 
@@ -10672,6 +10738,18 @@ __metadata:
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: 10c0/7e3c8b2e88a1841c9671094bbaeebd94448111dd90a81a1f606f3f67708a6ec57763b3b47f06da09fc6054193e0e6709e77325415dc8422b04497a8070fa02d4
+  languageName: node
+  linkType: hard
+
+"sander@npm:^0.5.0":
+  version: 0.5.1
+  resolution: "sander@npm:0.5.1"
+  dependencies:
+    es6-promise: "npm:^3.1.2"
+    graceful-fs: "npm:^4.1.3"
+    mkdirp: "npm:^0.5.1"
+    rimraf: "npm:^2.5.2"
+  checksum: 10c0/ce1e423fe5b4e57926df7cc6bd24b70271adfbe7b8ff995784f98101878e037327ac31c7a4e317ac3e1579f410e41a477fef40c2376f0dfa4499c8864a26f499
   languageName: node
   linkType: hard
 
@@ -11017,6 +11095,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sorcery@npm:^0.11.0":
+  version: 0.11.1
+  resolution: "sorcery@npm:0.11.1"
+  dependencies:
+    "@jridgewell/sourcemap-codec": "npm:^1.4.14"
+    buffer-crc32: "npm:^1.0.0"
+    minimist: "npm:^1.2.0"
+    sander: "npm:^0.5.0"
+  bin:
+    sorcery: bin/sorcery
+  checksum: 10c0/b111350df1c6412d5d71b0e72db630dcc90fc99dc9fc61dc4355a2de17f5a6951453d6430d908ee92b9da03628fd9f4361fe2e261c604dcb000e89152c134f1b
+  languageName: node
+  linkType: hard
+
 "sort-css-media-queries@npm:2.2.0":
   version: 2.2.0
   resolution: "sort-css-media-queries@npm:2.2.0"
@@ -11347,6 +11439,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strip-indent@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "strip-indent@npm:3.0.0"
+  dependencies:
+    min-indent: "npm:^1.0.0"
+  checksum: 10c0/ae0deaf41c8d1001c5d4fbe16cb553865c1863da4fae036683b474fa926af9fc121e155cb3fc57a68262b2ae7d5b8420aa752c97a6428c315d00efe2a3875679
+  languageName: node
+  linkType: hard
+
 "strip-json-comments@npm:^3.1.1":
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
@@ -11385,6 +11486,24 @@ __metadata:
   version: 1.0.0
   resolution: "supports-preserve-symlinks-flag@npm:1.0.0"
   checksum: 10c0/6c4032340701a9950865f7ae8ef38578d8d7053f5e10518076e6554a9381fa91bd9c6850193695c141f32b21f979c985db07265a758867bac95de05f7d8aeb39
+  languageName: node
+  linkType: hard
+
+"svelte-check@npm:^3.0.0":
+  version: 3.8.6
+  resolution: "svelte-check@npm:3.8.6"
+  dependencies:
+    "@jridgewell/trace-mapping": "npm:^0.3.17"
+    chokidar: "npm:^3.4.1"
+    picocolors: "npm:^1.0.0"
+    sade: "npm:^1.7.4"
+    svelte-preprocess: "npm:^5.1.3"
+    typescript: "npm:^5.0.3"
+  peerDependencies:
+    svelte: ^3.55.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
+  bin:
+    svelte-check: bin/svelte-check
+  checksum: 10c0/2b94b0b085e6f3fb0bc92e2aa8d29b3372df3d9ebf0d985114bc18622556607ccdfdc774fe12bb6c92b38718e5f06040f37d6eda40d843a1d78d446c47aa86b5
   languageName: node
   linkType: hard
 
@@ -11446,6 +11565,52 @@ __metadata:
   peerDependencies:
     svelte: ^3.20.0 || ^4.0.0
   checksum: 10c0/21c7a9ca9f73c0c77b404188be903db9a546d7933249f723b7936170cd71d00694d10debaad4c6e4410ed76f0109cafc3253bdda9867788835c298839d6caf09
+  languageName: node
+  linkType: hard
+
+"svelte-preprocess@npm:^5.1.3":
+  version: 5.1.4
+  resolution: "svelte-preprocess@npm:5.1.4"
+  dependencies:
+    "@types/pug": "npm:^2.0.6"
+    detect-indent: "npm:^6.1.0"
+    magic-string: "npm:^0.30.5"
+    sorcery: "npm:^0.11.0"
+    strip-indent: "npm:^3.0.0"
+  peerDependencies:
+    "@babel/core": ^7.10.2
+    coffeescript: ^2.5.1
+    less: ^3.11.3 || ^4.0.0
+    postcss: ^7 || ^8
+    postcss-load-config: ^2.1.0 || ^3.0.0 || ^4.0.0 || ^5.0.0
+    pug: ^3.0.0
+    sass: ^1.26.8
+    stylus: ^0.55.0
+    sugarss: ^2.0.0 || ^3.0.0 || ^4.0.0
+    svelte: ^3.23.0 || ^4.0.0-next.0 || ^4.0.0 || ^5.0.0-next.0
+    typescript: ">=3.9.5 || ^4.0.0 || ^5.0.0"
+  peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    coffeescript:
+      optional: true
+    less:
+      optional: true
+    postcss:
+      optional: true
+    postcss-load-config:
+      optional: true
+    pug:
+      optional: true
+    sass:
+      optional: true
+    stylus:
+      optional: true
+    sugarss:
+      optional: true
+    typescript:
+      optional: true
+  checksum: 10c0/fe968ee1d599a2c59c5a695e23cd3c2d15c5c316ce76ae644908521476f2e81b69dcf0cd3492deeb0a06140af497f994e4baf524d3d2c93986fad1c9267524ae
   languageName: node
   linkType: hard
 
@@ -11827,7 +11992,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.5.2, typescript@npm:^5.5.3":
+"typescript@npm:^5.0.3, typescript@npm:^5.5.2, typescript@npm:^5.5.3":
   version: 5.6.3
   resolution: "typescript@npm:5.6.3"
   bin:
@@ -11837,7 +12002,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.5.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.5.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.0.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.5.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.5.3#optional!builtin<compat/typescript>":
   version: 5.6.3
   resolution: "typescript@patch:typescript@npm%3A5.6.3#optional!builtin<compat/typescript>::version=5.6.3&hash=8c6c40"
   bin:
