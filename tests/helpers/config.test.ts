@@ -1,6 +1,6 @@
 describe( 'config.js', () => {
 	test( 'Default TSConfig', () => {
-		const {getTypeScriptConfig} = require( '../../helpers/config.js' );
+		const {getTypeScriptConfig} = require( '../../helpers/config' );
 		expect( getTypeScriptConfig() ).toMatchSnapshot();
 	} );
 } );

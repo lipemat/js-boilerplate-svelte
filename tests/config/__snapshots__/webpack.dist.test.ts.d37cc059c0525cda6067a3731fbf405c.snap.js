@@ -11,7 +11,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(html\\|svelte\\)\\$/,
+        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
         "use": {
           "loader": "svelte-loader",
           "options": {
@@ -40,7 +40,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
         "test": /node_modules\\\\/svelte\\\\/\\.\\*\\\\\\.mjs\\$/,
       },
       {
-        "exclude": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]\\(\\?!\\(@lipemat\\\\/eslint-config\\|eslint-plugin-svelte\\|loader-utils\\|require-json5\\|svelte\\|svelte-preprocess\\|svelte-preprocess-cssmodules\\)\\[\\\\\\\\/\\]\\)/,
+        "exclude": /node_modules/,
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
@@ -54,7 +54,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.37.1",
+                  "version": "3.39.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -70,7 +70,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                     "last 2 iOS versions",
                     "last 2 Edge versions",
                     "last 2 Opera versions",
-                    "not op_mini all",
+                    "not and_uc 15.5",
                   ],
                 },
                 "useBuiltIns": "usage",
@@ -209,7 +209,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                           "last 2 iOS versions",
                           "last 2 Edge versions",
                           "last 2 Opera versions",
-                          "not op_mini all",
+                          "not and_uc 15.5",
                         ],
                         "info": [Function],
                         "options": {
@@ -223,7 +223,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                             "last 2 iOS versions",
                             "last 2 Edge versions",
                             "last 2 Opera versions",
-                            "not op_mini all",
+                            "not and_uc 15.5",
                           ],
                         },
                         "postcssPlugin": "autoprefixer",
@@ -380,7 +380,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
     "timings": false,
     "version": false,
   },
-  "target": "browserslist:> 1%, last 1 Android versions, last 1 ChromeAndroid versions, last 2 Chrome versions, last 2 Firefox versions, last 2 Safari versions, last 2 iOS versions, last 2 Edge versions, last 2 Opera versions, not op_mini all",
+  "target": "browserslist:> 1%, last 1 Android versions, last 1 ChromeAndroid versions, last 2 Chrome versions, last 2 Firefox versions, last 2 Safari versions, last 2 iOS versions, last 2 Edge versions, last 2 Opera versions, not and_uc 15.5",
 }
 `;
 
@@ -389,7 +389,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(html\\|svelte\\)\\$/,
+        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
         "use": {
           "loader": "svelte-loader",
           "options": {
@@ -418,7 +418,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
         "test": /node_modules\\\\/svelte\\\\/\\.\\*\\\\\\.mjs\\$/,
       },
       {
-        "exclude": /\\[\\\\\\\\/\\]node_modules\\[\\\\\\\\/\\]\\(\\?!\\(@lipemat\\\\/eslint-config\\|eslint-plugin-svelte\\|loader-utils\\|require-json5\\|svelte\\|svelte-preprocess\\|svelte-preprocess-cssmodules\\)\\[\\\\\\\\/\\]\\)/,
+        "exclude": /node_modules/,
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
@@ -432,7 +432,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.37.1",
+                  "version": "3.39.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -448,7 +448,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                     "last 2 iOS versions",
                     "last 2 Edge versions",
                     "last 2 Opera versions",
-                    "not op_mini all",
+                    "not and_uc 15.5",
                   ],
                 },
                 "useBuiltIns": "usage",
@@ -587,7 +587,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                           "last 2 iOS versions",
                           "last 2 Edge versions",
                           "last 2 Opera versions",
-                          "not op_mini all",
+                          "not and_uc 15.5",
                         ],
                         "info": [Function],
                         "options": {
@@ -601,7 +601,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                             "last 2 iOS versions",
                             "last 2 Edge versions",
                             "last 2 Opera versions",
-                            "not op_mini all",
+                            "not and_uc 15.5",
                           ],
                         },
                         "postcssPlugin": "autoprefixer",

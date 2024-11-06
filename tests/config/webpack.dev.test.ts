@@ -1,5 +1,3 @@
-
-
 describe( 'webpack.dev.js', () => {
 	const {getConfig} = require( '@lipemat/js-boilerplate/helpers/config' );
 
@@ -19,7 +17,7 @@ describe( 'webpack.dev.js', () => {
 	test( 'Rules', () => {
 		const rules = getWebpackConfig().module.rules;
 		expect( rules ).toHaveLength( 6 );
-		expect( rules[ 0 ].test ).toEqual( /\.(html|svelte)$/ );
+		expect( rules[ 0 ].test ).toEqual( /\.(svelte|svelte\.ts)$/ );
 		expect( rules[ 1 ].test ).toEqual( /node_modules\/svelte\/.*\.mjs$/ );
 
 		const mainRule = rules[ 0 ].use;

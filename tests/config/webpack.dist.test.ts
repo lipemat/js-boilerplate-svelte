@@ -5,7 +5,7 @@ describe( 'webpack.dist.js', () => {
 		jest.resetModules();
 		const defaultConfig = require( '@lipemat/js-boilerplate/config/webpack.dist' );
 		return require( '../../config/webpack.dist' )( defaultConfig );
-	}
+	};
 
 	test( 'Snapshot', () => {
 		expect( getWebpackConfig() ).toMatchSnapshot( 'production' );
@@ -17,7 +17,7 @@ describe( 'webpack.dist.js', () => {
 	test( 'Rules', () => {
 		const rules = getWebpackConfig().module.rules;
 		expect( rules ).toHaveLength( 5 );
-		expect( rules[ 0 ].test ).toEqual( /\.(html|svelte)$/ );
+		expect( rules[ 0 ].test ).toEqual( /\.(svelte|svelte\.ts)$/ );
 		expect( rules[ 1 ].test ).toEqual( /node_modules\/svelte\/.*\.mjs$/ );
 
 		const mainRule = rules[ 0 ].use;

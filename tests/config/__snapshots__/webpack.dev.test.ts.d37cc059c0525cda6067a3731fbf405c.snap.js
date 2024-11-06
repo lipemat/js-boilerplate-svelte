@@ -6,7 +6,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(html\\|svelte\\)\\$/,
+        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
         "use": {
           "loader": "svelte-loader",
           "options": {
@@ -53,7 +53,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.37.1",
+                  "version": "3.39.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -69,7 +69,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
                     "last 2 iOS versions",
                     "last 2 Edge versions",
                     "last 2 Opera versions",
-                    "not op_mini all",
+                    "not and_uc 15.5",
                   ],
                 },
                 "useBuiltIns": "usage",
@@ -205,7 +205,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
                           "last 2 iOS versions",
                           "last 2 Edge versions",
                           "last 2 Opera versions",
-                          "not op_mini all",
+                          "not and_uc 15.5",
                         ],
                         "info": [Function],
                         "options": {
@@ -219,7 +219,7 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
                             "last 2 iOS versions",
                             "last 2 Edge versions",
                             "last 2 Opera versions",
-                            "not op_mini all",
+                            "not and_uc 15.5",
                           ],
                         },
                         "postcssPlugin": "autoprefixer",
@@ -290,7 +290,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(html\\|svelte\\)\\$/,
+        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
         "use": {
           "loader": "svelte-loader",
           "options": {
@@ -337,7 +337,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.37.1",
+                  "version": "3.39.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -353,7 +353,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
                     "last 2 iOS versions",
                     "last 2 Edge versions",
                     "last 2 Opera versions",
-                    "not op_mini all",
+                    "not and_uc 15.5",
                   ],
                 },
                 "useBuiltIns": "usage",
@@ -489,7 +489,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
                           "last 2 iOS versions",
                           "last 2 Edge versions",
                           "last 2 Opera versions",
-                          "not op_mini all",
+                          "not and_uc 15.5",
                         ],
                         "info": [Function],
                         "options": {
@@ -503,7 +503,7 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
                             "last 2 iOS versions",
                             "last 2 Edge versions",
                             "last 2 Opera versions",
-                            "not op_mini all",
+                            "not and_uc 15.5",
                           ],
                         },
                         "postcssPlugin": "autoprefixer",
@@ -599,6 +599,6 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
     ],
   },
   "stats": "minimal",
-  "target": "browserslist:> 1%, last 1 Android versions, last 1 ChromeAndroid versions, last 2 Chrome versions, last 2 Firefox versions, last 2 Safari versions, last 2 iOS versions, last 2 Edge versions, last 2 Opera versions, not op_mini all",
+  "target": "browserslist:> 1%, last 1 Android versions, last 1 ChromeAndroid versions, last 2 Chrome versions, last 2 Firefox versions, last 2 Safari versions, last 2 iOS versions, last 2 Edge versions, last 2 Opera versions, not and_uc 15.5",
 }
 `;

@@ -1,18 +1,27 @@
 #!/usr/bin/env node
+'use strict';
 
-const { execSync } = require('child_process');
+const args = process.argv.slice( 2 );
 
-const command = process.argv[2];
+const scriptIndex = args.findIndex( x => 'check-types' === x );
+let command = -1 === scriptIndex ? args[ 0 ] : args[ scriptIndex ];
 
-switch (command) {
-  case 'check-types':
-    try {
-      execSync('svelte-check', { stdio: 'inherit' });
-    } catch (error) {
-      process.exit(error.status);
-    }
-    break;
-  default:
-    console.error(`Unknown command: ${command}`);
-    process.exit(1);
-}
+
+( async () => {
+	let result;
+	switch ( command ) {
+		case 'check-types':
+			const svelteCheck = require( 'svelte-check' );
+			result = await svelteCheck();
+			break;
+		default:
+			console.error( `Unknown command: ${command}` );
+			console.error( 'Perhaps you need to update lipemat-js-boilerplate-svelte?' );
+			process.exit( 1 );
+	}
+
+	if ( result.error ) {
+		console.error( result.error );
+		process.exit( 1 );
+	}
+} )();
