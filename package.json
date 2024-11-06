@@ -19,8 +19,11 @@
     "url": "https://github.com/lipemat/js-boilerplate-svelte/issues"
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-svelte#readme",
+  "bin": {
+    "lipemat-js-boilerplate-svelte": "./bin/lipemat-js-boilerplate-svelte"
+  },
   "scripts": {
-    "test": "lipemat-js-boilerplate test"
+    "test": "lipemat-js-boilerplate test",
   },
   "dependencies": {
     "@lipemat/eslint-config": "^3.1.1",
@@ -31,7 +34,8 @@
     "svelte": "^4.2.19",
     "svelte-loader": "^3.1.9",
     "svelte-preprocess": "^5.0.4",
-    "svelte-preprocess-cssmodules": "^2.2.4"
+    "svelte-preprocess-cssmodules": "^2.2.4",
+    "svelte-check": "^3.0.0"
   },
   "devDependencies": {
     "@lipemat/js-boilerplate": "^10.9.2",

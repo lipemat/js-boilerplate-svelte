@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const { execSync } = require('child_process');
+
+const command = process.argv[2];
+
+switch (command) {
+  case 'check-types':
+    try {
+      execSync('svelte-check', { stdio: 'inherit' });
+    } catch (error) {
+      process.exit(error.status);
+    }
+    break;
+  default:
+    console.error(`Unknown command: ${command}`);
+    process.exit(1);
+}
