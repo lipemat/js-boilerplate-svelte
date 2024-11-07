@@ -45,7 +45,7 @@ function getCurrentDirectoryHash( dir: string ) {
 /**
  * Convert the test file path to the path of its snapshot.
  */
-export function resolveSnapshotPath( testPath, snapshotExtension ) {
+export function resolveSnapshotPath( testPath: string, snapshotExtension: string ) {
 	const normalizedPath = testPath.replace( /\\/g, '/' );
 	const filePath = dirname( normalizedPath ) + '/__snapshots__/' + basename( normalizedPath );
 	if ( filesWithPaths.includes( basename( testPath ) ) ) {
@@ -58,7 +58,7 @@ export function resolveSnapshotPath( testPath, snapshotExtension ) {
 /**
  * Convert the path of a snapshot to the path of the original test file.
  */
-export function resolveTestPath( snapshotFilePath, snapshotExtension ) {
+export function resolveTestPath( snapshotFilePath: string, snapshotExtension: string ) {
 	const normalizedPath = snapshotFilePath.replace( /\\/g, '/' );
 	const hash = getCurrentDirectoryHash( dirname( normalizedPath.replace( '__snapshots__/', '' ) ) );
 
@@ -67,7 +67,7 @@ export function resolveTestPath( snapshotFilePath, snapshotExtension ) {
 
 	const fileWithoutHash = basename( newPath )
 		.replace( '.' + hash, '' )
-		.slice( 0, -snapshotExtension.length - 3 )
+		.slice( 0, -snapshotExtension.length - 3 );
 
 	if ( filesWithPaths.includes( fileWithoutHash ) ) {
 		newPath = newPath
@@ -91,4 +91,4 @@ module.exports = {
 	resolveSnapshotPath,
 	resolveTestPath,
 	testPathForConsistencyCheck,
-}
+};

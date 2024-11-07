@@ -1,0 +1,9 @@
+{
+  "extends": "../tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "JS Boilerplate Svelte Source Files",
+  "include": [
+    "../config/*.ts",
+    "../helpers/*.ts"
+  ]
+}

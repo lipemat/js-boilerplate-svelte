@@ -4,6 +4,7 @@ import type {Configuration, ModuleOptions} from 'webpack';
 import {getConfig} from '@lipemat/js-boilerplate/helpers/config';
 import {getTypeScriptConfig} from '../helpers/config';
 import type {AutoPreprocessOptions} from 'svelte-preprocess/dist/types/index';
+import type {SvelteLoaderOptions} from './webpack.dist';
 
 const postcssOptions = getConfig( 'postcss.config' );
 
@@ -17,6 +18,30 @@ const POST_CSS_OPTIONS: AutoPreprocessOptions['postcss'] = {
 	parser: require( 'postcss-scss' ),
 	stringifier: undefined,
 	syntax: undefined,
+};
+
+const SVELTE_LOADER_OPTIONS: SvelteLoaderOptions = {
+	compilerOptions: {
+		dev: true,
+		cssHash: ( {hash, css, name} ) => {
+			const className = hash( css );
+			return `§${name}__${className}`;
+		},
+	},
+	emitCss: true,
+	hotReload: true,
+	preprocess: [
+		sveltePreprocess( {
+			postcss: POST_CSS_OPTIONS,
+			typescript: getTypeScriptConfig(),
+		} ),
+		// CSS module support for local <style> tags.
+		cssModules( {
+			localIdentName: '§Ⓜ[name]__[local]__[contenthash:base52:2]',
+			useAsDefaultScoping: true,
+			mode: 'mixed',
+		} ),
+	],
 };
 
 module.exports = function( config: Configuration ) {
@@ -46,29 +71,7 @@ module.exports = function( config: Configuration ) {
 		test: /\.(svelte|svelte\.ts)$/,
 		use: {
 			loader: 'svelte-loader',
-			options: {
-				compilerOptions: {
-					dev: true,
-					cssHash: ( {hash, css, name} ) => {
-						const className = hash( css );
-						return `§${name}__${className}`;
-					},
-				},
-				emitCss: true,
-				hotReload: true,
-				preprocess: [
-					sveltePreprocess( {
-						postcss: POST_CSS_OPTIONS,
-						typescript: getTypeScriptConfig(),
-					} ),
-					// CSS module support for local <style> tags.
-					cssModules( {
-						localIdentName: '§Ⓜ[name]__[local]__[contenthash:base52:2]',
-						useAsDefaultScoping: true,
-						mode: 'mixed',
-					} ),
-				],
-			},
+			options: SVELTE_LOADER_OPTIONS,
 		},
 	} );
 

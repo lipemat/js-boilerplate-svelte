@@ -1,6 +1,6 @@
 import {sveltePreprocess} from 'svelte-preprocess';
 import {cssModules} from 'svelte-preprocess-cssmodules';
-import interpolateName from 'loader-utils/lib/interpolateName';
+import {interpolateName} from 'loader-utils';
 import type {Configuration, ModuleOptions} from 'webpack';
 import {getConfig} from '@lipemat/js-boilerplate/helpers/config';
 import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate/helpers/css-classnames';
@@ -58,7 +58,8 @@ const SVELTE_LOADER_OPTIONS: SvelteLoaderOptions = {
 			}
 
 			// Mimic `localIdentName` from `css-loader`.
-			return interpolateName( {resourcePath: filename}, '[contenthash:base52:5]', {
+			// @ts-expect-error TS2345 -- loader-utils is typed to version 4 of webpack.
+			return interpolateName( {resourcePath: filename ?? ''}, '[contenthash:base52:5]', {
 				content: css,
 				context: process.cwd(),
 			} );
