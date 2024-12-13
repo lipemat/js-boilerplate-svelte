@@ -1,6 +1,5 @@
 # Build files
-config/webpack.dev.js
-config/webpack.dist.js
+config/*.js
 
 
 # system/hidden files

@@ -1,10 +1,10 @@
 describe( 'eslint.config', () => {
 	test( 'Snapshot', () => {
-		expect( require( '../../config/eslint.config.js' )( {} ) ).toMatchSnapshot();
+		expect( require( '../../config/eslint.config' )( {} ) ).toMatchSnapshot();
 	} );
 
 	test( 'Parser Options', () => {
-		expect( require( '../../config/eslint.config.js' )( {} ).parserOptions ).toEqual( {
+		expect( require( '../../config/eslint.config' )( {} ).parserOptions ).toEqual( {
 			extraFileExtensions: [
 				'.svelte',
 			],
@@ -12,7 +12,7 @@ describe( 'eslint.config', () => {
 	} );
 
 	test( 'Overrides', () => {
-		expect( require( '../../config/eslint.config.js' )( {} ).overrides[ 0 ] ).toEqual( {
+		expect( require( '../../config/eslint.config' )( {} ).overrides[ 0 ] ).toEqual( {
 			files: [
 				'*.svelte',
 			],
@@ -32,7 +32,7 @@ describe( 'eslint.config', () => {
 	} );
 
 	test( 'Merged', () => {
-		const merged = require( '../../config/eslint.config.js' )( {
+		const merged = require( '../../config/eslint.config' )( {
 			overrides: [ {
 				files: [ '**/*.ts', '**/*.tsx' ],
 				plugins: [

@@ -10,7 +10,7 @@ const postcssOptions = getConfig( 'postcss.config' );
 
 /**
  * Using our standard options from `postcss.config.ts` with a few
- * explit removals to satifiy TS configuration differences.
+ * explicit removals to satisfy TS configuration differences.
  */
 const POST_CSS_OPTIONS: AutoPreprocessOptions['postcss'] = {
 	...postcssOptions,
