@@ -1,6 +1,6 @@
 import chokidar from 'chokidar';
 import {exec} from 'child_process';
-import chalk, {red} from 'chalk';
+import chalk from 'chalk';
 
 const toWatch = [
 	'config/*.ts',
@@ -15,7 +15,7 @@ chokidar.watch( toWatch, {ignored: /(^|[\/\\])\../} )
 		console.debug( chalk.yellowBright( '[watch]' ), `${path} changed` );
 		exec( 'yarn run build', ( err, stdout ) => {
 			if ( err ) {
-				console.error( red( stdout ) );
+				console.error( chalk.red( stdout ) );
 			} else {
 				console.debug( stdout );
 			}
