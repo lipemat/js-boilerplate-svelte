@@ -16,7 +16,7 @@ describe( 'webpack.dev.js', () => {
 
 	test( 'Rules', () => {
 		const rules = getWebpackConfig().module.rules;
-		expect( rules ).toHaveLength( 6 );
+		expect( rules ).toHaveLength( 5 );
 		expect( rules[ 0 ].test ).toEqual( /\.(svelte|svelte\.ts)$/ );
 		expect( rules[ 1 ].test ).toEqual( /node_modules\/svelte\/.*\.mjs$/ );
 

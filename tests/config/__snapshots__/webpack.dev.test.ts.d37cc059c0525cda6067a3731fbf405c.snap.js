@@ -88,10 +88,6 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
         "test": /\\\\\\.\\[jt\\]sx\\?\\$/,
       },
       {
-        "include": /node_modules/,
-        "test": /\\\\\\.\\[jt\\]sx\\?\\$/,
-      },
-      {
         "test": /\\\\\\.css\\$/,
         "use": [
           "style-loader",
@@ -161,10 +157,6 @@ exports[`webpack.dev.js Snapshot: develop 1`] = `
                       {
                         "Rule": [Function],
                         "postcssPlugin": "postcss-nesting",
-                      },
-                      {
-                        "Rule": [Function],
-                        "postcssPlugin": "postcss-selector-not",
                       },
                       {
                         "Rule": [Function],
@@ -372,10 +364,6 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
         "test": /\\\\\\.\\[jt\\]sx\\?\\$/,
       },
       {
-        "include": /node_modules/,
-        "test": /\\\\\\.\\[jt\\]sx\\?\\$/,
-      },
-      {
         "test": /\\\\\\.css\\$/,
         "use": [
           "style-loader",
@@ -445,10 +433,6 @@ exports[`webpack.dev.js Snapshot: full 1`] = `
                       {
                         "Rule": [Function],
                         "postcssPlugin": "postcss-nesting",
-                      },
-                      {
-                        "Rule": [Function],
-                        "postcssPlugin": "postcss-selector-not",
                       },
                       {
                         "Rule": [Function],

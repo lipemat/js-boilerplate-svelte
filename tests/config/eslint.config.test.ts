@@ -1,114 +1,67 @@
+import * as tsParser from '@typescript-eslint/parser';
+
+
+const BASE = {
+	configs: [ {
+		languageOptions: {
+			parserOptions: {},
+		},
+	} ]
+};
+
 describe( 'eslint.config', () => {
-	test( 'Snapshot', () => {
-		expect( require( '../../config/eslint.config' )( {} ) ).toMatchSnapshot();
-	} );
 
 	test( 'Parser Options', () => {
-		expect( require( '../../config/eslint.config' )( {} ).parserOptions ).toEqual( {
+		const svelteConfig = require( '../../config/eslint.config' )( BASE ).configs[ 0 ];
+		expect( svelteConfig.languageOptions.parserOptions ).toEqual( {
 			extraFileExtensions: [
 				'.svelte',
 			],
 		} );
 	} );
 
+
 	test( 'Overrides', () => {
-		expect( require( '../../config/eslint.config' )( {} ).overrides[ 0 ] ).toEqual( {
-			files: [
-				'*.svelte',
+		const configs = require( '../../config/eslint.config' )( BASE ).configs;
+		const svelteConfig = configs[ configs.length - 1 ];
+
+		expect( svelteConfig.files ).toEqual( [
+			'**/*.svelte',
+			'*.svelte',
+		] );
+		expect( JSON.stringify( svelteConfig.languageOptions.parserOptions.parser ) ).toEqual( JSON.stringify( tsParser ) );
+		expect( svelteConfig.rules ).toEqual( {
+			'no-unused-vars': [
+				0,
 			],
-			extends: [
-				'plugin:svelte/recommended',
+			'prefer-const': [
+				0,
 			],
-			parser: 'svelte-eslint-parser',
-			parserOptions: {
-				parser: '@typescript-eslint/parser',
-			},
-			rules: {
-				'prefer-const': [
-					0,
-				],
-			},
 		} );
 	} );
 
+
 	test( 'Merged', () => {
-		const merged = require( '../../config/eslint.config' )( {
-			overrides: [ {
-				files: [ '**/*.ts', '**/*.tsx' ],
-				plugins: [
-					'@typescript-eslint',
-				],
-				rules: {
-					'jsdoc/no-undefined-types': [ 0 ],
-					'no-magic-numbers': [ 0 ],
-					'no-redeclare': [ 0 ],
-					'no-shadow': [ 0 ],
-					'no-undef': [ 0 ],
-					semi: [ 0 ],
-					'@typescript-eslint/no-shadow': [ 'error' ],
-					'@typescript-eslint/no-redeclare': [ 'error' ],
-					'@typescript-eslint/no-unused-vars': 'error',
-					'@typescript-eslint/strict-boolean-expressions': [
-						'warn',
-						{
-							allowString: false,
-							allowNumber: false,
-						},
-					],
-					'@typescript-eslint/type-annotation-spacing': [ 'warn', {
-						before: false,
-						after: true,
-						overrides: {
-							arrow: {
-								before: true,
-								after: true,
-							},
-						},
-					} ],
-				},
-			} ],
-			parser: '@typescript-eslint/parser',
-			parserOptions: {
-				ecmaVersion: 7,
-				project: './tsconfig.json',
-				sourceType: 'module',
-				warnOnUnsupportedTypeScriptVersion: false,
-			},
-		} );
+		const config = require( '@lipemat/eslint-config' );
 
-		expect( merged ).toMatchSnapshot();
+		const original = config.default[ config.default.length - 6 ];
+		const svelte = config.default[ config.default.length - 1 ];
 
-		expect( merged.parserOptions ).toEqual( {
-			ecmaVersion: 7,
+		expect( original.languageOptions.sourceType ).toEqual( 'module' );
+		expect( original.languageOptions.ecmaVersion ).toEqual( 7 );
+		expect( original.languageOptions.parserOptions ).toEqual( {
 			extraFileExtensions: [
 				'.svelte',
 			],
 			project: './tsconfig.json',
-			sourceType: 'module',
 			warnOnUnsupportedTypeScriptVersion: false,
 		} );
 
-		expect( merged.overrides[ 1 ] ).toEqual( {
-			files: [
-				'*.svelte',
-			],
-			extends: [
-				'plugin:svelte/recommended',
-			],
-			parser: 'svelte-eslint-parser',
-			parserOptions: {
-				parser: '@typescript-eslint/parser',
-			},
-			rules: {
-				'prefer-const': [
-					0,
-				],
-			},
-		} );
-
-		expect( merged.overrides[ 0 ].files ).toEqual( [
-			'**/*.ts',
-			'**/*.tsx',
+		expect( svelte.languageOptions.sourceType ).not.toBeDefined();
+		expect( svelte.languageOptions.ecmaVersion ).not.toBeDefined();
+		expect( original.languageOptions.parserOptions.extraFileExtensions ).toEqual( [
+			'.svelte',
 		] );
+
 	} );
 } );

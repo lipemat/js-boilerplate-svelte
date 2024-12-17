@@ -168,10 +168,6 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                       },
                       {
                         "Rule": [Function],
-                        "postcssPlugin": "postcss-selector-not",
-                      },
-                      {
-                        "Rule": [Function],
                         "postcssPlugin": "postcss-dir-pseudo-class",
                       },
                       {
@@ -543,10 +539,6 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                       {
                         "Rule": [Function],
                         "postcssPlugin": "postcss-nesting",
-                      },
-                      {
-                        "Rule": [Function],
-                        "postcssPlugin": "postcss-selector-not",
                       },
                       {
                         "Rule": [Function],
