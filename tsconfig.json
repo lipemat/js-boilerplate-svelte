@@ -9,6 +9,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "module": "CommonJS",
+    "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true,

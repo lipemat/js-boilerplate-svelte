@@ -1,4 +1,3 @@
-// @ts-expect-error TS2307: Cannot find module @typescript-eslint/ parser or its corresponding type declarations.
 import * as tsParser from '@typescript-eslint/parser';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
