@@ -1,3 +1,4 @@
+// @ts-ignore TS2307: Cannot find module @typescript-eslint/parse
 import * as tsParser from '@typescript-eslint/parser';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
