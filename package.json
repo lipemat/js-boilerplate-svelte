@@ -31,7 +31,7 @@
     "watch": "ts-node ./bin/watch.ts"
   },
   "dependencies": {
-    "@lipemat/eslint-config": "^3.4.0",
+    "@lipemat/eslint-config": "^4.0.0-beta.2",
     "@tsconfig/svelte": "^5.0.4",
     "@types/eslint": "^9",
     "@typescript-eslint/parser": "^8.18.0",
