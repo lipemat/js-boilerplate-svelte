@@ -44,9 +44,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
-          "plugins": [
-            "@babel/plugin-syntax-dynamic-import",
-          ],
+          "plugins": [],
           "presets": [
             [
               "@babel/preset-env",
@@ -54,7 +52,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.39.0",
+                  "version": "3.45.1",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -70,7 +68,6 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                     "last 2 iOS versions",
                     "last 2 Edge versions",
                     "last 2 Opera versions",
-                    "not and_uc 15.5",
                   ],
                 },
                 "useBuiltIns": "usage",
@@ -197,7 +194,6 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                           "last 2 iOS versions",
                           "last 2 Edge versions",
                           "last 2 Opera versions",
-                          "not and_uc 15.5",
                         ],
                         "info": [Function],
                         "options": {
@@ -211,7 +207,6 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                             "last 2 iOS versions",
                             "last 2 Edge versions",
                             "last 2 Opera versions",
-                            "not and_uc 15.5",
                           ],
                         },
                         "postcssPlugin": "autoprefixer",
@@ -270,9 +265,10 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       "_sortedModulesCache": WeakMap {},
       "options": {
         "chunkFilename": "[name].[contenthash].css",
-        "experimentalUseImportModule": false,
+        "experimentalUseImportModule": undefined,
         "filename": "[name].css",
         "ignoreOrder": false,
+        "runtime": true,
       },
       "runtimeOptions": {
         "attributes": undefined,
@@ -354,10 +350,12 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
     "assets": true,
     "assetsSort": "size",
     "assetsSpace": 100,
-    "cached": false,
     "cachedAssets": true,
+    "cachedModules": false,
     "children": false,
-    "colors": true,
+    "colors": {
+      "green": "[93m",
+    },
     "groupAssetsByChunk": false,
     "groupAssetsByEmitStatus": false,
     "groupAssetsByExtension": false,
@@ -368,7 +366,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
     "timings": false,
     "version": false,
   },
-  "target": "browserslist:> 1%, last 1 Android versions, last 1 ChromeAndroid versions, last 2 Chrome versions, last 2 Firefox versions, last 2 Safari versions, last 2 iOS versions, last 2 Edge versions, last 2 Opera versions, not and_uc 15.5",
+  "target": "browserslist:> 1%, last 1 Android versions, last 1 ChromeAndroid versions, last 2 Chrome versions, last 2 Firefox versions, last 2 Safari versions, last 2 iOS versions, last 2 Edge versions, last 2 Opera versions",
 }
 `;
 
@@ -410,9 +408,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
         "loader": "babel-loader",
         "options": {
           "cacheDirectory": true,
-          "plugins": [
-            "@babel/plugin-syntax-dynamic-import",
-          ],
+          "plugins": [],
           "presets": [
             [
               "@babel/preset-env",
@@ -420,7 +416,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.39.0",
+                  "version": "3.45.1",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -436,7 +432,6 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                     "last 2 iOS versions",
                     "last 2 Edge versions",
                     "last 2 Opera versions",
-                    "not and_uc 15.5",
                   ],
                 },
                 "useBuiltIns": "usage",
@@ -563,7 +558,6 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                           "last 2 iOS versions",
                           "last 2 Edge versions",
                           "last 2 Opera versions",
-                          "not and_uc 15.5",
                         ],
                         "info": [Function],
                         "options": {
@@ -577,7 +571,6 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                             "last 2 iOS versions",
                             "last 2 Edge versions",
                             "last 2 Opera versions",
-                            "not and_uc 15.5",
                           ],
                         },
                         "postcssPlugin": "autoprefixer",

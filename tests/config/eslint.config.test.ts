@@ -6,11 +6,21 @@ const BASE = {
 		languageOptions: {
 			parserOptions: {},
 		},
-	} ]
+	} ],
 };
 
-describe( 'eslint.config', () => {
+jest.mock( '@lipemat/js-boilerplate/helpers/config.js', () => ( {
+	...jest.requireActual( '@lipemat/js-boilerplate/helpers/config.js' ),
+	getExtensionsConfig: ( fileName: string, originalConfig: object ) => {
+		if ( fileName !== 'eslint.config' ) {
+			return jest.requireActual( '@lipemat/js-boilerplate/helpers/config.js' ).getExtensionsConfig( fileName, originalConfig );
+		}
+		return require( '../../config/eslint.config.ts' )( {...originalConfig} );
+	},
+} ) );
 
+
+describe( 'eslint.config', () => {
 	test( 'Parser Options', () => {
 		const svelteConfig = require( '../../config/eslint.config' )( BASE ).configs[ 0 ];
 		expect( svelteConfig.languageOptions.parserOptions ).toEqual( {
@@ -44,7 +54,7 @@ describe( 'eslint.config', () => {
 	test( 'Merged', () => {
 		const config = require( '@lipemat/eslint-config' );
 
-		const original = config.default[ config.default.length - 6 ];
+		const original = config.default[ config.default.length - 7 ];
 		const svelte = config.default[ config.default.length - 1 ];
 
 		expect( original.languageOptions.sourceType ).toEqual( 'module' );
@@ -62,6 +72,5 @@ describe( 'eslint.config', () => {
 		expect( original.languageOptions.parserOptions.extraFileExtensions ).toEqual( [
 			'.svelte',
 		] );
-
 	} );
 } );

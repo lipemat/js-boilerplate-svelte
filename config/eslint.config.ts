@@ -2,7 +2,11 @@
 import * as tsParser from '@typescript-eslint/parser';
 import eslintPluginSvelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
+// @ts-ignore TS2307: Not the correct type of module resolution.
+import type {FlatConfig} from '@typescript-eslint/utils/ts-eslint';
 
+// @todo switch to type exported from eslint-config:5.0.1+
+export type ExtensionConfigs = { configs: FlatConfig.Config[] };
 
 /**
  * Eslint override for svelte files
@@ -22,8 +26,7 @@ const SVELTE_CONFIG: Linter.Config = {
 	},
 };
 
-module.exports = function( config: { configs: Linter.Config[] } ): { configs: Linter.Config[] } {
-
+module.exports = function( config: ExtensionConfigs ): ExtensionConfigs {
 	/**
 	 * Add ".svelte" files to `extraFileExtensions`
 	 * @link https://github.com/sveltejs/svelte-eslint-parser?tab=readme-ov-file#parseroptionsparser
