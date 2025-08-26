@@ -1,4 +1,4 @@
-import * as tsParser from '@typescript-eslint/parser';
+import ts from 'typescript-eslint';
 
 
 const BASE = {
@@ -39,7 +39,7 @@ describe( 'eslint.config', () => {
 			'**/*.svelte',
 			'*.svelte',
 		] );
-		expect( JSON.stringify( svelteConfig.languageOptions.parserOptions.parser ) ).toEqual( JSON.stringify( tsParser ) );
+		expect( JSON.stringify( svelteConfig.languageOptions.parserOptions.parser ) ).toEqual( JSON.stringify( ts.parser ) );
 		expect( svelteConfig.rules ).toEqual( {
 			'no-unused-vars': [
 				0,
@@ -54,7 +54,7 @@ describe( 'eslint.config', () => {
 	test( 'Merged', () => {
 		const config = require( '@lipemat/eslint-config' );
 
-		const original = config.default[ config.default.length - 7 ];
+		const original = config.default[ config.default.length - 4 ];
 		const svelte = config.default[ config.default.length - 1 ];
 
 		expect( original.languageOptions.sourceType ).toEqual( 'module' );

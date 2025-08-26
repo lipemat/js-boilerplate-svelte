@@ -7,6 +7,7 @@
     "tests/**/*"
   ],
   "compilerOptions": {
+    "allowJs": true,
     "esModuleInterop": true,
     "module": "CommonJS",
     "skipLibCheck": true,

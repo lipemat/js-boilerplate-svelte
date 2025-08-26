@@ -1,9 +1,10 @@
-// @ts-ignore TS2307: Cannot find module @typescript-eslint/parse
-import * as tsParser from '@typescript-eslint/parser';
-import eslintPluginSvelte from 'eslint-plugin-svelte';
+import ts from 'typescript-eslint';
+import svelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
-// @ts-ignore TS2307: Not the correct type of module resolution.
+// @ts-expect-error
 import type {FlatConfig} from '@typescript-eslint/utils/ts-eslint';
+import svelteConfig from './svelte.config.js';
+
 
 // @todo switch to type exported from eslint-config:5.0.1+
 export type ExtensionConfigs = { configs: FlatConfig.Config[] };
@@ -17,7 +18,9 @@ const SVELTE_CONFIG: Linter.Config = {
 	files: [ '**/*.svelte', '*.svelte' ],
 	languageOptions: {
 		parserOptions: {
-			parser: tsParser,
+			projectService: true,
+			parser: ts.parser,
+			svelteConfig
 		},
 	},
 	rules: {
@@ -26,7 +29,7 @@ const SVELTE_CONFIG: Linter.Config = {
 	},
 };
 
-module.exports = function( config: ExtensionConfigs ): ExtensionConfigs {
+const extension = function( config: ExtensionConfigs ): ExtensionConfigs {
 	/**
 	 * Add ".svelte" files to `extraFileExtensions`
 	 * @link https://github.com/sveltejs/svelte-eslint-parser?tab=readme-ov-file#parseroptionsparser
@@ -42,8 +45,11 @@ module.exports = function( config: ExtensionConfigs ): ExtensionConfigs {
 	 *
 	 * @link https://github.com/sveltejs/eslint-plugin-svelte?tab=readme-ov-file#configuration
 	 */
-	config.configs.push( ...eslintPluginSvelte.configs[ 'flat/recommended' ] );
+	config.configs.push( ...svelte.configs.recommended );
 	config.configs.push( SVELTE_CONFIG );
 
 	return config;
 };
+
+export default extension;
+module.exports = extension;
