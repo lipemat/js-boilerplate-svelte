@@ -2,6 +2,7 @@ import {type CSSOptions, defineConfig} from 'vite';
 import {getConfig} from '@lipemat/js-boilerplate/helpers/config';
 import * as postcssScss from 'postcss-scss';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
+import {resolve} from 'path';
 
 const postcssOptions = getConfig( 'postcss.config' );
 
@@ -15,8 +16,11 @@ const POST_CSS_OPTIONS: CSSOptions['postcss'] = {
 
 export default defineConfig( {
 	plugins: [
-		svelte(),
+		svelte( {
+			configFile: 'config/svelte.config.js',
+		} ),
 	],
+	root: resolve( __dirname, '../' ),
 	server: {
 		// Configure dev server
 		host: 'localhost',

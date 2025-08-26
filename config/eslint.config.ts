@@ -1,7 +1,7 @@
 import ts from 'typescript-eslint';
 import svelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
-// @ts-expect-error
+// @ts-expect-error: TS2307: Requires type to be `module` to resolve
 import type {FlatConfig} from '@typescript-eslint/utils/ts-eslint';
 import svelteConfig from './svelte.config.js';
 
