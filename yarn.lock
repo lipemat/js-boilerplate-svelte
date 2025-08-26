@@ -2599,17 +2599,14 @@ __metadata:
     require-json5: "npm:^1.3.0"
     svelte: "npm:^5.38.5"
     svelte-check: "npm:^4.3.1"
-    svelte-eslint-parser: "npm:^0.43.0"
+    svelte-eslint-parser: "npm:^1.3.1"
     svelte-loader: "npm:^3.1.9"
     svelte-preprocess: "npm:^6.0.3"
-    svelte-preprocess-cssmodules: "npm:^2.2.5"
+    svelte-preprocess-cssmodules: "npm:^3.0.1"
     ts-node: "npm:^10.9.2"
     typescript: "npm:~5.8.3"
     typescript-eslint: "npm:^8.18.0"
     vite: "npm:^7.1.2"
-  peerDependencies:
-    "@lipemat/js-boilerplate": ">=10.10.3"
-    eslint: ^9
   bin:
     lipemat-js-boilerplate-svelte: bin/lipemat-js-boilerplate-svelte.js
   languageName: unknown
@@ -4487,7 +4484,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.1.0, acorn@npm:^8.11.0, acorn@npm:^8.12.1, acorn@npm:^8.14.0, acorn@npm:^8.15.0, acorn@npm:^8.4.1, acorn@npm:^8.5.0, acorn@npm:^8.8.1, acorn@npm:^8.9.0":
+"acorn@npm:^8.1.0, acorn@npm:^8.11.0, acorn@npm:^8.12.1, acorn@npm:^8.14.0, acorn@npm:^8.15.0, acorn@npm:^8.4.1, acorn@npm:^8.5.0, acorn@npm:^8.8.1":
   version: 8.15.0
   resolution: "acorn@npm:8.15.0"
   bin:
@@ -6805,16 +6802,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-scope@npm:^7.2.2":
-  version: 7.2.2
-  resolution: "eslint-scope@npm:7.2.2"
-  dependencies:
-    esrecurse: "npm:^4.3.0"
-    estraverse: "npm:^5.2.0"
-  checksum: 10c0/613c267aea34b5a6d6c00514e8545ef1f1433108097e857225fed40d397dd6b1809dffd11c2fde23b37ca53d7bf935fe04d2a18e6fc932b31837b6ad67e1c116
-  languageName: node
-  linkType: hard
-
 "eslint-scope@npm:^8.2.0, eslint-scope@npm:^8.4.0":
   version: 8.4.0
   resolution: "eslint-scope@npm:8.4.0"
@@ -6911,17 +6898,6 @@ __metadata:
     acorn-jsx: "npm:^5.3.2"
     eslint-visitor-keys: "npm:^4.2.1"
   checksum: 10c0/c63fe06131c26c8157b4083313cb02a9a54720a08e21543300e55288c40e06c3fc284bdecf108d3a1372c5934a0a88644c98714f38b6ae8ed272b40d9ea08d6b
-  languageName: node
-  linkType: hard
-
-"espree@npm:^9.6.1":
-  version: 9.6.1
-  resolution: "espree@npm:9.6.1"
-  dependencies:
-    acorn: "npm:^8.9.0"
-    acorn-jsx: "npm:^5.3.2"
-    eslint-visitor-keys: "npm:^3.4.1"
-  checksum: 10c0/1a2e9b4699b715347f62330bcc76aee224390c28bb02b31a3752e9d07549c473f5f986720483c6469cf3cfb3c9d05df612ffc69eb1ee94b54b739e67de9bb460
   languageName: node
   linkType: hard
 
@@ -11010,7 +10986,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.14, postcss@npm:^8.4.39, postcss@npm:^8.4.47, postcss@npm:^8.4.49, postcss@npm:^8.4.7, postcss@npm:^8.5.6":
+"postcss@npm:^8.4.14, postcss@npm:^8.4.47, postcss@npm:^8.4.49, postcss@npm:^8.4.7, postcss@npm:^8.5.6":
   version: 8.5.6
   resolution: "postcss@npm:8.5.6"
   dependencies:
@@ -12407,25 +12383,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte-eslint-parser@npm:^0.43.0":
-  version: 0.43.0
-  resolution: "svelte-eslint-parser@npm:0.43.0"
-  dependencies:
-    eslint-scope: "npm:^7.2.2"
-    eslint-visitor-keys: "npm:^3.4.3"
-    espree: "npm:^9.6.1"
-    postcss: "npm:^8.4.39"
-    postcss-scss: "npm:^4.0.9"
-  peerDependencies:
-    svelte: ^3.37.0 || ^4.0.0 || ^5.0.0
-  peerDependenciesMeta:
-    svelte:
-      optional: true
-  checksum: 10c0/52bbbf5d266fc36f64626e38d8de4354d78a5490fa60b61b1cd127c1c661d94f0c671a220e3ed7dd92b144a3c99f517d5205c218f78feea0603132f24eeb4c9d
-  languageName: node
-  linkType: hard
-
-"svelte-eslint-parser@npm:^1.3.0":
+"svelte-eslint-parser@npm:^1.3.0, svelte-eslint-parser@npm:^1.3.1":
   version: 1.3.1
   resolution: "svelte-eslint-parser@npm:1.3.1"
   dependencies:
@@ -12466,17 +12424,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"svelte-preprocess-cssmodules@npm:^2.2.5":
-  version: 2.2.5
-  resolution: "svelte-preprocess-cssmodules@npm:2.2.5"
+"svelte-preprocess-cssmodules@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "svelte-preprocess-cssmodules@npm:3.0.1"
   dependencies:
     acorn: "npm:^8.5.0"
     big.js: "npm:^6.1.1"
     estree-walker: "npm:^2.0.2"
     magic-string: "npm:^0.25.7"
   peerDependencies:
-    svelte: ^3.20.0 || ^4.0.0
-  checksum: 10c0/21c7a9ca9f73c0c77b404188be903db9a546d7933249f723b7936170cd71d00694d10debaad4c6e4410ed76f0109cafc3253bdda9867788835c298839d6caf09
+    svelte: ^5.15.0
+  checksum: 10c0/0adcf396647449abb4c506bc0d5ffa9ece295fd9537da2c3b2567704dc004ac4520a63f827a1b4f9c7dc15d447fa9f74df6fc8bae191360af334a667f3d292ed
   languageName: node
   linkType: hard
 
