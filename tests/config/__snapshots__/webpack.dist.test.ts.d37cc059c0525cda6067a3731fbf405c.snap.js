@@ -138,10 +138,6 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                   {
                     "plugins": [
                       {
-                        "Declaration": [Function],
-                        "postcssPlugin": "postcss-color-function",
-                      },
-                      {
                         "postcssPlugin": "postcss-normalize-display-values",
                         "prepare": [Function],
                       },
@@ -189,10 +185,6 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                       {
                         "Declaration": [Function],
                         "postcssPlugin": "postcss-stepped-value-functions",
-                      },
-                      {
-                        "Declaration": [Function],
-                        "postcssPlugin": "postcss-trigonometric-functions",
                       },
                       {
                         "browsers": [
@@ -512,10 +504,6 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                   {
                     "plugins": [
                       {
-                        "Declaration": [Function],
-                        "postcssPlugin": "postcss-color-function",
-                      },
-                      {
                         "postcssPlugin": "postcss-normalize-display-values",
                         "prepare": [Function],
                       },
@@ -563,10 +551,6 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                       {
                         "Declaration": [Function],
                         "postcssPlugin": "postcss-stepped-value-functions",
-                      },
-                      {
-                        "Declaration": [Function],
-                        "postcssPlugin": "postcss-trigonometric-functions",
                       },
                       {
                         "browsers": [

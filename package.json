@@ -62,5 +62,5 @@
     "@lipemat/js-boilerplate": ">=10.10.3",
     "eslint": "^9"
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.9.4"
 }
