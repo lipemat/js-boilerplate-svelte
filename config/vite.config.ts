@@ -1,12 +1,12 @@
 import {defineConfig} from 'vite';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
-import {resolve} from 'path';
 import {getPackageConfig} from '@lipemat/js-boilerplate/helpers/package-config';
 import manifestHash from '../lib/manifest-hash';
 import runningFlag from '../lib/running-flag';
 import fs from 'fs';
 import cleanExceptRunning from '../lib/cleanup-build';
-import {getLocalIdentName, getPostCssConfig} from '../helpers/postcss';
+import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss';
+import svelteConfig from '../config/svelte.config';
 
 const postcssOptions = getPostCssConfig();
 const packageConfig = getPackageConfig();
@@ -19,13 +19,14 @@ const ssl = 'https:' === url.protocol && 'object' === typeof ( packageConfig.cer
 	https: {
 		cert: fs.readFileSync( packageConfig.certificates.cert ),
 		key: fs.readFileSync( packageConfig.certificates.key ),
-	}
+	},
 } : {};
 
 export default defineConfig( {
 	plugins: [
 		svelte( {
-			configFile: resolve( __dirname, '../' ) + '/config/svelte.config.js',
+			...svelteConfig,
+			configFile: false,
 		} ),
 		cleanExceptRunning(),
 		manifestHash(),
@@ -36,7 +37,7 @@ export default defineConfig( {
 		host: url.hostname,
 		port: 5173,
 		cors: true,
-		...ssl
+		...ssl,
 	},
 	base: '/' + DIST_DIR.replace( /.*(?=(wp-content))/, '' ) + '/',
 	build: {
@@ -51,15 +52,16 @@ export default defineConfig( {
 				chunkFileNames: '[name].[hash].js',
 				dir: DIST_DIR,
 				entryFileNames: '[name].js',
-			}
-		}
+			},
+		},
 	},
 	css: {
+		// Only affects imported .pcss files.
 		modules: {
-			generateScopedName: getLocalIdentName(),
+			generateScopedName: getGeneratedScopedName(),
 			localsConvention: 'camelCase',
 		},
 		postcss: postcssOptions,
 		devSourcemap: postcssOptions.map,
-	}
+	},
 } );
