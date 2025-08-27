@@ -29,9 +29,7 @@
     "prepublishOnly": "yarn run build",
     "test": "lipemat-js-boilerplate test",
     "validate-ts": "tsc --noEmit",
-    "watch": "ts-node ./bin/watch.ts",
-    "start": "lipemat-js-boilerplate-svelte start",
-    "dist": "lipemat-js-boilerplate-svelte dist"
+    "watch": "ts-node ./bin/watch.ts"
   },
   "dependencies": {
     "@lipemat/eslint-config": "^5.0.0",
