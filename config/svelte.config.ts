@@ -1,5 +1,6 @@
 import {cssModules} from 'svelte-preprocess-cssmodules';
 import {type SvelteConfig, vitePreprocess} from '@sveltejs/vite-plugin-svelte';
+import {getLocalIdentName} from '../helpers/postcss';
 
 
 const config: SvelteConfig = {
@@ -10,7 +11,7 @@ const config: SvelteConfig = {
 
 		// CSS module support for local <style> tags.
 		cssModules( {
-			localIdentName: 'production' === process.env.NODE_ENV ? '[contenthash:base52:5]' : '§Ⓜ[name]__[local]__[contenthash:base52:2]',
+			localIdentName: getLocalIdentName(),
 			useAsDefaultScoping: true,
 			mode: 'mixed'
 		} )
