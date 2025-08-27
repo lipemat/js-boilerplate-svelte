@@ -9,18 +9,14 @@ export default function cleanExceptRunning(): Plugin {
 		name: 'clean-except-running',
 		apply: 'build',
 		async buildStart() {
-			try {
-				const items = await fsp.readdir( DIST_DIR );
-				await Promise.all( items.map( async item => {
-					if ( '.running' === item ) {
-						return;
-					}
-					const full = path.join( DIST_DIR, item );
-					await fsp.rm( full, {recursive: true, force: true} );
-				} ) );
-			} catch ( e ) {
-				// ignore if DIR does not exist yet
-			}
+			const items = await fsp.readdir( DIST_DIR );
+			await Promise.all( items.map( async item => {
+				if ( '.running' === item ) {
+					return;
+				}
+				const full = path.join( DIST_DIR, item );
+				await fsp.rm( full, {recursive: true, force: true} );
+			} ) );
 		},
 	};
 }

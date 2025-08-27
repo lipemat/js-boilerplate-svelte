@@ -2551,9 +2551,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lipemat/eslint-config@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "@lipemat/eslint-config@npm:5.0.0"
+"@lipemat/eslint-config@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@lipemat/eslint-config@npm:5.0.1"
   dependencies:
     "@eslint/compat": "npm:^1.2.4"
     "@eslint/eslintrc": "npm:^3.2.0"
@@ -2571,7 +2571,7 @@ __metadata:
     globals: "npm:^15.13.0"
   peerDependencies:
     typescript: ^5.8.3
-  checksum: 10c0/9d97372d1f23c36807e2e54622373f18f4c72857ac84b959517999066b20d87c42db8d870132339a85bc798e71967a414b221ce0cb8531ba3c3429f577c08af3
+  checksum: 10c0/f4b758c3b3fa3c578d21b9b4eb893f2db2ddaa104544717a73a52cd25147bb301a31cac4ed5f27326642422933d6878498da2c1edc234e0b9a2b15c8a497b716
   languageName: node
   linkType: hard
 
@@ -2579,7 +2579,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lipemat/js-boilerplate-svelte@workspace:."
   dependencies:
-    "@lipemat/eslint-config": "npm:^5.0.0"
+    "@lipemat/eslint-config": "npm:^5.0.1"
     "@lipemat/js-boilerplate": "npm:^10.14.2"
     "@sveltejs/vite-plugin-svelte": "npm:^6.1.1"
     "@types/eslint": "npm:^9"

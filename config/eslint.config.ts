@@ -1,12 +1,7 @@
 import ts from 'typescript-eslint';
 import svelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
-// @ts-expect-error: TS2307: Requires type to be `module` to resolve
-import type {FlatConfig} from '@typescript-eslint/utils/ts-eslint';
-
-
-// @todo switch to type exported from eslint-config:5.0.1+
-export type ExtensionConfigs = { configs: FlatConfig.Config[] };
+import type {ExtensionConfigs} from '@lipemat/eslint-config/types/helpers/config';
 
 /**
  * Eslint override for svelte files
@@ -18,7 +13,7 @@ const SVELTE_CONFIG: Linter.Config = {
 	languageOptions: {
 		parserOptions: {
 			projectService: true,
-			parser: ts.parser
+			parser: ts.parser,
 		},
 	},
 	rules: {
@@ -34,7 +29,7 @@ const extension = function( config: ExtensionConfigs ): ExtensionConfigs {
 	 */
 	const extraExtensions = config.configs[ 0 ]?.languageOptions?.parserOptions?.extraFileExtensions ?? [];
 	extraExtensions.push( '.svelte' );
-	if ( config.configs[ 0 ]?.languageOptions?.parserOptions ) {
+	if ( 'object' === typeof config.configs[ 0 ]?.languageOptions?.parserOptions ) {
 		config.configs[ 0 ].languageOptions.parserOptions.extraFileExtensions = extraExtensions;
 	}
 

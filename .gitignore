@@ -2,25 +2,33 @@
 config/*.js
 helpers/*.js
 lib/*.js
+*.map
 
 
 # system/hidden files
+*.bak
+*.sublime-project
+*.sublime-workspace
+*.swp
 *~
 .DS_Store
 .DS_Store?
-.svn
-.cvs
-*.bak
-*.swp
-.ready
-.sass-cache
-.project
-*.sublime-project
-*.sublime-workspace
-*.map
 .Trashes
-ehthumbs.db
+.cvs
+.eslintcache
+.phpcs.cache
+.phpunit.cache
+.phpunit.result.cache
+.project
+.ready
+.running
+.sass-cache
+.stylelintcache
+.svn
+.vscode
 Thumbs.db
+ehthumbs.db
+tsconfig.tsbuildinfo
 
 # log files
 *.log

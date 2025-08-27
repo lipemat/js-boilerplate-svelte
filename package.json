@@ -26,13 +26,14 @@
   },
   "scripts": {
     "build": "ts-node ./bin/build.ts",
+    "lint": "eslint --fix --cache",
     "prepublishOnly": "yarn run build",
     "test": "lipemat-js-boilerplate test",
     "validate-ts": "tsc --noEmit",
     "watch": "ts-node ./bin/watch.ts"
   },
   "dependencies": {
-    "@lipemat/eslint-config": "^5.0.0",
+    "@lipemat/eslint-config": "^5.0.1",
     "@lipemat/js-boilerplate": "^10.14.2",
     "@sveltejs/vite-plugin-svelte": "^6.1.1",
     "@types/eslint": "^9",

@@ -10,9 +10,11 @@
     "target": "ES2024"
   },
   "include": [
-    "bin/**/*",
-    "config/**/*",
-    "helpers/**/*",
-    "tests/**/*"
+    "bin/**/*.ts",
+    "config/**/*.ts",
+    "helpers/**/*.ts",
+    "lib/**/*.ts",
+    "tests/**/*.ts",
+    "jest.config.ts"
   ]
 }
