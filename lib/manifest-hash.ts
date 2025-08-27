@@ -12,7 +12,7 @@ declare module 'vite' {
 }
 
 export default function manifestSRI(): Plugin {
-	const manifestPaths = [ 'manifest.json', ];
+	const manifestPaths = [ '.vite/manifest.json', '.vite/manifest-assets.json', 'manifest.json', 'manifest-assets.json' ];
 
 	return {
 		name: 'vite-plugin-manifest',
@@ -28,10 +28,18 @@ async function augmentManifest( manifestPath: string, outDir: string ) {
 	const resolveInOutDir = ( path: string ) => resolve( outDir, path );
 	manifestPath = resolveInOutDir( manifestPath );
 
-	const manifest: Manifest | undefined
-		= await fs.readFile( manifestPath, 'utf-8' ).then( JSON.parse, () => undefined );
+	const manifest: Manifest | undefined =
+		await fs.readFile( manifestPath, 'utf-8' ).then( JSON.parse, () => undefined );
 
 	if ( manifest ) {
+		Object.keys( manifest ).forEach( key => {
+			// Remove everything, but the file name from the manifest.
+			manifest[ key ].src = manifest[ key ].src?.replace( /.*js\/src\//, '' );
+			delete manifest[ key ].dynamicImports;
+			manifest[ key.replace( /.*\//, '' ).replace( '.ts', '.js' ) ] = manifest[ key ];
+			delete manifest[ key ];
+		} );
+
 		await Promise.all( Object.values( manifest ).map( async ( chunk: ManifestChunk ) => {
 			chunk.integrity = calculateIntegrityHash( await fs.readFile( resolveInOutDir( chunk.file ) ), 'sha384' );
 			chunk.hash = calculateFileHash( await fs.readFile( resolveInOutDir( chunk.file ) ) );

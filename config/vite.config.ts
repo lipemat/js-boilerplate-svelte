@@ -5,6 +5,9 @@ import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {resolve} from 'path';
 import {getPackageConfig} from '@lipemat/js-boilerplate/helpers/package-config';
 import manifestHash from '../lib/manifest-hash';
+import runningFlag from '../lib/running-flag';
+import fs from 'fs';
+import cleanExceptRunning from '../lib/cleanup-build';
 
 const postcssOptions = getConfig( 'postcss.config' );
 
@@ -16,12 +19,16 @@ const POST_CSS_OPTIONS: CSSOptions['postcss'] = {
 	syntax: undefined,
 };
 
+export const DIR = getPackageConfig().workingDirectory + '/dist-svelte';
+
 export default defineConfig( {
 	plugins: [
 		svelte( {
 			configFile: 'config/svelte.config.js',
 		} ),
+		cleanExceptRunning(),
 		manifestHash(),
+		runningFlag(),
 	],
 	root: resolve( __dirname, '../' ),
 	server: {
