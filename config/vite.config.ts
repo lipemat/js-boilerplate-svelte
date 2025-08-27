@@ -3,6 +3,8 @@ import {getConfig} from '@lipemat/js-boilerplate/helpers/config';
 import * as postcssScss from 'postcss-scss';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {resolve} from 'path';
+import {getPackageConfig} from '@lipemat/js-boilerplate/helpers/package-config';
+import manifestHash from '../lib/manifest-hash';
 
 const postcssOptions = getConfig( 'postcss.config' );
 
@@ -19,6 +21,7 @@ export default defineConfig( {
 		svelte( {
 			configFile: 'config/svelte.config.js',
 		} ),
+		manifestHash(),
 	],
 	root: resolve( __dirname, '../' ),
 	server: {

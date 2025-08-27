@@ -1,5 +1,7 @@
 # Build files
 config/*.js
+helpers/*.js
+lib/*.js
 
 
 # system/hidden files
