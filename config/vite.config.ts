@@ -34,13 +34,13 @@ const ssl = 'https:' === url.protocol && 'object' === typeof ( packageConfig.cer
 export default defineConfig( {
 	plugins: [
 		svelte( {
-			configFile: 'config/svelte.config.js',
+			configFile: resolve( __dirname, '../' ) + '/config/svelte.config.js',
 		} ),
 		cleanExceptRunning(),
 		manifestHash(),
 		runningFlag(),
 	],
-	root: resolve( __dirname, '../' ),
+	root: getPackageConfig().workingDirectory + '/src/',
 	server: {
 		host: url.hostname,
 		port: 5173,
