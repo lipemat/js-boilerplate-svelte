@@ -1,5 +1,5 @@
 import {promises as fsp} from 'fs';
-import {DIR} from '../config/vite.config';
+import {DIST_DIR} from '../config/vite.config';
 import path from 'path';
 import type {Plugin} from 'vite';
 
@@ -10,17 +10,17 @@ export default function cleanExceptRunning(): Plugin {
 		apply: 'build',
 		async buildStart() {
 			try {
-				const items = await fsp.readdir( DIR );
+				const items = await fsp.readdir( DIST_DIR );
 				await Promise.all( items.map( async item => {
-					if ( item === '.running' ) {
+					if ( '.running' === item ) {
 						return;
 					}
-					const full = path.join( DIR, item );
+					const full = path.join( DIST_DIR, item );
 					await fsp.rm( full, {recursive: true, force: true} );
 				} ) );
 			} catch ( e ) {
 				// ignore if DIR does not exist yet
 			}
-		}
+		},
 	};
 }

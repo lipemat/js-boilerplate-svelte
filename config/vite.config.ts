@@ -20,7 +20,7 @@ const POST_CSS_OPTIONS: CSSOptions['postcss'] = {
 	syntax: undefined,
 };
 
-export const DIR = packageConfig.workingDirectory + '/dist-svelte';
+export const DIST_DIR = packageConfig.workingDirectory + '/dist-svelte';
 
 const url = new URL( packageConfig.url );
 
@@ -47,7 +47,7 @@ export default defineConfig( {
 		cors: true,
 		...ssl
 	},
-	base: '/' + DIR.replace( /.*(?=(wp-content))/, '' ) + '/',
+	base: '/' + DIST_DIR.replace( /.*(?=(wp-content))/, '' ) + '/',
 	build: {
 		emptyOutDir: false,
 		manifest: 'manifest.json',
@@ -58,7 +58,7 @@ export default defineConfig( {
 			output: {
 				assetFileNames: '[name].[hash].[ext]',
 				chunkFileNames: '[name].[hash].js',
-				dir: DIR,
+				dir: DIST_DIR,
 				entryFileNames: '[name].js',
 			}
 		}

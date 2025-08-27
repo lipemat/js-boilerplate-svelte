@@ -1,17 +1,17 @@
 import {resolve} from 'path';
 import {mkdirSync, unlinkSync, writeFileSync} from 'node:fs';
 import type {Plugin, ViteDevServer} from 'vite';
-import {DIR} from '../config/vite.config';
+import {DIST_DIR} from '../config/vite.config';
 
 export default function runningFlag(): Plugin {
 	return {
 		name: 'vite:running-flag',
 		apply: 'serve',
 		configureServer( server: ViteDevServer ) {
-			const flagPath = resolve( DIR, '.running' );
+			const flagPath = resolve( DIST_DIR, '.running' );
 
 
-			mkdirSync( DIR, {recursive: true} );
+			mkdirSync( DIST_DIR, {recursive: true} );
 			writeFileSync( flagPath, '' );
 
 
