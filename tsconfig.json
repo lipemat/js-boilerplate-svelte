@@ -1,18 +1,18 @@
 {
   "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
-  "include": [
-    "bin/**/*",
-    "config/**/*",
-    "helpers/**/*",
-    "tests/**/*"
-  ],
   "compilerOptions": {
     "allowJs": true,
     "module": "CommonJS",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "strict": true,
     "target": "ES2024"
-  }
+  },
+  "include": [
+    "bin/**/*",
+    "config/**/*",
+    "helpers/**/*",
+    "tests/**/*"
+  ]
 }

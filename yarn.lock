@@ -2607,6 +2607,7 @@ __metadata:
     typescript: "npm:~5.8.3"
     typescript-eslint: "npm:^8.18.0"
     vite: "npm:^7.1.2"
+    vite-plugin-manifest-sri: "npm:^0.2.0"
   bin:
     lipemat-js-boilerplate-svelte: bin/lipemat-js-boilerplate-svelte.js
   languageName: unknown
@@ -13092,6 +13093,13 @@ __metadata:
   version: 1.1.2
   resolution: "vary@npm:1.1.2"
   checksum: 10c0/f15d588d79f3675135ba783c91a4083dcd290a2a5be9fcb6514220a1634e23df116847b1cc51f66bfb0644cf9353b2abb7815ae499bab06e46dd33c1a6bf1f4f
+  languageName: node
+  linkType: hard
+
+"vite-plugin-manifest-sri@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "vite-plugin-manifest-sri@npm:0.2.0"
+  checksum: 10c0/02d75c0e7b2fb8ed3a49df30f12eb33821d78fca6241cac8a61aaace8e7f6874fdb9a5a4f2e293bdcc25852f02fb80dd04cee0ed85b45e776bc0fa683f06d018
   languageName: node
   linkType: hard
 

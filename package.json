@@ -9,7 +9,8 @@
   "files": [
     "bin/",
     "config/",
-    "helpers/"
+    "helpers/",
+    "lib/"
   ],
   "sideEffects": false,
   "repository": {

@@ -10,6 +10,7 @@ import fs from 'fs';
 import cleanExceptRunning from '../lib/cleanup-build';
 
 const postcssOptions = getConfig( 'postcss.config' );
+const packageConfig = getPackageConfig();
 
 const POST_CSS_OPTIONS: CSSOptions['postcss'] = {
 	plugins: postcssOptions.plugins ?? [],
@@ -19,7 +20,16 @@ const POST_CSS_OPTIONS: CSSOptions['postcss'] = {
 	syntax: undefined,
 };
 
-export const DIR = getPackageConfig().workingDirectory + '/dist-svelte';
+export const DIR = packageConfig.workingDirectory + '/dist-svelte';
+
+const url = new URL( packageConfig.url );
+
+const ssl = 'https:' === url.protocol && 'object' === typeof ( packageConfig.certificates ) ? {
+	https: {
+		cert: fs.readFileSync( packageConfig.certificates.cert ),
+		key: fs.readFileSync( packageConfig.certificates.key ),
+	}
+} : {};
 
 export default defineConfig( {
 	plugins: [
@@ -32,21 +42,24 @@ export default defineConfig( {
 	],
 	root: resolve( __dirname, '../' ),
 	server: {
-		// Configure dev server
-		host: 'localhost',
+		host: url.hostname,
 		port: 5173,
 		cors: true,
+		...ssl
 	},
-	base: '/dist',
+	base: '/' + DIR.replace( /.*(?=(wp-content))/, '' ) + '/',
 	build: {
+		emptyOutDir: false,
 		manifest: 'manifest.json',
 		rollupOptions: {
 			input: {
-				master: 'src/main.ts'
+				'svelte-index': getPackageConfig().workingDirectory + '/src/' + 'svelte-index.ts',
 			},
 			output: {
-				entryFileNames: '[name].[hash].js',
 				assetFileNames: '[name].[hash].[ext]',
+				chunkFileNames: '[name].[hash].js',
+				dir: DIR,
+				entryFileNames: '[name].js',
 			}
 		}
 	},
