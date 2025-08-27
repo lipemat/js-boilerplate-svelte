@@ -3,7 +3,6 @@ import svelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
 // @ts-expect-error: TS2307: Requires type to be `module` to resolve
 import type {FlatConfig} from '@typescript-eslint/utils/ts-eslint';
-import svelteConfig from './svelte.config.js';
 
 
 // @todo switch to type exported from eslint-config:5.0.1+
@@ -19,8 +18,7 @@ const SVELTE_CONFIG: Linter.Config = {
 	languageOptions: {
 		parserOptions: {
 			projectService: true,
-			parser: ts.parser,
-			svelteConfig
+			parser: ts.parser
 		},
 	},
 	rules: {
@@ -51,5 +49,4 @@ const extension = function( config: ExtensionConfigs ): ExtensionConfigs {
 	return config;
 };
 
-export default extension;
 module.exports = extension;
