@@ -1,4 +1,4 @@
-import {defineConfig} from 'vite';
+import {defineConfig, type UserConfig} from 'vite';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {getPackageConfig} from '@lipemat/js-boilerplate/helpers/package-config';
 import manifestHash from '../lib/manifest-hash';
@@ -23,26 +23,36 @@ const ssl = 'https:' === url.protocol && 'object' === typeof ( packageConfig.cer
 	},
 } : {};
 
-export default defineConfig( {
-	plugins: [
-		svelte( {
-			...svelteConfig,
-			configFile: false,
-		} ),
-		cleanExceptRunning(),
-		manifestHash(),
-		runningFlag(),
-		checker( {
-			typescript: {
-				root: packageConfig.packageDirectory,
-			},
-			eslint: {
-				lintCommand: `eslint "${packageConfig.workingDirectory}/src/**/*.svelte"`,
-				useFlatConfig: true,
-				watchPath: packageConfig.workingDirectory + '/src/',
-			},
-		} ),
-	],
+
+const plugins: UserConfig['plugins'] = [
+	svelte( {
+		...svelteConfig,
+		configFile: false,
+	} ),
+	checker( {
+		typescript: {
+			root: packageConfig.packageDirectory,
+		},
+		eslint: {
+			lintCommand: `eslint "${packageConfig.workingDirectory}/src/**/*.svelte"`,
+			useFlatConfig: true,
+			watchPath: packageConfig.workingDirectory + '/src/',
+		},
+	} ),
+];
+if ( 'production' === process.env.NODE_ENV ) {
+	plugins.push( manifestHash() );
+	plugins.push( cleanExceptRunning() );
+} else {
+	plugins.push( runningFlag() );
+}
+
+
+/**
+ * Finished configuration for Vite.
+ */
+const viteConfig: UserConfig = defineConfig( {
+	plugins,
 	root: packageConfig.workingDirectory + '/src/',
 	server: {
 		host: url.hostname,
@@ -76,3 +86,5 @@ export default defineConfig( {
 		devSourcemap: postcssOptions.map,
 	},
 } );
+
+export default viteConfig;
