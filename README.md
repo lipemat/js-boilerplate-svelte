@@ -4,16 +4,33 @@ Svelte extension for @lipemat/js-boilerplate
 
 ## Project Setup
 
-Unless you project imports the `SvelteComponent` already, you'll get this TS error:
-> TS2307: Cannot find module '<module name>.svelte' or its corresponding type declarations.
+### Index
 
-This may be fixed by adding the following module definition to your `types` folder:
-```ts
-declare module '*.svelte' {
-	// @ts-ignore
-	export {SvelteComponent as default} from 'svelte';
-}
+Create a `svelte-index.ts` file in your `src` folder. This file is used as the entry point for your project.
+
+### Exclude from Git
+
+Add `dist-svelte` to your `.gitignore` file.
+
+### Types
+
+Improvements to svelte TS definitions are included in this package. To use it, add it to your project:
+
+#### In a .d.ts file
 ```
+/// <reference types="@lipemat/js-boilerplate-svelte" />
+```
+
+#### In any .ts file (preferrably svelte-index.ts)
+
+```
+import '@lipemat/js-boilerplate-svelte/types';
+
+```
+Or shorthand works too.
+```ts
+import '@lipemat/js-boilerplate-svelte';
+````
 
 ## Commands
 
