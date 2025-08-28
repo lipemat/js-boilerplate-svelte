@@ -34,16 +34,16 @@ export default defineConfig( {
 		runningFlag(),
 		checker( {
 			typescript: {
-				root: getPackageConfig().workingDirectory,
+				root: packageConfig.packageDirectory,
 			},
 			eslint: {
-				lintCommand: `eslint "${getPackageConfig().workingDirectory}/src/**/*.svelte"`,
+				lintCommand: `eslint "${packageConfig.workingDirectory}/src/**/*.svelte"`,
 				useFlatConfig: true,
-				watchPath: getPackageConfig().workingDirectory + '/src/',
+				watchPath: packageConfig.workingDirectory + '/src/',
 			},
 		} ),
 	],
-	root: getPackageConfig().workingDirectory + '/src/',
+	root: packageConfig.workingDirectory + '/src/',
 	server: {
 		host: url.hostname,
 		port: 5173,
@@ -56,7 +56,7 @@ export default defineConfig( {
 		manifest: 'manifest.json',
 		rollupOptions: {
 			input: {
-				'svelte-index': getPackageConfig().workingDirectory + '/src/' + 'svelte-index.ts',
+				'svelte-index': packageConfig.workingDirectory + '/src/' + 'svelte-index.ts',
 			},
 			output: {
 				assetFileNames: '[name].[hash].[ext]',
