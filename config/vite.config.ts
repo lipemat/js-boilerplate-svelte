@@ -7,6 +7,7 @@ import fs from 'fs';
 import cleanExceptRunning from '../lib/cleanup-build';
 import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss';
 import svelteConfig from '../config/svelte.config';
+import checker from 'vite-plugin-checker';
 
 const postcssOptions = getPostCssConfig();
 const packageConfig = getPackageConfig();
@@ -31,6 +32,16 @@ export default defineConfig( {
 		cleanExceptRunning(),
 		manifestHash(),
 		runningFlag(),
+		checker( {
+			typescript: {
+				root: getPackageConfig().workingDirectory,
+			},
+			eslint: {
+				lintCommand: `eslint "${getPackageConfig().workingDirectory}/src/**/*.svelte"`,
+				useFlatConfig: true,
+				watchPath: getPackageConfig().workingDirectory + '/src/',
+			},
+		} ),
 	],
 	root: getPackageConfig().workingDirectory + '/src/',
 	server: {
