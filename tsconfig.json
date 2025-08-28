@@ -15,6 +15,7 @@
     "helpers/**/*.ts",
     "lib/**/*.ts",
     "tests/**/*.ts",
+    "types/*.d.ts",
     "jest.config.ts"
   ]
 }
