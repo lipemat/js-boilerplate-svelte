@@ -13,7 +13,8 @@
     "config/",
     "helpers/",
     "lib/",
-    "types/"
+    "types/",
+    "tsconfig.json"
   ],
   "sideEffects": false,
   "repository": {
