@@ -9,6 +9,7 @@ import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss';
 import svelteConfig from '../config/svelte.config';
 import checker from 'vite-plugin-checker';
 import wpExternals from '../lib/wp-externals';
+import {compression} from 'vite-plugin-compression2';
 
 const postcssOptions = getPostCssConfig();
 const packageConfig = getPackageConfig();
@@ -45,6 +46,9 @@ const plugins: UserConfig['plugins'] = [
 if ( 'production' === process.env.NODE_ENV ) {
 	plugins.push( manifestHash() );
 	plugins.push( cleanExceptRunning() );
+	plugins.push( compression( {
+		algorithms: [ 'brotliCompress' ],
+	} ) );
 } else {
 	plugins.push( runningFlag() );
 }
