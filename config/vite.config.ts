@@ -8,6 +8,7 @@ import cleanExceptRunning from '../lib/cleanup-build';
 import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss';
 import svelteConfig from '../config/svelte.config';
 import checker from 'vite-plugin-checker';
+import wpExternals from '../lib/wp-externals';
 
 const postcssOptions = getPostCssConfig();
 const packageConfig = getPackageConfig();
@@ -39,6 +40,7 @@ const plugins: UserConfig['plugins'] = [
 			watchPath: packageConfig.workingDirectory + '/src/',
 		},
 	} ),
+	wpExternals(),
 ];
 if ( 'production' === process.env.NODE_ENV ) {
 	plugins.push( manifestHash() );
