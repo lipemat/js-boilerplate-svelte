@@ -12,6 +12,10 @@ Create a `svelte-index.ts` file in your `src` folder. This file is used as the e
 
 Add `dist-svelte` to your `.gitignore` file.
 
+### Allow Servce Worker in CSP
+
+Add `worker-src 'self' blob:` to your `Content-Security-Policy` header.
+
 ### Types
 
 Improvements to svelte TS definitions are included in this package. To use it, add it to your project:
