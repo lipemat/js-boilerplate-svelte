@@ -27,11 +27,6 @@ Improvements to svelte TS definitions are included in this package. To use it, a
 
 #### In any .ts file (preferrably svelte-index.ts)
 
-```
-import '@lipemat/js-boilerplate-svelte/types';
-
-```
-Or shorthand works too.
 ```ts
 import '@lipemat/js-boilerplate-svelte';
 ````
