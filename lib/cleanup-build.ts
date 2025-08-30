@@ -9,7 +9,15 @@ export default function cleanExceptRunning(): Plugin {
 		name: 'lipemat:clean-except-running',
 		apply: 'build',
 		async buildStart() {
-			const items = await fsp.readdir( DIST_DIR );
+			let items: string[];
+			try {
+				items = await fsp.readdir( DIST_DIR );
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars
+			} catch ( err ) {
+				return;
+			}
+
+			// Delete all files and folders except .running
 			await Promise.all( items.map( async item => {
 				if ( '.running' === item ) {
 					return;
