@@ -6,7 +6,7 @@ import type {Plugin} from 'vite';
 
 export default function cleanExceptRunning(): Plugin {
 	return {
-		name: 'clean-except-running',
+		name: 'lipemat:clean-except-running',
 		apply: 'build',
 		async buildStart() {
 			const items = await fsp.readdir( DIST_DIR );

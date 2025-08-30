@@ -92,7 +92,7 @@ const wpExports: { [ name: string ]: string } = [
 
 export default function wpExternals(): Plugin[] {
 	const plugin: Plugin = {
-		name: 'vite:wp-externals',
+		name: 'lipemat:wp-externals',
 		apply: 'build',
 		config(): UserConfig {
 			return {

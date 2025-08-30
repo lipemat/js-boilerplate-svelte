@@ -15,7 +15,7 @@ export default function manifestSRI(): Plugin {
 	const manifestPaths = [ '.vite/manifest.json', '.vite/manifest-assets.json', 'manifest.json', 'manifest-assets.json' ];
 
 	return {
-		name: 'vite-plugin-manifest',
+		name: 'lipemat:manifest-hash',
 		apply: 'build',
 		enforce: 'post',
 		async writeBundle( {dir} ) {

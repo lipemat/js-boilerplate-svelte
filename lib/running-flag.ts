@@ -5,7 +5,7 @@ import {DIST_DIR} from '../config/vite.config';
 
 export default function runningFlag(): Plugin {
 	return {
-		name: 'vite:running-flag',
+		name: 'lipemat:running-flag',
 		apply: 'serve',
 		configureServer( server: ViteDevServer ) {
 			const flagPath = resolve( DIST_DIR, '.running' );
