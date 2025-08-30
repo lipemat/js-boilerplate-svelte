@@ -36,7 +36,7 @@ const plugins: UserConfig['plugins'] = [
 			root: packageConfig.packageDirectory,
 		},
 		eslint: {
-			lintCommand: `eslint "${packageConfig.workingDirectory}/src/**/*.svelte"`,
+			lintCommand: `eslint --cache "${packageConfig.workingDirectory}/src/**/*.svelte"`,
 			useFlatConfig: true,
 			watchPath: packageConfig.workingDirectory + '/src/',
 		},
