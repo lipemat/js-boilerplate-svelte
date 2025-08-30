@@ -32,7 +32,8 @@ const plugins: UserConfig['plugins'] = [
 		configFile: false,
 	} ),
 	checker( {
-		typescript: {
+		// False positives during build, works on serve just fine.
+		typescript: 'production' === process.env.NODE_ENV ? false : {
 			root: packageConfig.packageDirectory,
 		},
 		eslint: {
