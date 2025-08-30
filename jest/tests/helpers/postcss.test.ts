@@ -1,4 +1,4 @@
-import {getGeneratedScopedName, getLocalIdentName, getPostCssConfig, maybeGetLocalIdent} from '../../helpers/postcss';
+import {getGeneratedScopedName, getLocalIdentName, getPostCssConfig, maybeGetLocalIdent} from '../../../helpers/postcss';
 import {usingShortCssClasses} from '@lipemat/js-boilerplate/helpers/css-classnames';
 import type {GetLocalIdent} from 'svelte-preprocess-cssmodules/dist/lib';
 

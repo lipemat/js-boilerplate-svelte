@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`svelte.config it is a module 1`] = `
+{
+  "default": {
+    "compilerOptions": {
+      "dev": true,
+    },
+    "preprocess": [
+      undefined,
+      {
+        "markup": [Function],
+      },
+    ],
+  },
+}
+`;
