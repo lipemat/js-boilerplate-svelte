@@ -1,9 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "JS Boilerplate Svelte Source Files",
+  "display": "Build config for TS files required to be transpiled to CommonJS.",
   "include": [
-    "../config/*.ts",
-    "../helpers/*.ts"
-  ]
+    "../config/eslint.config.ts"
+  ],
+  "compilerOptions": {
+    "module": "CommonJS",
+    "sourceMap": true
+  }
 }

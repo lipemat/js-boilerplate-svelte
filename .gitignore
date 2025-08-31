@@ -1,9 +1,6 @@
 # Build files
-config/*.js
-helpers/*.js
-lib/*.js
+config/eslint.config.js
 *.map
-
 
 # system/hidden files
 *.bak
