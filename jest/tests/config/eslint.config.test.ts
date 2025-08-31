@@ -41,12 +41,9 @@ describe( 'eslint.config', () => {
 		] );
 		expect( JSON.stringify( svelteConfig.languageOptions.parserOptions.parser ) ).toEqual( JSON.stringify( ts.parser ) );
 		expect( svelteConfig.rules ).toEqual( {
-			'no-unused-vars': [
-				0,
-			],
-			'prefer-const': [
-				0,
-			],
+			'no-unused-vars': 'off',
+			'prefer-const': 'off',
+			'svelte/no-useless-mustaches': 'off',
 		} );
 	} );
 

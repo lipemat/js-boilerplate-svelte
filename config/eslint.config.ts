@@ -17,8 +17,9 @@ const SVELTE_CONFIG: Linter.Config = {
 		},
 	},
 	rules: {
-		'no-unused-vars': [ 0 ],
-		'prefer-const': [ 0 ],
+		'no-unused-vars': 'off',
+		'prefer-const': 'off',
+		'svelte/no-useless-mustaches': 'off',
 	},
 };
 
