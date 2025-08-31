@@ -10,6 +10,7 @@ import svelteConfig from '../config/svelte.config';
 import wpExternals from '../lib/wp-externals';
 import {compression} from 'vite-plugin-compression2';
 import {svelteChecker} from '../lib/svelte-checker';
+import cssModuleTypes from '../lib/css-module-types';
 
 const postcssOptions = getPostCssConfig();
 const packageConfig = getPackageConfig();
@@ -33,6 +34,7 @@ const plugins: UserConfig['plugins'] = [
 	} ),
 	svelteChecker(),
 	wpExternals(),
+	cssModuleTypes(),
 ];
 if ( 'production' === process.env.NODE_ENV ) {
 	plugins.push( manifestHash() );
@@ -83,5 +85,6 @@ const viteConfig: UserConfig = defineConfig( {
 		devSourcemap: postcssOptions.map,
 	},
 } );
+
 
 export default viteConfig;
