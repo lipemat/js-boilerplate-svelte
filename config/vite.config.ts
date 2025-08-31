@@ -7,9 +7,9 @@ import fs from 'fs';
 import cleanExceptRunning from '../lib/cleanup-build';
 import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss';
 import svelteConfig from '../config/svelte.config';
-import checker from 'vite-plugin-checker';
 import wpExternals from '../lib/wp-externals';
 import {compression} from 'vite-plugin-compression2';
+import {svelteChecker} from '../lib/svelte-checker';
 
 const postcssOptions = getPostCssConfig();
 const packageConfig = getPackageConfig();
@@ -31,17 +31,7 @@ const plugins: UserConfig['plugins'] = [
 		...svelteConfig,
 		configFile: false,
 	} ),
-	checker( {
-		// False positives during build, works on serve just fine.
-		typescript: 'production' === process.env.NODE_ENV ? false : {
-			root: packageConfig.packageDirectory,
-		},
-		eslint: {
-			lintCommand: `eslint --cache "${packageConfig.workingDirectory}/src/**/*.svelte"`,
-			useFlatConfig: true,
-			watchPath: packageConfig.workingDirectory + '/src/',
-		},
-	} ),
+	svelteChecker(),
 	wpExternals(),
 ];
 if ( 'production' === process.env.NODE_ENV ) {
