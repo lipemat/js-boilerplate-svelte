@@ -72,6 +72,7 @@ const viteConfig: UserConfig = defineConfig( {
 				chunkFileNames: '[name].[hash].js',
 				dir: DIST_DIR,
 				entryFileNames: '[name].js',
+				format: 'module',
 			},
 		},
 	},
