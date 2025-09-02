@@ -59,7 +59,7 @@ const viteConfig: UserConfig = defineConfig( {
 		cors: true,
 		...ssl,
 	},
-	base: '/' + DIST_DIR.replace( /.*(?=(wp-content))/, '' ) + '/',
+	base: '/' + DIST_DIR.replace( /.*?((wp-)?content)/, '$1' ) + '/',
 	build: {
 		emptyOutDir: false,
 		manifest: 'manifest.json',
