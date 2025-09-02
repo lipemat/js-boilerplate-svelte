@@ -19,14 +19,6 @@ export const DIST_DIR = packageConfig.workingDirectory + '/dist-svelte';
 
 const url = new URL( packageConfig.url );
 
-const ssl = 'https:' === url.protocol && 'object' === typeof ( packageConfig.certificates ) ? {
-	https: {
-		cert: fs.readFileSync( packageConfig.certificates.cert ),
-		key: fs.readFileSync( packageConfig.certificates.key ),
-	},
-} : {};
-
-
 const plugins: UserConfig['plugins'] = [
 	svelte( {
 		...svelteConfig,
@@ -53,12 +45,6 @@ if ( 'production' === process.env.NODE_ENV ) {
 const viteConfig: UserConfig = defineConfig( {
 	plugins,
 	root: packageConfig.workingDirectory + '/src/',
-	server: {
-		host: url.hostname,
-		port: 5173,
-		cors: true,
-		...ssl,
-	},
 	base: '/' + DIST_DIR.replace( /.*?((wp-)?content)/, '$1' ) + '/',
 	build: {
 		emptyOutDir: false,
@@ -87,5 +73,23 @@ const viteConfig: UserConfig = defineConfig( {
 	},
 } );
 
+/**
+ * Dev server configuration.
+ */
+if ( 'production' !== process.env.NODE_ENV ) {
+	const ssl: UserConfig['server'] = 'https:' === url.protocol && 'object' === typeof ( packageConfig.certificates ) ? {
+		https: {
+			cert: fs.readFileSync( packageConfig.certificates.cert ),
+			key: fs.readFileSync( packageConfig.certificates.key ),
+		},
+	} : {};
+
+	viteConfig.server = {
+		host: url.hostname,
+		port: 5173,
+		cors: true,
+		...ssl,
+	};
+}
 
 export default viteConfig;
