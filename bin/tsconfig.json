@@ -6,7 +6,6 @@
     "../config/eslint.config.ts"
   ],
   "compilerOptions": {
-    "module": "CommonJS",
     "sourceMap": true
   }
 }

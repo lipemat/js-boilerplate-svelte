@@ -2900,6 +2900,7 @@ __metadata:
     "@types/postcss-modules-local-by-default": "npm:^4"
     "@types/postcss-modules-scope": "npm:^3"
     "@typescript-eslint/parser": "npm:^8.18.0"
+    "@typescript-eslint/types": "npm:^8.44.0"
     chalk: "npm:^4.1.2"
     chokidar: "npm:^3.5.3"
     cross-spawn: "npm:^7.0.6"
@@ -4393,6 +4394,13 @@ __metadata:
   version: 8.41.0
   resolution: "@typescript-eslint/types@npm:8.41.0"
   checksum: 10c0/4945a7ed7789e0527833ee378b962416d6d0d61eb6c891fe49cb6c8dc8a9adbfc58676080ca767a1f034f74f9a981caf5f4d4706cba5025c0520a801fb45d7e1
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/types@npm:^8.44.0":
+  version: 8.44.0
+  resolution: "@typescript-eslint/types@npm:8.44.0"
+  checksum: 10c0/d3a4c173294533215b4676a89e454e728cda352d6c923489af4306bf5166e51625bff6980708cb1c191bdb89c864d82bccdf96a9ed5a76f6554d6af8c90e2e1d
   languageName: node
   linkType: hard
 

@@ -29,12 +29,12 @@
     "lipemat-js-boilerplate-svelte": "bin/lipemat-js-boilerplate-svelte.js"
   },
   "scripts": {
-    "build": "ts-node ./bin/build.ts",
+    "build": "tsc --project ./bin",
     "lint": "eslint --fix --cache",
     "prepublishOnly": "yarn run build",
     "test": "lipemat-js-boilerplate test",
     "validate-ts": "tsc --noEmit",
-    "watch": "ts-node ./bin/watch.ts"
+    "watch": "tsc --project ./bin --watch"
   },
   "dependencies": {
     "@lipemat/eslint-config": "^5.0.1",
@@ -46,6 +46,7 @@
     "@types/postcss-modules-local-by-default": "^4",
     "@types/postcss-modules-scope": "^3",
     "@typescript-eslint/parser": "^8.18.0",
+    "@typescript-eslint/types": "^8.44.0",
     "cross-spawn": "^7.0.6",
     "eslint": "^9",
     "eslint-plugin-svelte": "^3.11.0",
