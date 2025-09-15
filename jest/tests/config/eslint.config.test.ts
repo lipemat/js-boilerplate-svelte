@@ -33,7 +33,7 @@ describe( 'eslint.config', () => {
 
 	test( 'Overrides', () => {
 		const configs = require( '../../../config/eslint.config' )( BASE ).configs;
-		const svelteConfig = configs[ configs.length - 1 ];
+		const svelteConfig = configs[ configs.length - 2 ];
 
 		expect( svelteConfig.files ).toEqual( [
 			'**/*.svelte',
@@ -43,7 +43,12 @@ describe( 'eslint.config', () => {
 		expect( svelteConfig.rules ).toEqual( {
 			'no-unused-vars': 'off',
 			'prefer-const': 'off',
+			'svelte/no-at-html-tags': 'off',
 			'svelte/no-useless-mustaches': 'off',
+		} );
+
+		expect( configs[ configs.length - 1 ].rules ).toEqual( {
+			'@lipemat/security/no-at-html-tags': 'error',
 		} );
 	} );
 
@@ -51,8 +56,8 @@ describe( 'eslint.config', () => {
 	test( 'Merged', () => {
 		const config = require( '@lipemat/eslint-config' );
 
-		const original = config.default[ config.default.length - 5 ];
-		const svelte = config.default[ config.default.length - 1 ];
+		const original = config.default[ config.default.length - 6 ];
+		const svelte = config.default[ config.default.length - 2 ];
 
 		expect( original.languageOptions.sourceType ).toEqual( 'module' );
 		expect( original.languageOptions.ecmaVersion ).toEqual( 7 );

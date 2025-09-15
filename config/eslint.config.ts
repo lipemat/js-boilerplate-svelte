@@ -1,7 +1,8 @@
 import ts from 'typescript-eslint';
 import svelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
-import type {ExtensionConfigs} from '@lipemat/eslint-config/types/helpers/config';
+import type {ExtensionConfigs} from '@lipemat/eslint-config/helpers/config.js';
+import securityPlugin from '@lipemat/eslint-config/plugins/security/index.js';
 
 /**
  * Eslint override for svelte files
@@ -19,6 +20,7 @@ const SVELTE_CONFIG: Linter.Config = {
 	rules: {
 		'no-unused-vars': 'off',
 		'prefer-const': 'off',
+		'svelte/no-at-html-tags': 'off',
 		'svelte/no-useless-mustaches': 'off',
 	},
 };
@@ -41,6 +43,7 @@ const extension = function( config: ExtensionConfigs ): ExtensionConfigs {
 	 */
 	config.configs.push( ...svelte.configs.recommended );
 	config.configs.push( SVELTE_CONFIG );
+	config.configs.push( securityPlugin.configs.svelte );
 
 	return config;
 };
