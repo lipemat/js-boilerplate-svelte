@@ -20,5 +20,5 @@ jobs:
     with:
       beta: true
       nodeVersion: '22.17.0'
-      withInstall: false
+      withInstall: true
     secrets: inherit
