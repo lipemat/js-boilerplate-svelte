@@ -48,4 +48,4 @@ const extension = function( config: ExtensionConfigs ): ExtensionConfigs {
 	return config;
 };
 
-module.exports = extension;
+export default extension;
