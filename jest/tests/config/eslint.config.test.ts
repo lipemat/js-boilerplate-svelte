@@ -15,14 +15,14 @@ jest.mock( '@lipemat/js-boilerplate/helpers/config.js', () => ( {
 		if ( fileName !== 'eslint.config' ) {
 			return jest.requireActual( '@lipemat/js-boilerplate/helpers/config.js' ).getExtensionsConfig( fileName, originalConfig );
 		}
-		return require( '../../../config/eslint.config.ts' ).default( {...originalConfig} );
+		return require( '../../../config/eslint.config.ts' )( {...originalConfig} );
 	},
 } ) );
 
 
 describe( 'eslint.config', () => {
 	test( 'Parser Options', () => {
-		const svelteConfig = require( '../../../config/eslint.config' ).default( BASE ).configs[ 0 ];
+		const svelteConfig = require( '../../../config/eslint.config' )( BASE ).configs[ 0 ];
 		expect( svelteConfig.languageOptions.parserOptions ).toEqual( {
 			extraFileExtensions: [
 				'.svelte',
@@ -32,7 +32,7 @@ describe( 'eslint.config', () => {
 
 
 	test( 'Overrides', () => {
-		const configs = require( '../../../config/eslint.config' ).default( BASE ).configs;
+		const configs = require( '../../../config/eslint.config' )( BASE ).configs;
 		const svelteConfig = configs[ configs.length - 2 ];
 
 		expect( svelteConfig.files ).toEqual( [

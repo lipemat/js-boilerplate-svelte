@@ -6,6 +6,8 @@
     "../config/eslint.config.ts"
   ],
   "compilerOptions": {
+    // Must be CommonJS to use helpers from @lipemat/js-boilerplate.
+    "module": "CommonJS",
     "sourceMap": true
   }
 }
