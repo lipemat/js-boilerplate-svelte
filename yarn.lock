@@ -2854,7 +2854,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lipemat/eslint-config@npm:^5.1.0-beta.1":
+"@lipemat/eslint-config@npm:^5.1.0":
   version: 5.1.0
   resolution: "@lipemat/eslint-config@npm:5.1.0"
   dependencies:
@@ -2882,7 +2882,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lipemat/js-boilerplate-svelte@workspace:."
   dependencies:
-    "@lipemat/eslint-config": "npm:^5.1.0-beta.1"
+    "@lipemat/eslint-config": "npm:^5.1.0"
     "@lipemat/js-boilerplate": "npm:^10.14.3"
     "@sveltejs/vite-plugin-svelte": "npm:^6.1.1"
     "@types/eslint": "npm:^9"
