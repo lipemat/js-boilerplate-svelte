@@ -1,12 +1,8 @@
-// @ts-ignore TS2307: Cannot find module @typescript-eslint/parse
-import * as tsParser from '@typescript-eslint/parser';
-import eslintPluginSvelte from 'eslint-plugin-svelte';
+import ts from 'typescript-eslint';
+import svelte from 'eslint-plugin-svelte';
 import type {Linter} from 'eslint';
-// @ts-ignore TS2307: Not the correct type of module resolution.
-import type {FlatConfig} from '@typescript-eslint/utils/ts-eslint';
-
-// @todo switch to type exported from eslint-config:5.0.1+
-export type ExtensionConfigs = { configs: FlatConfig.Config[] };
+import type {ExtensionConfigs} from '@lipemat/eslint-config/helpers/config.js';
+import securityPlugin from '@lipemat/eslint-config/plugins/security/index.js';
 
 /**
  * Eslint override for svelte files
@@ -17,23 +13,26 @@ const SVELTE_CONFIG: Linter.Config = {
 	files: [ '**/*.svelte', '*.svelte' ],
 	languageOptions: {
 		parserOptions: {
-			parser: tsParser,
+			projectService: true,
+			parser: ts.parser,
 		},
 	},
 	rules: {
-		'no-unused-vars': [ 0 ],
-		'prefer-const': [ 0 ],
+		'no-unused-vars': 'off',
+		'prefer-const': 'off',
+		'svelte/no-at-html-tags': 'off',
+		'svelte/no-useless-mustaches': 'off',
 	},
 };
 
-module.exports = function( config: ExtensionConfigs ): ExtensionConfigs {
+const extension = function( config: ExtensionConfigs ): ExtensionConfigs {
 	/**
 	 * Add ".svelte" files to `extraFileExtensions`
 	 * @link https://github.com/sveltejs/svelte-eslint-parser?tab=readme-ov-file#parseroptionsparser
 	 */
 	const extraExtensions = config.configs[ 0 ]?.languageOptions?.parserOptions?.extraFileExtensions ?? [];
 	extraExtensions.push( '.svelte' );
-	if ( config.configs[ 0 ]?.languageOptions?.parserOptions ) {
+	if ( 'object' === typeof config.configs[ 0 ]?.languageOptions?.parserOptions ) {
 		config.configs[ 0 ].languageOptions.parserOptions.extraFileExtensions = extraExtensions;
 	}
 
@@ -42,8 +41,11 @@ module.exports = function( config: ExtensionConfigs ): ExtensionConfigs {
 	 *
 	 * @link https://github.com/sveltejs/eslint-plugin-svelte?tab=readme-ov-file#configuration
 	 */
-	config.configs.push( ...eslintPluginSvelte.configs[ 'flat/recommended' ] );
+	config.configs.push( ...svelte.configs.recommended );
 	config.configs.push( SVELTE_CONFIG );
+	config.configs.push( securityPlugin.configs.svelte );
 
 	return config;
 };
+
+export default extension;

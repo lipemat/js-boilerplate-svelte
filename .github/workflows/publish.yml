@@ -20,6 +20,6 @@ jobs:
     uses: lipemat/public-actions/.github/workflows/publish-package.yml@version/1
     with:
       beta: false
-      nodeVersion: '20.11.0'
+      nodeVersion: '22.17.0'
       withInstall: true
     secrets: inherit
