@@ -1,6 +1,6 @@
 {
   "name": "@lipemat/js-boilerplate-svelte",
-  "version": "3.0.0-beta.7",
+  "version": "3.0.0",
   "description": "Svelte extension for @lipemat/js-boilerplate",
   "license": "MIT",
   "engines": {
