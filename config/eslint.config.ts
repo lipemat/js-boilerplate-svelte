@@ -13,6 +13,7 @@ const SVELTE_CONFIG: Linter.Config = {
 	files: [ '**/*.svelte', '*.svelte' ],
 	languageOptions: {
 		parserOptions: {
+			project: false,
 			projectService: true,
 			parser: ts.parser,
 		},
