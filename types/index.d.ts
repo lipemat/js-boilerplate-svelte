@@ -1,7 +1,7 @@
 /// <reference types="svelte" />
 
 /**
- * Enchancement types for Svelte to be included in all
+ * Enhancement types for Svelte to be included in all
  * projects which use this boilerplate.
  */
 
