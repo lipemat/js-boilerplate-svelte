@@ -1,6 +1,5 @@
-import type {Config} from 'jest';
-
-const config: Config = require( '@lipemat/js-boilerplate/config/jest.config' );
+/** @type {import('@jest/types').Config.InitialOptions} */
+import config from '@lipemat/js-boilerplate/config/jest.config.js';
 
 config.moduleNameMapper = {
 	...config.moduleNameMapper,

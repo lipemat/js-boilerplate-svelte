@@ -3091,7 +3091,7 @@ __metadata:
 
 "@lipemat/eslint-config@file:../eslint-config::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
   version: 5.1.4
-  resolution: "@lipemat/eslint-config@file:../eslint-config#../eslint-config::hash=2cc15b&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
+  resolution: "@lipemat/eslint-config@file:../eslint-config#../eslint-config::hash=582cf1&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
   dependencies:
     "@eslint/compat": "npm:^1.2.4"
     "@eslint/eslintrc": "npm:^3.3.3"
@@ -3109,42 +3109,37 @@ __metadata:
     globals: "npm:^15.13.0"
   peerDependencies:
     typescript: ^5.9.3
-  checksum: 10c0/f1f82827879a1b91caf705c25892ccb8554d3444ba3b00306926c27acad71380c29123fc04d3b2e6d3c6b8c0c769cca49d3da286ffcd4f6f8c46ee44c7b8bcbb
+  checksum: 10c0/fadc6bf1f33161192fcfbde9bdcd67c21ec2d951a26f99554942d7361d12448c5cf24b5526b9f25cc5c5157175b053188deaf4bf642c6bd139030b5b7c0c2e49
   languageName: node
   linkType: hard
 
-"@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared::locator=%40lipemat%2Feslint-config%40file%3A..%2Feslint-config%23..%2Feslint-config%3A%3Ahash%3D2cc15b%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A.":
+"@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared::locator=%40lipemat%2Feslint-config%40file%3A..%2Feslint-config%23..%2Feslint-config%3A%3Ahash%3D582cf1%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A.":
   version: 0.0.1
-  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=190193&locator=%40lipemat%2Feslint-config%40file%3A..%2Feslint-config%23..%2Feslint-config%3A%3Ahash%3D2cc15b%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A."
+  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=1c9ea7&locator=%40lipemat%2Feslint-config%40file%3A..%2Feslint-config%23..%2Feslint-config%3A%3Ahash%3D582cf1%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A."
   dependencies:
     core-js: "npm:^3.33.1"
   peerDependencies:
     typescript: ^5.9.3
-  checksum: 10c0/8f3ec2f9a48a89ae56f729c318247993234dbbfe23209faffa8161ce1763b73c1ba439afaa6f7e3739250c3d1b2a18a73ae4dfe07a549e0af01fe4f648b072d9
-  languageName: node
-  linkType: hard
-
-"@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate%40file%3A..%2Fjs-boilerplate%23..%2Fjs-boilerplate%3A%3Ahash%3D833d6d%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A.":
-  version: 0.0.1
-  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=190193&locator=%40lipemat%2Fjs-boilerplate%40file%3A..%2Fjs-boilerplate%23..%2Fjs-boilerplate%3A%3Ahash%3D833d6d%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A."
-  dependencies:
-    core-js: "npm:^3.33.1"
-  peerDependencies:
-    typescript: ^5.9.3
-  checksum: 10c0/8f3ec2f9a48a89ae56f729c318247993234dbbfe23209faffa8161ce1763b73c1ba439afaa6f7e3739250c3d1b2a18a73ae4dfe07a549e0af01fe4f648b072d9
+  checksum: 10c0/a382406659b58304985df0930b2738f0734e7cb5b90b1034a3835869baeff8a8ec20190b5ee77e84fbc20d360ab56598f75053f91f72340fe5a198db2d24a633
   languageName: node
   linkType: hard
 
 "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
   version: 0.0.1
-  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=190193&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
+  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=1c9ea7&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
   dependencies:
     core-js: "npm:^3.33.1"
   peerDependencies:
     typescript: ^5.9.3
-  checksum: 10c0/8f3ec2f9a48a89ae56f729c318247993234dbbfe23209faffa8161ce1763b73c1ba439afaa6f7e3739250c3d1b2a18a73ae4dfe07a549e0af01fe4f648b072d9
+  checksum: 10c0/a382406659b58304985df0930b2738f0734e7cb5b90b1034a3835869baeff8a8ec20190b5ee77e84fbc20d360ab56598f75053f91f72340fe5a198db2d24a633
   languageName: node
   linkType: hard
+
+"@lipemat/js-boilerplate-shared@link:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate%40file%3A..%2Fjs-boilerplate%23..%2Fjs-boilerplate%3A%3Ahash%3D19bd57%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A.":
+  version: 0.0.0-use.local
+  resolution: "@lipemat/js-boilerplate-shared@link:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate%40file%3A..%2Fjs-boilerplate%23..%2Fjs-boilerplate%3A%3Ahash%3D19bd57%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A."
+  languageName: node
+  linkType: soft
 
 "@lipemat/js-boilerplate-svelte@workspace:.":
   version: 0.0.0-use.local
@@ -3198,14 +3193,14 @@ __metadata:
 
 "@lipemat/js-boilerplate@file:../js-boilerplate::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
   version: 10.15.0-beta.1
-  resolution: "@lipemat/js-boilerplate@file:../js-boilerplate#../js-boilerplate::hash=833d6d&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
+  resolution: "@lipemat/js-boilerplate@file:../js-boilerplate#../js-boilerplate::hash=19bd57&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
   dependencies:
     "@babel/core": "npm:^7.24.7"
     "@babel/preset-env": "npm:^7.24.7"
     "@babel/preset-react": "npm:^7.24.7"
     "@babel/preset-typescript": "npm:^7.24.7"
     "@csstools/postcss-global-data": "npm:2.0.0"
-    "@lipemat/js-boilerplate-shared": "file:../js-boilerplate-shared"
+    "@lipemat/js-boilerplate-shared": "link:../js-boilerplate-shared"
     "@pmmmwh/react-refresh-webpack-plugin": "npm:^0.6.1"
     "@statoscope/webpack-plugin": "npm:^5.29.0"
     "@types/babel__preset-env": "npm:^7.9.6"
@@ -3251,7 +3246,7 @@ __metadata:
     webpack-subresource-integrity: "npm:^5.1.0"
   bin:
     lipemat-js-boilerplate: bin/lipemat-js-boilerplate.js
-  checksum: 10c0/9e22f5e978f7bead8b21c5a2126a4c5cdd758d251b1d384d01b594eb1d91e0c99e66be57213594ef37fc9b0391ae5f933251b7bdce290bde6c1392f0f3130f5a
+  checksum: 10c0/67f25ea9ea7aa49c20009a79d889228583f9d39b6207b4411092366ab7a065056efb488fc51c59dfc5576884dfe7f343c7c8697d54da7d7868188300dd910840
   languageName: node
   linkType: hard
 

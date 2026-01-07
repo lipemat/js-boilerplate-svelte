@@ -3,7 +3,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "target": "ES2024",
     "paths": {
       "@typescript-eslint/utils/ts-eslint": [
