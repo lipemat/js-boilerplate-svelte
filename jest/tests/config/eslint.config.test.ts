@@ -9,11 +9,11 @@ const BASE = {
 	} ],
 };
 
-jest.mock( '@lipemat/js-boilerplate/helpers/config.js', () => ( {
-	...jest.requireActual( '@lipemat/js-boilerplate/helpers/config.js' ),
+jest.mock( '@lipemat/js-boilerplate-shared', () => ( {
+	...jest.requireActual( '@lipemat/js-boilerplate-shared' ),
 	getExtensionsConfig: ( fileName: string, originalConfig: object ) => {
 		if ( fileName !== 'eslint.config' ) {
-			return jest.requireActual( '@lipemat/js-boilerplate/helpers/config.js' ).getExtensionsConfig( fileName, originalConfig );
+			return jest.requireActual( '@lipemat/js-boilerplate-shared' ).getExtensionsConfig( fileName, originalConfig );
 		}
 		return require( '../../../config/eslint.config.ts' )( {...originalConfig} );
 	},
