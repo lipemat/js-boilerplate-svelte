@@ -1,22 +1,12 @@
 import {getGeneratedScopedName, getLocalIdentName, getPostCssConfig, maybeGetLocalIdent} from '../../../helpers/postcss';
-import {usingShortCssClasses} from '@lipemat/js-boilerplate/helpers/css-classnames';
+import {usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames';
 import type {GetLocalIdent} from 'svelte-preprocess-cssmodules/dist/lib';
-
-// Change this variable during tests.
-// noinspection ES6ConvertVarToLetConst
-var mockShortCssEnabled = false;
-
-jest.mock( '@lipemat/js-boilerplate/helpers/package-config.js', () => ( {
-	...jest.requireActual( '@lipemat/js-boilerplate/helpers/package-config.js' ),
-	getPackageConfig: () => ( {
-		...jest.requireActual( '@lipemat/js-boilerplate/helpers/package-config.js' ),
-		// Change this variable during the test.
-		shortCssClasses: mockShortCssEnabled,
-	} ),
-} ) );
+import {modifyPackageConfig} from '../../../../js-boilerplate-shared/helpers/package-config';
 
 beforeEach( () => {
-	mockShortCssEnabled = false;
+	modifyPackageConfig( {
+		shortCssClasses: false,
+	} );
 	process.env.NODE_ENV = 'development';
 } );
 
@@ -49,7 +39,10 @@ describe( 'getLocalIdentName', () => {
 
 	test( 'Are Short CSS Classes Enabled?', () => {
 		expect( usingShortCssClasses() ).toEqual( false );
-		mockShortCssEnabled = true;
+		modifyPackageConfig( {
+			shortCssClasses: true,
+		} );
+
 		expect( usingShortCssClasses() ).toEqual( true );
 	} );
 } );
@@ -58,7 +51,9 @@ describe( 'getLocalIdentName', () => {
 describe( 'getGeneratedScopedName', () => {
 	it( 'should return a short CSS classname when enabled', () => {
 		process.env.NODE_ENV = 'production';
-		mockShortCssEnabled = true;
+		modifyPackageConfig( {
+			shortCssClasses: true,
+		} );
 		const shortName = getGeneratedScopedName();
 		expect( typeof shortName ).toBe( 'function' );
 		if ( 'function' === typeof shortName ) {
@@ -82,7 +77,9 @@ describe( 'mabyeGetLocalIdent', () => {
 
 
 	it( 'should return an object with getLocalIdent when short CSS classes are enabled', () => {
-		mockShortCssEnabled = true;
+		modifyPackageConfig( {
+			shortCssClasses: true,
+		} );
 		process.env.NODE_ENV = 'production';
 		const result = maybeGetLocalIdent();
 		expect( typeof result ).toBe( 'object' );
@@ -92,13 +89,17 @@ describe( 'mabyeGetLocalIdent', () => {
 
 	it( 'should return an empty object when short CSS classes are not enabled', () => {
 		process.env.NODE_ENV = 'development';
-		mockShortCssEnabled = true;
+		modifyPackageConfig( {
+			shortCssClasses: true,
+		} );
 		const result = maybeGetLocalIdent();
 		expect( typeof result ).toBe( 'object' );
 		expect( Object.keys( result ) ).toHaveLength( 0 );
 
 		process.env.NODE_ENV = 'production';
-		mockShortCssEnabled = false;
+		modifyPackageConfig( {
+			shortCssClasses: false,
+		} );
 		const result2 = maybeGetLocalIdent();
 		expect( typeof result2 ).toBe( 'object' );
 		expect( Object.keys( result2 ) ).toHaveLength( 0 );
@@ -107,7 +108,9 @@ describe( 'mabyeGetLocalIdent', () => {
 
 	it( 'should return a short CSS classname when enabled', () => {
 		process.env.NODE_ENV = 'production';
-		mockShortCssEnabled = true;
+		modifyPackageConfig( {
+			shortCssClasses: true,
+		} );
 		const result = maybeGetLocalIdent();
 		expect( typeof result ).toBe( 'object' );
 		expect( typeof result.getLocalIdent ).toBe( 'function' );

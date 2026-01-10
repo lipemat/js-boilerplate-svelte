@@ -1,6 +1,6 @@
 import {defineConfig, type UserConfig} from 'vite';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
-import {getPackageConfig} from '@lipemat/js-boilerplate/helpers/package-config';
+import {getPackageConfig} from '@lipemat/js-boilerplate-shared';
 import manifestHash from '../lib/manifest-hash';
 import runningFlag from '../lib/running-flag';
 import fs from 'fs';

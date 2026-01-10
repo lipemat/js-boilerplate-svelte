@@ -1,6 +1,6 @@
 import fs, {existsSync, readFileSync} from 'fs';
 import type {Plugin, UserConfig, ViteDevServer} from 'vite';
-import camelCase from '@lipemat/js-boilerplate/helpers/camel-case';
+import camelCase from '@lipemat/js-boilerplate-shared/helpers/camel-case';
 import {basename} from 'path';
 import localByDefault from 'postcss-modules-local-by-default';
 import extractImports from 'postcss-modules-extract-imports';
