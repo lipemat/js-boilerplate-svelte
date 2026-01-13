@@ -1,13 +1,33 @@
 import type {CSSModulesOptions, CSSOptions} from 'vite';
 import * as postcssScss from 'postcss-scss';
 import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames.js';
-import type {GetLocalIdent} from 'svelte-preprocess-cssmodules/dist/lib';
 import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/postcss-config.js';
 
 
 type PostCSSConfig = Exclude<CSSOptions['postcss'], string | undefined> & {
 	map: boolean;
 }
+
+interface Context {
+	context: string;
+	resourcePath: string;
+}
+
+interface LocalIdentName {
+	template: string;
+	interpolatedName: string;
+}
+
+interface Options {
+	markup: string;
+	style: string;
+}
+
+export type GetLocalIdent = {
+	( context: Context, localIdentName: LocalIdentName, localName: string, options: Options ): string;
+};
+
+
 const env = 'production' === process.env.NODE_ENV ? 'production' : 'development';
 const postcssOptions = getPostCSSConfig( env );
 
