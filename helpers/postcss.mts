@@ -39,8 +39,13 @@ export function maybeGetLocalIdent(): { getLocalIdent: GetLocalIdent } | Record<
 }
 
 
-export function getLocalIdentName(): string {
-	return 'production' === process.env.NODE_ENV ? '[contenthash:base52:5]' : '§Ⓜ[name]__[local]__[contenthash:base52:2]';
+export function getLocalIdentName( modules: boolean = true ): string {
+	let name = '§Ⓜ[name]__[local]__[contenthash:base52:2]';
+	if ( ! modules ) {
+		name = '§[name]__[local]__[contenthash:base52:2]';
+	}
+
+	return 'production' === process.env.NODE_ENV ? '[contenthash:base52:5]' : name;
 }
 
 export function getPostCssConfig(): PostCSSConfig {
