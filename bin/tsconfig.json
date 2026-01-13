@@ -6,6 +6,7 @@
     "../config/eslint.config.ts"
   ],
   "compilerOptions": {
+    "allowImportingTsExtensions": false,
     "sourceMap": true
   }
 }

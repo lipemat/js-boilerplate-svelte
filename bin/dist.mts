@@ -1,6 +1,6 @@
 import {build} from 'vite';
 
-import config from '../config/vite.config';
+import config from '../config/vite.config.mts';
 
 ( async () => {
 	try {
@@ -9,3 +9,5 @@ import config from '../config/vite.config';
 		return console.error( err );
 	}
 } )();
+
+export {};

@@ -1,6 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "declaration": false,
     "esModuleInterop": true,
     "module": "ESNext",
@@ -9,7 +10,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "ES2024",
-    "verbatimModuleSyntax": false,
+    "verbatimModuleSyntax": true,
     "paths": {
       "@typescript-eslint/utils/ts-eslint": [
         "./node_modules/@typescript-eslint/utils/dist/ts-eslint"
@@ -17,12 +18,12 @@
     }
   },
   "include": [
-    "bin/**/*.ts",
-    "config/**/*.ts",
-    "helpers/**/*.ts",
-    "lib/**/*.ts",
+    "bin/**/*ts",
+    "config/**/*ts",
+    "helpers/**/*ts",
+    "lib/**/*ts",
     "jest/jest.config.ts",
-    "jest/tests/**/*.ts",
-    "types/*.d.ts"
+    "jest/tests/**/*ts",
+    "types"
   ]
 }

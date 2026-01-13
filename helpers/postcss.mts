@@ -1,8 +1,8 @@
 import type {CSSModulesOptions, CSSOptions} from 'vite';
 import * as postcssScss from 'postcss-scss';
-import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames';
-import {GetLocalIdent} from 'svelte-preprocess-cssmodules/dist/lib';
-import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/postcss-config';
+import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames.js';
+import type {GetLocalIdent} from 'svelte-preprocess-cssmodules/dist/lib';
+import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/postcss-config.js';
 
 
 type PostCSSConfig = Exclude<CSSOptions['postcss'], string | undefined> & {

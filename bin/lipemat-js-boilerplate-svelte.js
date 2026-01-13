@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 
-const args = process.argv.slice( 2 );
+import {sync as spawn} from 'cross-spawn';
+import {createRequire} from 'node:module';
 
+const requireModule = createRequire( import.meta.url );
+
+const args = process.argv.slice( 2 );
 
 const scriptIndex = args.findIndex(
 	x => 'start' === x || 'dist' === x || 'check-types' === x
@@ -15,14 +19,20 @@ const nodeArgs = scriptIndex > 0 ? args.slice( 0, scriptIndex ) : [];
 	let result;
 	switch ( command ) {
 		case 'check-types':
-			result = await require( 'svelte-check' );
+			result = await import( 'svelte-check' );
 			break;
 		case 'start':
 		case 'dist':
-			result = sync(
+			// If the ts-node command is not available, install it globally.
+			if ( spawn( 'ts-node', [ '-v' ] ).error ) {
+				console.log( 'Installing ts-node globally.' );
+				spawn( 'npm', [ 'install', '-g', 'ts-node' ] );
+			}
+
+			result = spawn(
 				'ts-node',
 				nodeArgs
-					.concat( require.resolve( './' + command + '.ts' ) )
+					.concat( requireModule.resolve( './' + command + '.mts' ) )
 					.concat( args.slice( scriptIndex + 1 ) ),
 				{
 					stdio: 'inherit',
@@ -67,4 +77,4 @@ const nodeArgs = scriptIndex > 0 ? args.slice( 0, scriptIndex ) : [];
 	}
 } )();
 
-module.exports = {};
+export {};

@@ -2,7 +2,7 @@ process.env.NODE_ENV = 'development';
 
 import {createServer} from 'vite';
 
-import config from '../config/vite.config';
+import config from '../config/vite.config.mts';
 
 ( async () => {
 	try {

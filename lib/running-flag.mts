@@ -1,7 +1,7 @@
 import {resolve} from 'path';
 import {mkdirSync, unlinkSync, writeFileSync} from 'node:fs';
 import type {Plugin, ViteDevServer} from 'vite';
-import {DIST_DIR} from '../config/vite.config';
+import {DIST_DIR} from '../config/vite.config.mts';
 
 export default function runningFlag(): Plugin {
 	return {

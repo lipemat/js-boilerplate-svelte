@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import {basename, join, resolve} from 'path';
-import cssModuleTypes from '../../../lib/css-module-types';
+import cssModuleTypes from '../../../lib/css-module-types.mts';
 import {sync} from 'glob';
 
 

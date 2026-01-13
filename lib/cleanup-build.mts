@@ -1,5 +1,5 @@
 import {promises as fsp} from 'fs';
-import {DIST_DIR} from '../config/vite.config';
+import {DIST_DIR} from '../config/vite.config.mts';
 import path from 'path';
 import type {Plugin} from 'vite';
 

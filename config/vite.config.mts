@@ -1,16 +1,16 @@
 import {defineConfig, type UserConfig} from 'vite';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
-import manifestHash from '../lib/manifest-hash';
-import runningFlag from '../lib/running-flag';
+import manifestHash from '../lib/manifest-hash.mts';
+import runningFlag from '../lib/running-flag.mts';
 import fs from 'fs';
-import cleanExceptRunning from '../lib/cleanup-build';
-import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss';
-import svelteConfig from '../config/svelte.config';
-import wpExternals from '../lib/wp-externals';
+import cleanExceptRunning from '../lib/cleanup-build.mts';
+import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss.mts';
+import svelteConfig from './svelte.config.mts';
+import wpExternals from '../lib/wp-externals.mts';
 import {compression} from 'vite-plugin-compression2';
-import {svelteChecker} from '../lib/svelte-checker';
-import cssModuleTypes from '../lib/css-module-types';
+import {svelteChecker} from '../lib/svelte-checker.mts';
+import cssModuleTypes from '../lib/css-module-types.mts';
 
 const postcssOptions = getPostCssConfig();
 const packageConfig = getPackageConfig();
