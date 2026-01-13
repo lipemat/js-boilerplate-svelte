@@ -1,5 +1,7 @@
 import {importFresh} from '../../helpers/imports';
 import type {Plugin} from 'vite';
+import {getPostCssConfig} from '../../../helpers/postcss.mjs';
+import * as PostCSS from 'postcss';
 
 describe( 'postcss-plugin', () => {
 	afterEach( () => {
@@ -25,14 +27,28 @@ describe( 'postcss-plugin', () => {
 	} );
 
 
-	it( 'Does not have the clean plugin', async () => {
+	it( 'Does not have the clean plugin - kit', async () => {
 		process.env.NODE_ENV = 'production';
-		const plugin = await importFresh<() => Plugin>( './lib/postcss-plugin.js' );
-
-		// @ts-expect-error Could be undefined.
-		const names = plugin().config().css.postcss.plugins.map( ( plug: {
-			postcssPlugin: string
-		} ) => plug.postcssPlugin );
+		const plugin = getPostCssConfig( true );
+		const names = plugin.plugins?.map( ( plug: PostCSS.AcceptedPlugin ) => {
+			if ( 'postcssPlugin' in plug ) {
+				return plug.postcssPlugin;
+			}
+			return 'unknown';
+		} );
 		expect( names ).not.toContain( 'clean' );
+	} );
+
+
+	it( 'Has the clean plugin - default', async () => {
+		process.env.NODE_ENV = 'production';
+		const plugin = getPostCssConfig();
+		const names = plugin.plugins?.map( ( plug: PostCSS.AcceptedPlugin ) => {
+			if ( 'postcssPlugin' in plug ) {
+				return plug.postcssPlugin;
+			}
+			return 'unknown';
+		} );
+		expect( names ).toContain( 'clean' );
 	} );
 } );

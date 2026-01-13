@@ -269,6 +269,10 @@ exports[`postcss-plugin Does not change unexpectedly - Dist: config 1`] = `
           "OnceExit": [Function],
           "postcssPlugin": "postcss-sort-media-queries",
         },
+        {
+          "OnceExit": [Function],
+          "postcssPlugin": "clean",
+        },
       ],
       "stringifier": undefined,
       "syntax": undefined,

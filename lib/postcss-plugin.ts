@@ -2,13 +2,13 @@ import type {Plugin, UserConfig} from 'vite';
 import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss.mjs';
 
 
-export default function postCssConfig(): Plugin {
+export default function postCssConfig( kit: boolean = false ): Plugin {
 	return {
 		name: 'lipemat:postcss-config',
 
 		// Add CSS config to Vite.
 		config: (): Pick<UserConfig, 'css'> => {
-			const postcssOptions = getPostCssConfig();
+			const postcssOptions = getPostCssConfig( kit );
 
 			return {
 				css: {
