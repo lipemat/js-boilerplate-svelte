@@ -2,14 +2,14 @@ import type {CSSModulesOptions, CSSOptions} from 'vite';
 import * as postcssScss from 'postcss-scss';
 import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames';
 import {GetLocalIdent} from 'svelte-preprocess-cssmodules/dist/lib';
-import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/config.js';
+import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/postcss-config';
 
 
 type PostCSSConfig = Exclude<CSSOptions['postcss'], string | undefined> & {
 	map: boolean;
 }
-
-const postcssOptions = getPostCSSConfig();
+const env = 'production' === process.env.NODE_ENV ? 'production' : 'development';
+const postcssOptions = getPostCSSConfig( env );
 
 const POST_CSS_OPTIONS: PostCSSConfig = {
 	plugins: postcssOptions.plugins ?? [],

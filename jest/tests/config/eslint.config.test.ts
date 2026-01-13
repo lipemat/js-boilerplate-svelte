@@ -1,6 +1,5 @@
 import ts from 'typescript-eslint';
 
-
 const BASE = {
 	configs: [ {
 		languageOptions: {
@@ -9,13 +8,13 @@ const BASE = {
 	} ],
 };
 
-jest.mock( '@lipemat/js-boilerplate-shared', () => ( {
-	...jest.requireActual( '@lipemat/js-boilerplate-shared' ),
+jest.mock( '@lipemat/js-boilerplate-shared/helpers/config.js', () => ( {
+	...jest.requireActual( '@lipemat/js-boilerplate-shared/helpers/config.js' ),
 	getExtensionsConfig: ( fileName: string, originalConfig: object ) => {
 		if ( fileName !== 'eslint.config' ) {
-			return jest.requireActual( '@lipemat/js-boilerplate-shared' ).getExtensionsConfig( fileName, originalConfig );
+			return jest.requireActual( '@lipemat/js-boilerplate-shared/helpers/config.js' ).getExtensionsConfig( fileName, originalConfig );
 		}
-		return require( '../../../config/eslint.config.ts' )( {...originalConfig} );
+		return require( '../../../config/eslint.config.js' )( {...originalConfig} );
 	},
 } ) );
 
