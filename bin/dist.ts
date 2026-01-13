@@ -1,5 +1,3 @@
-process.env.NODE_ENV = 'production';
-
 import {build} from 'vite';
 
 import config from '../config/vite.config';

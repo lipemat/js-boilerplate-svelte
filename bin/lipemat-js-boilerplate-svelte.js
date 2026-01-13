@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-const spawn = require( 'cross-spawn' );
 const args = process.argv.slice( 2 );
 
 
@@ -20,12 +19,18 @@ const nodeArgs = scriptIndex > 0 ? args.slice( 0, scriptIndex ) : [];
 			break;
 		case 'start':
 		case 'dist':
-			result = spawn.sync(
+			result = sync(
 				'ts-node',
 				nodeArgs
 					.concat( require.resolve( './' + command + '.ts' ) )
 					.concat( args.slice( scriptIndex + 1 ) ),
-				{stdio: 'inherit'}
+				{
+					stdio: 'inherit',
+					env: {
+						...process.env,
+						NODE_ENV: command === 'start' ? 'development' : 'production',
+					}
+				}
 			);
 			if ( result.error ) {
 				console.error( result.error );
