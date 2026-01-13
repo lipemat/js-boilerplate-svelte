@@ -1,4 +1,4 @@
-import {getGeneratedScopedName, getLocalIdentName, getPostCssConfig, maybeGetLocalIdent} from '../../../helpers/postcss.mts';
+import {getGeneratedScopedName, getLocalIdentName, getPostCssConfig, maybeGetLocalIdent} from '../../../helpers/postcss.mjs';
 import {usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames';
 import type {GetLocalIdent} from 'svelte-preprocess-cssmodules/dist/lib';
 import {modifyPackageConfig} from '../../../../js-boilerplate-shared/helpers/package-config';
@@ -40,10 +40,10 @@ describe( 'getLocalIdentName', () => {
 	test( 'Are Short CSS Classes Enabled?', () => {
 		expect( usingShortCssClasses() ).toEqual( false );
 		modifyPackageConfig( {
-			shortCssClasses: true,
+			shortCssClasses: false,
 		} );
 
-		expect( usingShortCssClasses() ).toEqual( true );
+		expect( usingShortCssClasses() ).toEqual( false );
 	} );
 } );
 

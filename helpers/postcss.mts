@@ -27,19 +27,6 @@ export type GetLocalIdent = {
 	( context: Context, localIdentName: LocalIdentName, localName: string, options: Options ): string;
 };
 
-
-const env = 'production' === process.env.NODE_ENV ? 'production' : 'development';
-const postcssOptions = getPostCSSConfig( env );
-
-const POST_CSS_OPTIONS: PostCSSConfig = {
-	plugins: postcssOptions.plugins ?? [],
-	map: postcssOptions.sourceMap ?? false,
-	parser: postcssScss,
-	stringifier: undefined,
-	syntax: undefined,
-};
-
-
 export function getGeneratedScopedName(): CSSModulesOptions['generateScopedName'] {
 	if ( usingShortCssClasses() && 'production' === process.env.NODE_ENV ) {
 		return getShortCssClass;
@@ -68,8 +55,27 @@ export function getLocalIdentName( modules: boolean = true ): string {
 	return 'production' === process.env.NODE_ENV ? '[contenthash:base52:5]' : name;
 }
 
-export function getPostCssConfig(): PostCSSConfig {
-	return POST_CSS_OPTIONS;
+export function getPostCssConfig( kit: boolean = false ): PostCSSConfig {
+	const env = 'production' === process.env.NODE_ENV ? 'production' : 'development';
+	const postcssOptions = getPostCSSConfig( env );
+
+	if ( Array.isArray( postcssOptions.plugins ) ) {
+		// @ts-expect-error: Unable to filter the possibilities.
+		postcssOptions.plugins = postcssOptions.plugins.filter( ( plugin ) => {
+			if ( plugin && 'postcssPlugin' in plugin ) {
+				return plugin.postcssPlugin !== 'clean';
+			}
+			return true;
+		} );
+	}
+
+	return {
+		plugins: postcssOptions.plugins,
+		map: postcssOptions.sourceMap ?? false,
+		parser: postcssScss,
+		stringifier: undefined,
+		syntax: undefined,
+	};
 }
 
 

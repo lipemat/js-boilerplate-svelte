@@ -1,18 +1,17 @@
 import {defineConfig, type UserConfig} from 'vite';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
-import manifestHash from '../lib/manifest-hash.mts';
-import runningFlag from '../lib/running-flag.mts';
+import manifestHash from '../lib/manifest-hash.mjs';
+import runningFlag from '../lib/running-flag.mjs';
 import fs from 'fs';
-import cleanExceptRunning from '../lib/cleanup-build.mts';
-import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss.mts';
-import svelteConfig from './svelte.config.mts';
-import wpExternals from '../lib/wp-externals.mts';
+import cleanExceptRunning from '../lib/cleanup-build.mjs';
+import svelteConfig from './svelte.config.mjs';
+import wpExternals from '../lib/wp-externals.mjs';
 import {compression} from 'vite-plugin-compression2';
-import {svelteChecker} from '../lib/svelte-checker.mts';
-import cssModuleTypes from '../lib/css-module-types.mts';
+import {svelteChecker} from '../lib/svelte-checker.mjs';
+import cssModuleTypes from '../lib/css-module-types.mjs';
+import postCssConfig from '../lib/postcss-plugin.js';
 
-const postcssOptions = getPostCssConfig();
 const packageConfig = getPackageConfig();
 
 export const DIST_DIR = packageConfig.workingDirectory + '/dist-svelte';
@@ -27,6 +26,7 @@ const plugins: UserConfig['plugins'] = [
 	svelteChecker(),
 	wpExternals(),
 	cssModuleTypes(),
+	postCssConfig(),
 ];
 if ( 'production' === process.env.NODE_ENV ) {
 	plugins.push( manifestHash() );
@@ -61,16 +61,7 @@ const viteConfig: UserConfig = defineConfig( {
 				format: 'module',
 			},
 		},
-	},
-	css: {
-		// Only affects imported .pcss files.
-		modules: {
-			generateScopedName: getGeneratedScopedName(),
-			localsConvention: 'camelCase',
-		},
-		postcss: postcssOptions,
-		devSourcemap: postcssOptions.map,
-	},
+	}
 } );
 
 /**

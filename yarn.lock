@@ -2471,7 +2471,7 @@ __metadata:
 
 "@lipemat/eslint-config@file:../eslint-config::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
   version: 5.1.4
-  resolution: "@lipemat/eslint-config@file:../eslint-config#../eslint-config::hash=a2e1c9&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
+  resolution: "@lipemat/eslint-config@file:../eslint-config#../eslint-config::hash=568848&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
   dependencies:
     "@eslint/compat": "npm:^1.2.4"
     "@eslint/eslintrc": "npm:^3.3.3"
@@ -2489,13 +2489,13 @@ __metadata:
     globals: "npm:^15.13.0"
   peerDependencies:
     typescript: ^5.9.3
-  checksum: 10c0/68afd5d015a8def3e63e239e60f970c21bc110e65948d2a8804260842abbc9ae9e339096acf6873bd48ac8cbe25a643ec4ebd668ca2400ea70df42a11238ead2
+  checksum: 10c0/8653d4187555df7ca929e4c723885132baf20c8266e26a182ae7eb9a33094adca6405968e9ae2196667aa081e0cf806337298f380a1e0fea6b348b0b20f88773
   languageName: node
   linkType: hard
 
-"@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared::locator=%40lipemat%2Feslint-config%40file%3A..%2Feslint-config%23..%2Feslint-config%3A%3Ahash%3Da2e1c9%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A.":
+"@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared::locator=%40lipemat%2Feslint-config%40file%3A..%2Feslint-config%23..%2Feslint-config%3A%3Ahash%3D568848%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A.":
   version: 0.0.1
-  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=ca21da&locator=%40lipemat%2Feslint-config%40file%3A..%2Feslint-config%23..%2Feslint-config%3A%3Ahash%3Da2e1c9%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A."
+  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=716a73&locator=%40lipemat%2Feslint-config%40file%3A..%2Feslint-config%23..%2Feslint-config%3A%3Ahash%3D568848%26locator%3D%2540lipemat%252Fjs-boilerplate-svelte%2540workspace%253A."
   dependencies:
     "@babel/preset-env": "npm:^7.28.5"
     "@babel/preset-typescript": "npm:^7.28.5"
@@ -2520,27 +2520,52 @@ __metadata:
     postcss-sort-media-queries: "npm:^5.2.0"
   peerDependencies:
     typescript: ^5.9.3
-  checksum: 10c0/b3cc8d3eea1109b8fb42219890cc51f7b8bb6bf82a7a8e66ed050d32c11fbcf3ecffd1d323d755f2cd52be2642a97d5b4254235063ca476efdb764e77be28f84
+  checksum: 10c0/9b1c0feb1ff4cd485012832804ae49aba604894bff6d340053df2eb9acdae443dbb7ef253748efa1eb848ee576e6c02a3c871a31bde48271ff4ea09ca11bf92d
   languageName: node
   linkType: hard
 
-"@lipemat/js-boilerplate-shared@link:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "@lipemat/js-boilerplate-shared@link:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
+"@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
+  version: 0.0.1
+  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=716a73&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
+  dependencies:
+    "@babel/preset-env": "npm:^7.28.5"
+    "@babel/preset-typescript": "npm:^7.28.5"
+    "@csstools/postcss-global-data": "npm:2.0.0"
+    "@types/clean-css": "npm:^4.2.11"
+    "@types/postcss-load-config": "npm:^3.0.1"
+    "@types/postcss-preset-env": "npm:^7.7.0"
+    "@types/webpack": "npm:^5.28.5"
+    babel-plugin-transform-import-meta: "npm:^2.3.3"
+    browserslist: "npm:^4.28.1"
+    clean-css: "npm:^5.3.3"
+    core-js: "npm:^3.33.1"
+    glob: "npm:^13.0.0"
+    postcss: "npm:^8.4.47"
+    postcss-color-mod-function: "npm:^4.1.1"
+    postcss-custom-media: "npm:^8.0.1"
+    postcss-import: "npm:^15.1.0"
+    postcss-loader: "npm:^8.1.1"
+    postcss-nested: "npm:^5.0.6"
+    postcss-preset-env: "npm:^7.8.3"
+    postcss-scss: "npm:^4.0.4"
+    postcss-sort-media-queries: "npm:^5.2.0"
+  peerDependencies:
+    typescript: ^5.9.3
+  checksum: 10c0/9b1c0feb1ff4cd485012832804ae49aba604894bff6d340053df2eb9acdae443dbb7ef253748efa1eb848ee576e6c02a3c871a31bde48271ff4ea09ca11bf92d
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "@lipemat/js-boilerplate-svelte@workspace:.":
   version: 0.0.0-use.local
   resolution: "@lipemat/js-boilerplate-svelte@workspace:."
   dependencies:
     "@lipemat/eslint-config": "file:../eslint-config"
-    "@lipemat/js-boilerplate-shared": "link:../js-boilerplate-shared"
+    "@lipemat/js-boilerplate-shared": "file:../js-boilerplate-shared"
     "@sveltejs/vite-plugin-svelte": "npm:^6.1.1"
     "@types/eslint": "npm:^9"
     "@types/jest": "npm:^30.0.0"
     "@types/loader-utils": "npm:^2.0.6"
-    "@types/node": "npm:~22.17.0"
+    "@types/node": "npm:^22"
     "@types/postcss-modules-extract-imports": "npm:^3"
     "@types/postcss-modules-local-by-default": "npm:^4"
     "@types/postcss-modules-scope": "npm:^3"
@@ -3154,12 +3179,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:~22.17.0":
-  version: 22.17.2
-  resolution: "@types/node@npm:22.17.2"
+"@types/node@npm:^22":
+  version: 22.19.6
+  resolution: "@types/node@npm:22.19.6"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/23cd13aa35da6322a6d66cf4b3a45dbd40764ba726ab8681960270156c3abba776dd8dc173250c467f708d40612ecd725755d7659b775b513904680d5205eaff
+  checksum: 10c0/0d4f305ee560e4261b3aefb186d9a42c0a07d2ab2201cc8cba24b72793a13c3b2a5f0c138fe704e9aaa7a545066d6baf0b98afc1ef7e776503af25cdfd040de0
   languageName: node
   linkType: hard
 
