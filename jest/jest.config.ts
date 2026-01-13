@@ -6,6 +6,7 @@ const jestConfig: Config = config;
 jestConfig.moduleNameMapper = {
 	...jestConfig.moduleNameMapper,
 	'eslint-plugin-svelte': '<rootDir>/mocks/eslint-plugin-svelte.ts',
+	'vite-plugin-external': '<rootDir>/mocks/vite-plugin-external.ts',
 	'@sveltejs/vite-plugin-svelte': '<rootDir>/mocks/sveltejs__vite-plugin-svelte.ts',
 
 
