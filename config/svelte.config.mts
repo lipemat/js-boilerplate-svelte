@@ -1,6 +1,6 @@
 import {cssModules} from 'svelte-preprocess-cssmodules';
 import {type SvelteConfig, vitePreprocess} from '@sveltejs/vite-plugin-svelte';
-import {getLocalIdentName, maybeGetLocalIdent} from '../helpers/postcss.mts';
+import {getLocalIdentName, maybeGetLocalIdent} from '../helpers/postcss.mjs';
 
 const config: SvelteConfig = {
 	// Consult https://svelte.dev/docs/kit/integrations

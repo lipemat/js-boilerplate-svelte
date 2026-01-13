@@ -32,7 +32,7 @@ const nodeArgs = scriptIndex > 0 ? args.slice( 0, scriptIndex ) : [];
 			result = spawn(
 				'ts-node',
 				nodeArgs
-					.concat( requireModule.resolve( './' + command + '.mts' ) )
+					.concat( requireModule.resolve( './' + command + '.mjs' ) )
 					.concat( args.slice( scriptIndex + 1 ) ),
 				{
 					stdio: 'inherit',

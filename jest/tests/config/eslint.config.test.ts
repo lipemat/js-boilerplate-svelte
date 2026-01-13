@@ -17,7 +17,7 @@ let mockExtension: { readonly default: ( config: ExtensionConfigs ) => Extension
 
 beforeAll( async () => {
 	mockSharedHelpers = await import( '@lipemat/js-boilerplate-shared/helpers/config.js' );
-	mockExtension = await import( '../../../config/eslint.config.ts' );
+	mockExtension = await import( '../../../config/eslint.config.js' );
 
 	jest.mock( '@lipemat/js-boilerplate-shared/helpers/config.js', () => ( {
 		...mockSharedHelpers,
