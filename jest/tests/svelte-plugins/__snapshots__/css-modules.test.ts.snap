@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`CSS Modules - Svelte Plugin Should not change unexpectedly: config 1`] = `
+{
+  "localIdentName": "§[name]__[local]__[contenthash:base52:2]",
+  "mode": "mixed",
+  "useAsDefaultScoping": true,
+}
+`;
+
+exports[`CSS Modules - Svelte Plugin Should not change unexpectedly: plugin 1`] = `
+{
+  "markup": [Function],
+}
+`;

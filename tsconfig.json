@@ -23,6 +23,7 @@
     "lib/**/*ts",
     "jest/jest.config.ts",
     "jest/tests/**/*ts",
+    "svelte-plugins/**/*ts",
     "types"
   ]
 }
