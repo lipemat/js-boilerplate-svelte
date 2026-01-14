@@ -1,5 +1,5 @@
 import cssModulesPlugin, {config} from '../../../svelte-plugins/css-modules.mjs';
-import {modifyPackageConfig} from '../../../../js-boilerplate-shared/helpers/package-config';
+import {modifyPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
 
 describe( 'CSS Modules - Svelte Plugin', () => {
 	it( 'Should not change unexpectedly', () => {
