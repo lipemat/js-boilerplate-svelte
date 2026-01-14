@@ -1,6 +1,6 @@
 import type {CSSModulesOptions, CSSOptions} from 'vite';
 import * as postcssScss from 'postcss-scss';
-import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames.js';
+import {getLocalIdent as getNextShortClass, usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames.js';
 import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/postcss-config.js';
 
 
@@ -27,6 +27,7 @@ export type GetLocalIdent = {
 	( context: Context, localIdentName: LocalIdentName, localName: string, options: Options ): string;
 };
 
+
 export function getGeneratedScopedName(): CSSModulesOptions['generateScopedName'] {
 	if ( usingShortCssClasses() && 'production' === process.env.NODE_ENV ) {
 		return getShortCssClass;
@@ -35,32 +36,43 @@ export function getGeneratedScopedName(): CSSModulesOptions['generateScopedName'
 }
 
 
+/**
+ * If using short CSS classes, add a '§' prefix to the generated class names.
+ * Otherwise, do nothing.
+ */
 export function maybeGetLocalIdent(): { getLocalIdent: GetLocalIdent } | Record<string, never> {
-	if ( ! usingShortCssClasses() || 'production' !== process.env.NODE_ENV ) {
+	if ( 'production' !== process.env.NODE_ENV || ! usingShortCssClasses() ) {
 		return {};
 	}
 
 	return {
-		getLocalIdent: ( context, localIdentName, localName ) => '§' + getLocalIdent( context, localIdentName.interpolatedName, localName ),
+		getLocalIdent: ( context, localIdentName, localName ) => '§' + getNextShortClass( context, localIdentName.interpolatedName, localName ),
 	};
 }
 
 
-export function getLocalIdentName( modules: boolean = true ): string {
-	let name = '§Ⓜ[name]__[local]__[contenthash:base52:2]';
-	if ( ! modules ) {
-		name = '§[name]__[local]__[contenthash:base52:2]';
+/**
+ * If coming from PostCSS modules, include a Ⓜ before the hash to
+ * distinguish from local <style> tag classnames.
+ */
+export function getLocalIdentName( postCssModules: boolean = true ): string {
+	if ( 'production' === process.env.NODE_ENV ) {
+		return '[contenthash:base52:5]';
 	}
 
-	return 'production' === process.env.NODE_ENV ? '[contenthash:base52:5]' : name;
+	if ( ! postCssModules ) {
+		return '§[name]__[local]__[contenthash:base52:2]';
+	}
+	return '§Ⓜ[name]__[local]__[contenthash:base52:2]';
 }
+
 
 export function getPostCssConfig( kit: boolean = false ): PostCSSConfig {
 	const env = 'production' === process.env.NODE_ENV ? 'production' : 'development';
 	const postcssOptions = getPostCSSConfig( env );
 
 
-	// Sveltekit does not support the clean plugin.
+	// Svelte kit does not support the clean plugin.
 	if ( kit && Array.isArray( postcssOptions.plugins ) ) {
 		// @ts-expect-error: Unable to filter the possibilities.
 		postcssOptions.plugins = postcssOptions.plugins.filter( ( plugin ) => {
@@ -82,5 +94,5 @@ export function getPostCssConfig( kit: boolean = false ): PostCSSConfig {
 
 
 function getShortCssClass( filename: string, name: string ): string {
-	return '§' + getLocalIdent( {resourcePath: filename ?? ''}, '', name );
+	return '§' + getNextShortClass( {resourcePath: filename ?? ''}, '', name );
 }

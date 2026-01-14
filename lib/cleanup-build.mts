@@ -12,8 +12,7 @@ export default function cleanExceptRunning(): Plugin {
 			let items: string[];
 			try {
 				items = await fsp.readdir( DIST_DIR );
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			} catch ( err ) {
+			} catch {
 				return;
 			}
 
