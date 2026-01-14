@@ -2524,43 +2524,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
-  version: 0.0.1
-  resolution: "@lipemat/js-boilerplate-shared@file:../js-boilerplate-shared#../js-boilerplate-shared::hash=716a73&locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
-  dependencies:
-    "@babel/preset-env": "npm:^7.28.5"
-    "@babel/preset-typescript": "npm:^7.28.5"
-    "@csstools/postcss-global-data": "npm:2.0.0"
-    "@types/clean-css": "npm:^4.2.11"
-    "@types/postcss-load-config": "npm:^3.0.1"
-    "@types/postcss-preset-env": "npm:^7.7.0"
-    "@types/webpack": "npm:^5.28.5"
-    babel-plugin-transform-import-meta: "npm:^2.3.3"
-    browserslist: "npm:^4.28.1"
-    clean-css: "npm:^5.3.3"
-    core-js: "npm:^3.33.1"
-    glob: "npm:^13.0.0"
-    postcss: "npm:^8.4.47"
-    postcss-color-mod-function: "npm:^4.1.1"
-    postcss-custom-media: "npm:^8.0.1"
-    postcss-import: "npm:^15.1.0"
-    postcss-loader: "npm:^8.1.1"
-    postcss-nested: "npm:^5.0.6"
-    postcss-preset-env: "npm:^7.8.3"
-    postcss-scss: "npm:^4.0.4"
-    postcss-sort-media-queries: "npm:^5.2.0"
-  peerDependencies:
-    typescript: ^5.9.3
-  checksum: 10c0/9b1c0feb1ff4cd485012832804ae49aba604894bff6d340053df2eb9acdae443dbb7ef253748efa1eb848ee576e6c02a3c871a31bde48271ff4ea09ca11bf92d
+"@lipemat/js-boilerplate-shared@link:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@lipemat/js-boilerplate-shared@link:../js-boilerplate-shared::locator=%40lipemat%2Fjs-boilerplate-svelte%40workspace%3A."
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@lipemat/js-boilerplate-svelte@workspace:.":
   version: 0.0.0-use.local
   resolution: "@lipemat/js-boilerplate-svelte@workspace:."
   dependencies:
     "@lipemat/eslint-config": "file:../eslint-config"
-    "@lipemat/js-boilerplate-shared": "file:../js-boilerplate-shared"
+    "@lipemat/js-boilerplate-shared": "link:../js-boilerplate-shared"
     "@sveltejs/vite-plugin-svelte": "npm:^6.1.1"
     "@types/eslint": "npm:^9"
     "@types/jest": "npm:^30.0.0"
