@@ -67,13 +67,13 @@ export function getLocalIdentName( postCssModules: boolean = true ): string {
 }
 
 
-export function getPostCssConfig( kit: boolean = false ): PostCSSConfig {
+export function getPostCssConfig( isSvelteKit: boolean = false ): PostCSSConfig {
 	const env = 'production' === process.env.NODE_ENV ? 'production' : 'development';
 	const postcssOptions = getPostCSSConfig( env );
 
 
 	// Svelte kit does not support the clean plugin.
-	if ( kit && Array.isArray( postcssOptions.plugins ) ) {
+	if ( isSvelteKit && Array.isArray( postcssOptions.plugins ) ) {
 		// @ts-expect-error: Unable to filter the possibilities.
 		postcssOptions.plugins = postcssOptions.plugins.filter( ( plugin ) => {
 			if ( plugin && 'postcssPlugin' in plugin ) {
