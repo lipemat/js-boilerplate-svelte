@@ -27,19 +27,6 @@ describe( 'postcss-plugin', () => {
 	} );
 
 
-	it( 'Does not have the clean plugin - kit', async () => {
-		process.env.NODE_ENV = 'production';
-		const plugin = getPostCssConfig( true );
-		const names = plugin.plugins?.map( ( plug: PostCSS.AcceptedPlugin ) => {
-			if ( 'postcssPlugin' in plug ) {
-				return plug.postcssPlugin;
-			}
-			return 'unknown';
-		} );
-		expect( names ).not.toContain( 'clean' );
-	} );
-
-
 	it( 'Has the clean plugin - default', async () => {
 		process.env.NODE_ENV = 'production';
 		const plugin = getPostCssConfig();

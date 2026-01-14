@@ -9,12 +9,12 @@ import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss.mjs';
  *
  * @see cssModulesPlugin for local <style> tags.
  */
-export default function postCssConfig( isSvelteKit: boolean = false ): Plugin {
+export default function postCssConfig(): Plugin {
 	return {
 		name: 'lipemat:postcss-config',
 
 		config: (): Pick<UserConfig, 'css'> => {
-			const postcssOptions = getPostCssConfig( isSvelteKit );
+			const postcssOptions = getPostCssConfig();
 
 			return {
 				css: {
