@@ -93,11 +93,13 @@ export default function cssModuleTypes(): Plugin {
 						getJSON: ( fileName, keys ): void => {
 							const typingsPath = fileName.replace( /\.pcss$/, '.pcss.d.ts' );
 							const cssModuleKeys = Object.keys( keys );
+							if ( 0 >= cssModuleKeys.length ) {
+								return;
+							}
+
 							const cssModuleDefinition = generateModuleTypeDefinition( cssModuleKeys, camelCase( basename( fileName ), true ) );
 
-							if ( 0 < cssModuleKeys.length ) {
-								writeTypingsFile( typingsPath, cssModuleDefinition );
-							}
+							writeTypingsFile( typingsPath, cssModuleDefinition );
 						},
 					},
 				},
