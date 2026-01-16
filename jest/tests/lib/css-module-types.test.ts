@@ -42,6 +42,13 @@ describe( 'Format CSS Module Typings', () => {
 	} );
 
 
+	test( 'Global files do not generate CSS types', async () => {
+		const pcssFile = join( 'jest/fixtures/pcss/global.pcss' );
+		await triggerWatcher( pcssFile );
+		expect( fs.writeFileSync ).not.toHaveBeenCalled();
+	} );
+
+
 	test.each( sync( 'jest/fixtures/postcss-modules/source/*.pcss' ).map( pcssFile => {
 		const filename = basename( pcssFile );
 		const cleanFile = join( 'jest/fixtures/postcss-modules/results', filename.replace( /\.pcss$/, '.pcss.d.ts' ) );

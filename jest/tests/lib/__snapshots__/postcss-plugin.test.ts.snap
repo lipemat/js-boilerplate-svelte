@@ -6,6 +6,9 @@ exports[`postcss-plugin Does not change unexpectedly - Dev: config 1`] = `
     "devSourcemap": true,
     "modules": {
       "generateScopedName": "§Ⓜ[name]__[local]__[contenthash:base52:2]",
+      "globalModulePaths": [
+        /\\[/\\\\\\\\\\]pcss\\[/\\\\\\\\\\]\\.\\*/,
+      ],
       "localsConvention": "camelCase",
     },
     "postcss": {
@@ -150,6 +153,9 @@ exports[`postcss-plugin Does not change unexpectedly - Dist: config 1`] = `
     "devSourcemap": false,
     "modules": {
       "generateScopedName": [Function],
+      "globalModulePaths": [
+        /\\[/\\\\\\\\\\]pcss\\[/\\\\\\\\\\]\\.\\*/,
+      ],
       "localsConvention": "camelCase",
     },
     "postcss": {

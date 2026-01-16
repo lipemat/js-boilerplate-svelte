@@ -109,7 +109,7 @@ export default function cssModuleTypes(): Plugin {
 		// Generate CSS module typings on change during `serve`.
 		configureServer: ( server: ViteDevServer ): void => {
 			server.watcher.on( 'change', async fileName => {
-				if ( ! fileName.endsWith( `.pcss` ) ) {
+				if ( ! fileName.endsWith( `.pcss` ) || /[/\\]pcss[/\\].*/.test( fileName ) ) {
 					return;
 				}
 				const typingsPath = fileName.replace( /\.pcss$/, '.pcss.d.ts' );

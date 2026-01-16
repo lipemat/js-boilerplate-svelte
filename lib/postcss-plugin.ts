@@ -20,6 +20,9 @@ export default function postCssConfig(): Plugin {
 				css: {
 					modules: {
 						generateScopedName: getGeneratedScopedName(),
+						globalModulePaths: [
+							/[/\\]pcss[/\\].*/,
+						],
 						localsConvention: 'camelCase',
 					},
 					postcss: postcssOptions,
