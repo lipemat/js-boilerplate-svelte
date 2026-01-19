@@ -10,7 +10,7 @@ import securityPlugin from '@lipemat/eslint-config/plugins/security/index.js';
  * @requires @lipemat/eslint-config
  */
 const SVELTE_CONFIG: Linter.Config = {
-	files: [ '**/*.svelte', '*.svelte' ],
+	files: [ '**/*.svelte*', '*.svelte*' ],
 	languageOptions: {
 		parserOptions: {
 			project: false,

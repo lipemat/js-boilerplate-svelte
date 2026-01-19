@@ -48,8 +48,8 @@ describe( 'eslint.config', () => {
 		const svelteConfig = configs[ configs.length - 2 ];
 
 		expect( svelteConfig.files ).toEqual( [
-			'**/*.svelte',
-			'*.svelte',
+			'**/*.svelte*',
+			'*.svelte*',
 		] );
 		expect( JSON.stringify( svelteConfig.languageOptions?.parserOptions?.parser ) ).toEqual( JSON.stringify( ts.parser ) );
 		expect( svelteConfig.rules ).toEqual( {
