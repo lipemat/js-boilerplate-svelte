@@ -3,7 +3,6 @@ import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
 import manifestHash from '../lib/manifest-hash.mjs';
 import runningFlag from '../lib/running-flag.mjs';
-import fs from 'fs';
 import cleanExceptRunning from '../lib/cleanup-build.mjs';
 import svelteConfig from './svelte.config.mjs';
 import wpExternals from '../lib/wp-externals.mjs';
@@ -11,12 +10,11 @@ import {compression} from 'vite-plugin-compression2';
 import {svelteChecker} from '../lib/svelte-checker.mjs';
 import cssModuleTypes from '../lib/css-module-types.mjs';
 import postCssConfig from '../lib/postcss-plugin.js';
+import devServer from '../lib/dev-server.mjs';
 
 const packageConfig = getPackageConfig();
 
 export const DIST_DIR = packageConfig.workingDirectory + '/dist-svelte';
-
-const url = new URL( packageConfig.url );
 
 const plugins: UserConfig['plugins'] = [
 	svelte( {
@@ -36,6 +34,7 @@ if ( 'production' === process.env.NODE_ENV ) {
 	} ) );
 } else {
 	plugins.push( runningFlag() );
+	plugins.push( devServer() );
 }
 
 
@@ -63,24 +62,5 @@ const viteConfig: UserConfig = defineConfig( {
 		},
 	}
 } );
-
-/**
- * Dev server configuration.
- */
-if ( 'production' !== process.env.NODE_ENV ) {
-	const ssl: UserConfig['server'] = 'https:' === url.protocol && 'object' === typeof ( packageConfig.certificates ) ? {
-		https: {
-			cert: fs.readFileSync( packageConfig.certificates.cert ),
-			key: fs.readFileSync( packageConfig.certificates.key ),
-		},
-	} : {};
-
-	viteConfig.server = {
-		host: url.hostname,
-		port: 5173,
-		cors: true,
-		...ssl,
-	};
-}
 
 export default viteConfig;
