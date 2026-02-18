@@ -16,6 +16,19 @@ Add `dist-svelte` to your `.gitignore` file.
 
 Add `worker-src 'self' blob:` to your `Content-Security-Policy` header.
 
+### Support Svelete Language Server with Yarn PNP
+
+1. Install the package to your project `yarn add svelte-language-server`.
+2. Generate the sdk `npx -y @yarnpkg/sdks base`.
+3. In PHPStorm settings
+    1. Language & Frameworks > TypeScript > Svelte
+    2. Language Server package
+        1. Select the '.yarn/sdks/svelte-language-server' directory.
+    3. Radio button:
+        1. Enabled.
+4. Cleanup the unnecessary eslint and typescript sdk directories.
+5. Commit the sdk to Git.
+
 ### Types
 
 Improvements to svelte TS definitions are included in this package. To use it, add it to your project:
