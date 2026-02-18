@@ -19,6 +19,7 @@ const nodeArgs = scriptIndex > 0 ? args.slice( 0, scriptIndex ) : [];
 	let result;
 	switch ( command ) {
 		case 'check-types':
+			process.argv.push( '--fail-on-warnings' );
 			result = await import( 'svelte-check' );
 			break;
 		case 'start':
