@@ -1,9 +1,19 @@
 jest.mock( '@lipemat/js-boilerplate-shared/helpers/package-config.js' );
+jest.mock( 'vite', () => ( {
+	searchForWorkspaceRoot: jest.fn( () => '/workspace/root' ),
+} ) );
 
 import fs from 'fs';
 import devServer from '../../../lib/dev-server.mjs';
 
 const mockReadFileSync = jest.spyOn( fs, 'readFileSync' );
+
+const expectedFs = {
+	allow: [
+		'/workspace/root',
+		'.yarn/__virtual__',
+	],
+};
 
 describe( 'devServer', () => {
 	beforeEach( () => {
@@ -39,6 +49,7 @@ describe( 'devServer', () => {
 				host: 'example.com',
 				port: 5173,
 				cors: true,
+				fs: expectedFs,
 			},
 		} );
 		expect( mockReadFileSync ).not.toHaveBeenCalled();
@@ -73,6 +84,7 @@ describe( 'devServer', () => {
 				host: 'secure.example.com',
 				port: 5173,
 				cors: true,
+				fs: expectedFs,
 				https: {
 					cert: Buffer.from( 'cert-content' ),
 					key: Buffer.from( 'key-content' ),
@@ -99,6 +111,7 @@ describe( 'devServer', () => {
 				host: 'secure.example.com',
 				port: 5173,
 				cors: true,
+				fs: expectedFs,
 			},
 		} );
 		expect( mockReadFileSync ).not.toHaveBeenCalled();
@@ -120,6 +133,7 @@ describe( 'devServer', () => {
 				host: 'secure.example.com',
 				port: 5173,
 				cors: true,
+				fs: expectedFs,
 			},
 		} );
 		expect( mockReadFileSync ).not.toHaveBeenCalled();

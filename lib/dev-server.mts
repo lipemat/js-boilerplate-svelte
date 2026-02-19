@@ -1,6 +1,6 @@
 import fs from 'fs';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
-import type {Plugin, UserConfig} from 'vite';
+import {type Plugin, searchForWorkspaceRoot, type UserConfig} from 'vite';
 
 type DevServerConfig = Required<Pick<Plugin, 'name' | 'apply' | 'config'>> & {
 	config: () => UserConfig['server'];
@@ -19,7 +19,18 @@ export default function devServer(): DevServerConfig {
 				host: url.hostname,
 				port: 5173,
 				cors: true,
+				fs: {
+					/**
+					 * Support yarn PNP when using Sveltekit.
+					 * @link https://vite.dev/config/server-options.html#server-fs-allow
+					 */
+					allow: [
+						searchForWorkspaceRoot( process.cwd() ),
+						'.yarn/__virtual__'
+					],
+				}
 			};
+
 			if ( 'https:' === url.protocol &&
 				'object' === typeof packageConfig.certificates &&
 				'cert' in packageConfig.certificates &&
