@@ -1,4 +1,4 @@
-import {defineConfig, type UserConfig} from 'vite';
+import {type ConfigEnv, defineConfig, type UserConfig} from 'vite';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
 import manifestHash from '../lib/manifest-hash.mjs';
@@ -26,39 +26,47 @@ const plugins: UserConfig['plugins'] = [
 	cssModuleTypes(),
 	postCssConfig(),
 ];
-if ( 'production' === process.env.NODE_ENV ) {
-	plugins.push( manifestHash() );
-	plugins.push( cleanExceptRunning() );
-	plugins.push( brotliCompress() );
-} else {
-	plugins.push( runningFlag() );
-	plugins.push( devServer() );
-}
 
 
 /**
  * Finished configuration for Vite.
  */
-const viteConfig: UserConfig = defineConfig( {
-	plugins,
-	root: packageConfig.workingDirectory + '/src/',
-	base: '/' + DIST_DIR.replace( /.*?((wp-)?content)/, '$1' ) + '/',
-	build: {
-		emptyOutDir: false,
-		manifest: 'manifest.json',
-		rollupOptions: {
-			input: {
-				'svelte-index': packageConfig.workingDirectory + '/src/' + 'svelte-index.ts',
-			},
-			output: {
-				assetFileNames: '[name].[hash].[ext]',
-				chunkFileNames: '[name].[hash].js',
-				dir: DIST_DIR,
-				entryFileNames: '[name].[hash].js',
-				format: 'module',
-			},
-		},
+const viteConfig = defineConfig( ( env: ConfigEnv ): UserConfig => {
+
+	/**
+	 * Environment specific plugins
+	 */
+	if ( 'build' === env.command ) {
+		plugins.push( manifestHash() );
+		plugins.push( cleanExceptRunning() );
+		plugins.push( brotliCompress() );
+	} else {
+		plugins.push( runningFlag() );
+		plugins.push( devServer() );
 	}
+
+
+	return {
+		plugins,
+		root: packageConfig.workingDirectory + '/src/',
+		base: '/' + DIST_DIR.replace( /.*?((wp-)?content)/, '$1' ) + '/',
+		build: {
+			emptyOutDir: false,
+			manifest: 'manifest.json',
+			rollupOptions: {
+				input: {
+					'svelte-index': packageConfig.workingDirectory + '/src/' + 'svelte-index.ts',
+				},
+				output: {
+					assetFileNames: '[name].[hash].[ext]',
+					chunkFileNames: '[name].[hash].js',
+					dir: DIST_DIR,
+					entryFileNames: '[name].[hash].js',
+					format: 'module',
+				},
+			},
+		}
+	};
 } );
 
 export default viteConfig;

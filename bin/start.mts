@@ -6,7 +6,11 @@ import config from '../config/vite.config.mjs';
 
 ( async () => {
 	try {
-		const server = await createServer( config );
+		const viteConfig = config( {
+			command: 'serve',
+			mode: 'development'
+		} );
+		const server = await createServer( viteConfig );
 		await server.listen();
 
 		server.printUrls();

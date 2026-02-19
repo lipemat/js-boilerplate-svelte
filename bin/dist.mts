@@ -4,7 +4,11 @@ import config from '../config/vite.config.mjs';
 
 ( async () => {
 	try {
-		await build( config );
+		const viteConfig = config( {
+			command: 'build',
+			mode: 'production'
+		} );
+		await build( viteConfig );
 	} catch ( err ) {
 		return console.error( err );
 	}
