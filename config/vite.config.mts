@@ -1,4 +1,4 @@
-import {type ConfigEnv, defineConfig, type UserConfig} from 'vite';
+import {type ConfigEnv, defineConfig, type UserConfig, type UserConfigFnObject} from 'vite';
 import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
 import manifestHash from '../lib/manifest-hash.mjs';
@@ -31,7 +31,7 @@ const plugins: UserConfig['plugins'] = [
 /**
  * Finished configuration for Vite.
  */
-const viteConfig = defineConfig( ( env: ConfigEnv ): UserConfig => {
+const viteConfig: UserConfigFnObject = defineConfig( ( env: ConfigEnv ): UserConfig => {
 
 	/**
 	 * Environment specific plugins
