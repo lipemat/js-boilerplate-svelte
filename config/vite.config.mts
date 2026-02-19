@@ -6,11 +6,11 @@ import runningFlag from '../lib/running-flag.mjs';
 import cleanExceptRunning from '../lib/cleanup-build.mjs';
 import svelteConfig from './svelte.config.mjs';
 import wpExternals from '../lib/wp-externals.mjs';
-import {compression} from 'vite-plugin-compression2';
 import {svelteChecker} from '../lib/svelte-checker.mjs';
 import cssModuleTypes from '../lib/css-module-types.mjs';
 import postCssConfig from '../lib/postcss-plugin.js';
 import devServer from '../lib/dev-server.mjs';
+import brotliCompress from '../lib/brotli-compress.mjs';
 
 const packageConfig = getPackageConfig();
 
@@ -29,9 +29,7 @@ const plugins: UserConfig['plugins'] = [
 if ( 'production' === process.env.NODE_ENV ) {
 	plugins.push( manifestHash() );
 	plugins.push( cleanExceptRunning() );
-	plugins.push( compression( {
-		algorithms: [ 'brotliCompress' ],
-	} ) );
+	plugins.push( brotliCompress() );
 } else {
 	plugins.push( runningFlag() );
 	plugins.push( devServer() );
