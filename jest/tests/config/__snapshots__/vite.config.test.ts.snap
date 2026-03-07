@@ -154,6 +154,11 @@ exports[`vite config Matches snapshot during build 1`] = `
       "name": "vite-plugin-compression",
     },
   ],
+  "resolve": {
+    "alias": {
+      "$src": "E:/SVN/the-boilerplate/packages/js-boilerplate-svelte/js/src/",
+    },
+  },
   "root": "E:/SVN/the-boilerplate/packages/js-boilerplate-svelte/js/src/",
 }
 `;
@@ -322,6 +327,11 @@ exports[`vite config Matches snapshot during dev 1`] = `
       "name": "lipemat:dev-server",
     },
   ],
+  "resolve": {
+    "alias": {
+      "$src": "E:/SVN/the-boilerplate/packages/js-boilerplate-svelte/js/src/",
+    },
+  },
   "root": "E:/SVN/the-boilerplate/packages/js-boilerplate-svelte/js/src/",
 }
 `;

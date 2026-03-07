@@ -48,6 +48,11 @@ const viteConfig: UserConfigFnObject = defineConfig( ( env: ConfigEnv ): UserCon
 
 	return {
 		plugins,
+		resolve: {
+			alias: {
+				$src: packageConfig.workingDirectory + '/src/',
+			},
+		},
 		root: packageConfig.workingDirectory + '/src/',
 		base: '/' + DIST_DIR.replace( /.*?((wp-)?content)/, '$1' ) + '/',
 		build: {
