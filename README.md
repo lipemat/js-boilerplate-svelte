@@ -24,6 +24,7 @@ Add `worker-src 'self' blob:` to your `Content-Security-Policy` header.
     1. Language & Frameworks > TypeScript > Svelte
     2. Language Server package
         1. Select the '.yarn/sdks/svelte-language-server' directory.
+            1. @notice Selecting the 'yarn:svelte-language-server' option provided by PHPStorm will not work!
     3. Radio button:
         1. Enabled.
 4. Cleanup the unnecessary eslint and typescript sdk directories.
