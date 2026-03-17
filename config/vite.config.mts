@@ -16,22 +16,21 @@ const packageConfig = getPackageConfig();
 
 export const DIST_DIR = packageConfig.workingDirectory + '/dist-svelte';
 
-const plugins: UserConfig['plugins'] = [
-	svelte( {
-		...svelteConfig,
-		configFile: false,
-	} ),
-	svelteChecker(),
-	wpExternals(),
-	cssModuleTypes(),
-	postCssConfig(),
-];
-
-
 /**
  * Finished configuration for Vite.
  */
 const viteConfig: UserConfigFnObject = defineConfig( ( env: ConfigEnv ): UserConfig => {
+
+	const plugins: UserConfig['plugins'] = [
+		svelte( {
+			...svelteConfig,
+			configFile: false,
+		} ),
+		svelteChecker(),
+		wpExternals(),
+		cssModuleTypes(),
+		postCssConfig(),
+	];
 
 	/**
 	 * Environment specific plugins
