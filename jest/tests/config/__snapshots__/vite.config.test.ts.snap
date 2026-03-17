@@ -113,7 +113,6 @@ exports[`vite config Matches snapshot during build 1`] = `
                 "react": "React",
                 "react-dom": "ReactDOM",
                 "react-refresh/runtime": "ReactRefreshRuntime",
-                "react/jsx-runtime": "ReactJSXRuntime",
                 "tinymce": "tinymce",
                 "wp": "wp",
               },
@@ -276,7 +275,6 @@ exports[`vite config Matches snapshot during dev 1`] = `
                 "react": "React",
                 "react-dom": "ReactDOM",
                 "react-refresh/runtime": "ReactRefreshRuntime",
-                "react/jsx-runtime": "ReactJSXRuntime",
                 "tinymce": "tinymce",
                 "wp": "wp",
               },
@@ -293,28 +291,6 @@ exports[`vite config Matches snapshot during dev 1`] = `
     {
       "config": [Function],
       "name": "lipemat:postcss-config",
-    },
-    {
-      "apply": "build",
-      "enforce": "post",
-      "name": "lipemat:manifest-hash",
-      "writeBundle": [Function],
-    },
-    {
-      "apply": "build",
-      "buildStart": [Function],
-      "name": "lipemat:clean-except-running",
-    },
-    {
-      "api": {
-        "done": Promise {},
-        "staticOutputs": Set {},
-      },
-      "apply": "build",
-      "closeBundle": [Function],
-      "configResolved": [Function],
-      "enforce": "post",
-      "name": "vite-plugin-compression",
     },
     {
       "apply": "serve",
