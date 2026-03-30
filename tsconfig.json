@@ -9,6 +9,7 @@
     "moduleResolution": "Node",
     "skipLibCheck": true,
     "sourceMap": true,
+    "resolveJsonModule": true,
     "strict": true,
     "target": "ES2024",
     "paths": {
