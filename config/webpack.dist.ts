@@ -2,13 +2,15 @@ import {sveltePreprocess} from 'svelte-preprocess';
 import {cssModules} from 'svelte-preprocess-cssmodules';
 import {interpolateName} from 'loader-utils';
 import type {Configuration, ModuleOptions} from 'webpack';
-import {getConfig} from '@lipemat/js-boilerplate/helpers/config';
-import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate/helpers/css-classnames';
-import {getTypeScriptConfig} from '../helpers/config';
+import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/postcss-config.js';
+import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate-shared/helpers/css-classnames.js';
+import {getTypeScriptConfig} from '../helpers/config.js';
 import type {CompileOptions, PreprocessorGroup} from 'svelte/compiler';
-import type {AutoPreprocessGroup, AutoPreprocessOptions} from 'svelte-preprocess/dist/types/index';
+import type {AutoPreprocessGroup, AutoPreprocessOptions} from 'svelte-preprocess/types';
 
-const postcssOptions = getConfig( 'postcss.config' );
+import * as postcssScss from 'postcss-scss';
+
+const postcssOptions = getPostCSSConfig( 'production' );
 
 /**
  * Partial options for the 'svelte-loader'.
@@ -37,7 +39,7 @@ export type SvelteLoaderOptions = {
 const POST_CSS_OPTIONS: AutoPreprocessOptions['postcss'] = {
 	...postcssOptions,
 	map: postcssOptions.sourceMap,
-	parser: require( 'postcss-scss' ),
+	parser: postcssScss,
 	stringifier: undefined,
 	syntax: undefined,
 };

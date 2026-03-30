@@ -1,4 +1,6 @@
-const requireJSON5 = require( 'require-json5' );
+import {createRequire} from 'node:module';
+
+const requireModule = createRequire( import.meta.url );
 
 /**
  * Get the TypeScript config used by Svelte preprocess.
@@ -8,5 +10,6 @@ const requireJSON5 = require( 'require-json5' );
  * @notice We must use require-json5 because the config uses comments.
  */
 export function getTypeScriptConfig() {
-	return requireJSON5( require.resolve( '@tsconfig/svelte/tsconfig.json' ) );
+	const requireJSON5 = requireModule( 'require-json5' );
+	return requireJSON5( requireModule.resolve( '@tsconfig/svelte/tsconfig.json' ) );
 }

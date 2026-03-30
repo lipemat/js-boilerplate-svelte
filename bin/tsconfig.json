@@ -1,9 +1,13 @@
 {
   "extends": "../tsconfig.json",
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "JS Boilerplate Svelte Source Files",
-  "include": [
-    "../config/*.ts",
-    "../helpers/*.ts"
-  ]
+  "display": "Build config for TS files transpiled to ESM.",
+  "exclude": [
+    "../tests",
+    "../types"
+  ],
+  "compilerOptions": {
+    "allowImportingTsExtensions": false,
+    "sourceMap": true
+  }
 }

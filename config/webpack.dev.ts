@@ -1,12 +1,14 @@
 import {sveltePreprocess} from 'svelte-preprocess';
 import {cssModules} from 'svelte-preprocess-cssmodules';
 import type {Configuration, ModuleOptions} from 'webpack';
-import {getConfig} from '@lipemat/js-boilerplate/helpers/config';
-import {getTypeScriptConfig} from '../helpers/config';
-import type {AutoPreprocessOptions} from 'svelte-preprocess/dist/types/index';
+import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/postcss-config.js';
+import {getTypeScriptConfig} from '../helpers/config.js';
+import type {AutoPreprocessOptions} from 'svelte-preprocess/types';
 import type {SvelteLoaderOptions} from './webpack.dist';
 
-const postcssOptions = getConfig( 'postcss.config' );
+import * as postcssScss from 'postcss-scss';
+
+const postcssOptions = getPostCSSConfig( 'development' );
 
 /**
  * Using our standard options from `postcss.config.ts` with a few
@@ -15,7 +17,7 @@ const postcssOptions = getConfig( 'postcss.config' );
 const POST_CSS_OPTIONS: AutoPreprocessOptions['postcss'] = {
 	...postcssOptions,
 	map: postcssOptions.sourceMap,
-	parser: require( 'postcss-scss' ),
+	parser: postcssScss,
 	stringifier: undefined,
 	syntax: undefined,
 };

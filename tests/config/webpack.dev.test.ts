@@ -1,10 +1,15 @@
+import {createRequire} from 'node:module';
+
+const requireModule = createRequire( import.meta.url );
+
+
 describe( 'webpack.dev.js', () => {
-	const {getConfig} = require( '@lipemat/js-boilerplate/helpers/config' );
+	const {getConfig} = requireModule( '@lipemat/js-boilerplate/helpers/config' );
 
 	function getWebpackConfig() {
 		jest.resetModules();
-		const defaultConfig = require( '@lipemat/js-boilerplate/config/webpack.dev' );
-		return require( '../../config/webpack.dev' )( defaultConfig );
+		const defaultConfig = requireModule( '@lipemat/js-boilerplate/config/webpack.dev' );
+		return requireModule( '../../config/webpack.dev' )( defaultConfig );
 	}
 
 	test( 'Snapshot', () => {

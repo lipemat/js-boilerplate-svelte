@@ -1,3 +1,4 @@
+import {createHash} from 'crypto';
 import {basename, dirname} from 'path';
 
 /**
@@ -38,7 +39,7 @@ const filesWithPaths = [
  * path will change, and the snapshots will fail.
  */
 function getCurrentDirectoryHash( dir: string ) {
-	return require( 'crypto' ).createHash( 'md5' ).update( dir ).digest( 'hex' );
+	return createHash( 'md5' ).update( dir ).digest( 'hex' );
 }
 
 
@@ -87,7 +88,7 @@ export function resolveTestPath( snapshotFilePath: string, snapshotExtension: st
  */
 export const testPathForConsistencyCheck = 'some/__tests__/webpack.dist.test.ts';
 
-module.exports = {
+export default {
 	resolveSnapshotPath,
 	resolveTestPath,
 	testPathForConsistencyCheck,

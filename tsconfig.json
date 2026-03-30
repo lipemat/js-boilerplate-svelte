@@ -1,17 +1,29 @@
 {
-  "extends": "@lipemat/js-boilerplate/config/tsconfig.json",
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "ES2024",
+    "paths": {
+      "@typescript-eslint/utils/ts-eslint": [
+        "./node_modules/@typescript-eslint/utils/dist/ts-eslint"
+      ],
+      "svelte-preprocess/types": [
+        "./node_modules/svelte-preprocess/dist/types/index"
+      ]
+    }
+  },
   "include": [
     "bin/**/*",
     "config/**/*",
     "helpers/**/*",
     "tests/**/*"
-  ],
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "module": "CommonJS",
-    "skipLibCheck": true,
-    "sourceMap": false,
-    "strict": true,
-    "target": "ES2022"
-  }
+  ]
 }
