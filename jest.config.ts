@@ -9,6 +9,6 @@ jestConfig.moduleNameMapper = {
 };
 
 // Custom snapshot resolver for the boilerplate.
-jestConfig.snapshotResolver = './tests/snapshot-resolver.ts';
+jestConfig.snapshotResolver = './tests/snapshot-resolver.cjs';
 
 export default jestConfig;
