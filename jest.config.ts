@@ -11,4 +11,7 @@ jestConfig.moduleNameMapper = {
 // Custom snapshot resolver for the boilerplate.
 jestConfig.snapshotResolver = './tests/snapshot-resolver.cjs';
 
+jestConfig.testEnvironment = 'node';
+jestConfig.extensionsToTreatAsEsm = [ '.ts', '.tsx', '.mts' ];
+
 export default jestConfig;

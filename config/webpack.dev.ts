@@ -1,12 +1,13 @@
 import {sveltePreprocess} from 'svelte-preprocess';
 import {cssModules} from 'svelte-preprocess-cssmodules';
-import type {Configuration, ModuleOptions} from 'webpack';
+import {Configuration, type ModuleOptions} from 'webpack';
 import {getPostCSSConfig} from '@lipemat/js-boilerplate-shared/helpers/postcss-config.js';
 import {getTypeScriptConfig} from '../helpers/config.js';
 import type {AutoPreprocessOptions} from 'svelte-preprocess/types';
 import type {SvelteLoaderOptions} from './webpack.dist';
-
+import type {WebpackConfig} from '@lipemat/js-boilerplate/config/webpack.dist';
 import * as postcssScss from 'postcss-scss';
+
 
 const postcssOptions = getPostCSSConfig( 'development' );
 
@@ -46,7 +47,7 @@ const SVELTE_LOADER_OPTIONS: SvelteLoaderOptions = {
 	],
 };
 
-export default function( config: Configuration ) {
+export default function( config: WebpackConfig ): Configuration {
 	if ( 'undefined' === typeof config.resolve ) {
 		config.resolve = {};
 	}

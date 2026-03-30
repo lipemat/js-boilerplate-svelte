@@ -7,8 +7,9 @@ import {getLocalIdent, usingShortCssClasses} from '@lipemat/js-boilerplate-share
 import {getTypeScriptConfig} from '../helpers/config.js';
 import type {CompileOptions, PreprocessorGroup} from 'svelte/compiler';
 import type {AutoPreprocessGroup, AutoPreprocessOptions} from 'svelte-preprocess/types';
-
+import type {WebpackConfig} from '@lipemat/js-boilerplate/config/webpack.dist';
 import * as postcssScss from 'postcss-scss';
+
 
 const postcssOptions = getPostCSSConfig( 'production' );
 
@@ -86,7 +87,7 @@ const SVELTE_LOADER_OPTIONS: SvelteLoaderOptions = {
 };
 
 
-export default function( config: Configuration ) {
+export default function( config: WebpackConfig ): Configuration {
 	if ( 'undefined' === typeof config.resolve ) {
 		config.resolve = {};
 	}
