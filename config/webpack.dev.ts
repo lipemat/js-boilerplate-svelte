@@ -46,7 +46,7 @@ const SVELTE_LOADER_OPTIONS: SvelteLoaderOptions = {
 	],
 };
 
-module.exports = function( config: Configuration ) {
+export default function( config: Configuration ) {
 	if ( 'undefined' === typeof config.resolve ) {
 		config.resolve = {};
 	}
