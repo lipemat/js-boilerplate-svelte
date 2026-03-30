@@ -54,6 +54,8 @@ describe( 'eslint.config', () => {
 		expect( svelteConfig.rules ).toEqual( {
 			'no-unused-vars': 'off',
 			'prefer-const': 'off',
+			'svelte/no-immutable-reactive-statements': 'off',
+			'svelte/no-svelte-internal': 'off',
 			'svelte/no-at-html-tags': 'off',
 			'svelte/no-useless-mustaches': 'off',
 		} );
