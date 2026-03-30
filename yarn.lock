@@ -2227,7 +2227,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/globals@npm:30.3.0":
+"@jest/globals@npm:30.3.0, @jest/globals@npm:^30.3.0":
   version: 30.3.0
   resolution: "@jest/globals@npm:30.3.0"
   dependencies:
@@ -2783,6 +2783,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lipemat/js-boilerplate-svelte@workspace:."
   dependencies:
+    "@jest/globals": "npm:^30.3.0"
     "@lipemat/eslint-config": "npm:^5.2.0-beta.3"
     "@lipemat/js-boilerplate": "npm:^11.0.0-beta.4"
     "@lipemat/js-boilerplate-shared": "npm:>=0.2.2"
@@ -2795,6 +2796,7 @@ __metadata:
     "@typescript-eslint/types": "npm:^8.44.0"
     chalk: "npm:^4.1.2"
     chokidar: "npm:^3.5.3"
+    core-js: "npm:^3.33.1"
     eslint: "npm:^9"
     eslint-plugin-svelte: "npm:^3.11.0"
     jest: "npm:^30.3.0"
@@ -2809,6 +2811,7 @@ __metadata:
     svelte-preprocess-cssmodules: "npm:^2.2.5"
     typescript: "npm:^5.9.3"
     typescript-eslint: "npm:^8.18.0"
+    webpack: "npm:^5.104.1"
   peerDependencies:
     "@lipemat/js-boilerplate": ">=11.0.0-beta.4"
     eslint: ^9

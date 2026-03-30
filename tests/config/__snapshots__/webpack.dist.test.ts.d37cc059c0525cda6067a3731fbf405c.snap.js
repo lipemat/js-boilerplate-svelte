@@ -11,35 +11,6 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
   "module": {
     "rules": [
       {
-        "test": /\\\\\\.\\(svelte\\|svelte\\\\\\.ts\\)\\$/,
-        "use": {
-          "loader": "svelte-loader",
-          "options": {
-            "compilerOptions": {
-              "cssHash": [Function],
-              "dev": false,
-            },
-            "emitCss": true,
-            "preprocess": [
-              {
-                "markup": [Function],
-                "script": [Function],
-                "style": [Function],
-              },
-              {
-                "markup": [Function],
-              },
-            ],
-          },
-        },
-      },
-      {
-        "resolve": {
-          "fullySpecified": false,
-        },
-        "test": /node_modules\\\\/svelte\\\\/\\.\\*\\\\\\.mjs\\$/,
-      },
-      {
         "exclude": /node_modules/,
         "loader": "babel-loader",
         "options": {
@@ -52,7 +23,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.45.1",
+                  "version": "3.49.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -91,11 +62,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
           "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
           {
-            "loader": "clean-css-loader",
-            "options": {
-              "level": 2,
-              "sourceMap": false,
-            },
+            "loader": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\@lipemat\\js-boilerplate\\lib\\clean-css-loader.js",
           },
         ],
       },
@@ -103,6 +70,9 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
         "test": /\\\\\\.pcss\\$/,
         "use": [
           "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          {
+            "loader": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\@lipemat\\js-boilerplate\\lib\\css-module-types.js",
+          },
           {
             "loader": "css-loader",
             "options": {
@@ -230,16 +200,16 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
                   },
                   {
                     "OnceExit": [Function],
-                    "postcssPlugin": "js-boilerplate/postcss-pretty",
+                    "postcssPlugin": "clean",
                   },
                 ],
-                "sourceMap": true,
               },
             },
           },
         ],
       },
     ],
+    "strictExportPresence": true,
   },
   "optimization": {
     "moduleIds": "deterministic",
@@ -248,7 +218,7 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
     "chunkFilename": "[name].[contenthash].js",
     "crossOriginLoading": "anonymous",
     "filename": "[name].js",
-    "path": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\dist",
+    "path": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\js\\dist",
     "publicPath": "auto",
   },
   "performance": {
@@ -323,6 +293,24 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
         },
       },
     },
+    CompressionPlugin {
+      "algorithm": [Function],
+      "options": {
+        "algorithm": "brotliCompress",
+        "compressionOptions": {
+          "params": {
+            "1": 11,
+          },
+        },
+        "deleteOriginalAssets": false,
+        "exclude": undefined,
+        "filename": "[path][base].br",
+        "include": undefined,
+        "minRatio": 0.8,
+        "test": /\\\\\\.\\(js\\|css\\)\\$/,
+        "threshold": 0,
+      },
+    },
   ],
   "resolve": {
     "extensions": [
@@ -332,17 +320,14 @@ exports[`webpack.dist.js Snapshot: full 1`] = `
       ".jsx",
       ".json",
       ".pcss",
-      ".svelte",
-      ".mjs",
     ],
     "mainFields": [
-      "svelte",
       "browser",
       "module",
       "main",
     ],
     "modules": [
-      "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\src",
+      "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\js\\src",
       "node_modules",
     ],
   },
@@ -416,7 +401,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                 "bugfixes": true,
                 "corejs": {
                   "proposals": false,
-                  "version": "3.45.1",
+                  "version": "3.49.0",
                 },
                 "debug": false,
                 "ignoreBrowserslistConfig": true,
@@ -455,11 +440,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
           "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
           "css-loader",
           {
-            "loader": "clean-css-loader",
-            "options": {
-              "level": 2,
-              "sourceMap": false,
-            },
+            "loader": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\@lipemat\\js-boilerplate\\lib\\clean-css-loader.js",
           },
         ],
       },
@@ -467,6 +448,9 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
         "test": /\\\\\\.pcss\\$/,
         "use": [
           "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\mini-css-extract-plugin\\dist\\loader.js",
+          {
+            "loader": "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\node_modules\\@lipemat\\js-boilerplate\\lib\\css-module-types.js",
+          },
           {
             "loader": "css-loader",
             "options": {
@@ -594,10 +578,9 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
                   },
                   {
                     "OnceExit": [Function],
-                    "postcssPlugin": "js-boilerplate/postcss-pretty",
+                    "postcssPlugin": "clean",
                   },
                 ],
-                "sourceMap": true,
               },
             },
           },
@@ -623,7 +606,7 @@ exports[`webpack.dist.js Snapshot: production 1`] = `
       "main",
     ],
     "modules": [
-      "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\src",
+      "E:\\SVN\\the-boilerplate\\packages\\js-boilerplate-svelte\\js\\src",
       "node_modules",
     ],
   },

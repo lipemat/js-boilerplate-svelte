@@ -4,10 +4,9 @@ import {getConfig} from '@lipemat/js-boilerplate/helpers/config.js';
 import {type Configuration, RuleSetRule} from 'webpack';
 
 describe( 'webpack.dist.js', () => {
-	const getWebpackConfig = (): Configuration => {
-		jest.resetModules();
+	function getWebpackConfig(): Configuration {
 		return webpackConfig( defaultConfig );
-	};
+	}
 
 	test( 'Snapshot', async () => {
 		expect( getWebpackConfig() ).toMatchSnapshot( 'production' );

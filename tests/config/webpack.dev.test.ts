@@ -1,49 +1,49 @@
-import {createRequire} from 'node:module';
-
-const requireModule = createRequire( import.meta.url );
+import defaultConfig from '@lipemat/js-boilerplate/config/webpack.dev.js';
+import webpackConfig from '../../config/webpack.dev.js';
+import {getConfig} from '@lipemat/js-boilerplate/helpers/config.js';
+import {type Configuration, type RuleSetRule} from 'webpack';
 
 
 describe( 'webpack.dev.js', () => {
-	const {getConfig} = requireModule( '@lipemat/js-boilerplate/helpers/config' );
-
-	function getWebpackConfig() {
-		jest.resetModules();
-		const defaultConfig = requireModule( '@lipemat/js-boilerplate/config/webpack.dev' );
-		return requireModule( '../../config/webpack.dev' )( defaultConfig );
+	function getWebpackConfig(): Configuration {
+		// @ts-expect-error -- Will be fixed on next update.
+		return webpackConfig( defaultConfig );
 	}
 
-	test( 'Snapshot', () => {
+	test( 'Snapshot', async () => {
 		expect( getWebpackConfig() ).toMatchSnapshot( 'develop' );
 
-		const full = getConfig( 'webpack.dev' );
+		const full = await getConfig( 'webpack.dev.js' );
 		expect( full ).toMatchSnapshot( 'full' );
 	} );
 
 	test( 'Rules', () => {
-		const rules = getWebpackConfig().module.rules;
+		const rules: RuleSetRule[] = getWebpackConfig().module?.rules as RuleSetRule[];
 		expect( rules ).toHaveLength( 5 );
-		expect( rules[ 0 ].test ).toEqual( /\.(svelte|svelte\.ts)$/ );
-		expect( rules[ 1 ].test ).toEqual( /node_modules\/svelte\/.*\.mjs$/ );
+		expect( rules[ 0 ]?.test ).toEqual( /\.(svelte|svelte\.ts)$/ );
+		expect( rules[ 1 ]?.test ).toEqual( /node_modules\/svelte\/.*\.mjs$/ );
 
-		const mainRule = rules[ 0 ].use;
-		expect( mainRule.options.emitCss ).toEqual( true );
-		expect( mainRule.options.hotReload ).toEqual( true );
+		const mainRule = rules[ 0 ].use as RuleSetRule;
+		// @ts-ignore
+		expect( mainRule.options?.emitCss ).toEqual( true );
+		// @ts-ignore
+		expect( mainRule.options?.hotReload ).toEqual( true );
 	} );
 
 	test( 'Extensions', () => {
-		const extensions = getWebpackConfig().resolve.extensions;
+		const extensions = getWebpackConfig().resolve?.extensions;
 		expect( extensions ).toHaveLength( 8 );
 		expect( extensions ).toEqual( [ '.ts', '.tsx', '.js', '.jsx', '.json', '.pcss', '.svelte', '.mjs' ] );
 	} );
 
 	test( 'mainFields', () => {
-		const mainFields = getWebpackConfig().resolve.mainFields;
+		const mainFields = getWebpackConfig().resolve?.mainFields;
 		expect( mainFields ).toHaveLength( 4 );
 		expect( mainFields ).toEqual( [ 'svelte', 'browser', 'module', 'main' ] );
 	} );
 
 	test( 'Devtool', () => {
-		const devtool = getWebpackConfig().devtool;
+		const devtool = getWebpackConfig().devtool ?? undefined;
 		expect( devtool ).toEqual( 'inline-source-map' );
 	} );
 } );

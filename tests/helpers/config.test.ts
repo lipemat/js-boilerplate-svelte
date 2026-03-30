@@ -1,10 +1,6 @@
-import {createRequire} from 'node:module';
-
-const requireModule = createRequire( import.meta.url );
-
 describe( 'config.js', () => {
-	test( 'Default TSConfig', () => {
-		const {getTypeScriptConfig} = requireModule( '../../helpers/config' );
+	test( 'Default TSConfig', async () => {
+		const {getTypeScriptConfig} = await import( '../../helpers/config.js' );
 		expect( getTypeScriptConfig() ).toMatchSnapshot();
 	} );
 } );

@@ -1,8 +1,20 @@
+import {jest} from '@jest/globals';
 import ts from 'typescript-eslint';
-import {createRequire} from 'node:module';
 import type {ExtensionConfigs} from '@lipemat/eslint-config/helpers/config.js';
 
-const requireModule = createRequire( import.meta.url );
+jest.unstable_mockModule( '@lipemat/js-boilerplate-shared/helpers/config.js', async () => {
+	const extension = await import( '../../config/eslint.config.js' );
+	return {
+		getExtensionsConfig: ( fileName: string, originalConfig: ExtensionConfigs ) => {
+			if ( 'eslint.config' !== fileName ) {
+				return {};
+			}
+			return extension.default( {...originalConfig} );
+		},
+		getExtensions: () => [ '@lipemat/js-boilerplate-svelte' ],
+		ensureJSExtension: ( name: string ) => name,
+	};
+} );
 
 const BASE = {
 	configs: [ {
@@ -12,23 +24,10 @@ const BASE = {
 	} ],
 };
 
-let mockSharedHelpers: typeof import( '@lipemat/js-boilerplate-shared/helpers/config.js' );
 let mockExtension: { readonly default: ( config: ExtensionConfigs ) => ExtensionConfigs };
 
 beforeAll( async () => {
-	mockSharedHelpers = await import( '@lipemat/js-boilerplate-shared/helpers/config.js' );
 	mockExtension = await import( '../../config/eslint.config.js' );
-
-	jest.mock( '@lipemat/js-boilerplate-shared/helpers/config.js', () => ( {
-		...mockSharedHelpers,
-		getExtensionsConfig: ( fileName: string, originalConfig: ExtensionConfigs ) => {
-			if ( fileName !== 'eslint.config' ) {
-				return mockSharedHelpers.getExtensionsConfig( fileName, originalConfig );
-			}
-
-			return mockExtension.default( {...originalConfig} );
-		},
-	} ) );
 } );
 
 
@@ -65,8 +64,9 @@ describe( 'eslint.config', () => {
 	} );
 
 
-	test( 'Merged', () => {
-		const config = requireModule( '@lipemat/eslint-config' );
+	test( 'Merged', async () => {
+		// @ts-ignore
+		const config = await import( '@lipemat/eslint-config' );
 
 		const original = config.default[ config.default.length - 6 ];
 		const svelte = config.default[ config.default.length - 2 ];
