@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/lipemat/js-boilerplate-svelte#readme",
   "bin": {
-    "lipemat-js-boilerplate-svelte": "./bin/lipemat-js-boilerplate-svelte"
+    "lipemat-js-boilerplate-svelte": "bin/lipemat-js-boilerplate-svelte.js"
   },
   "scripts": {
     "build": "tsc --project ./bin",

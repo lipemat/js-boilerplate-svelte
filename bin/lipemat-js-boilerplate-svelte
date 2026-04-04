@@ -11,8 +11,8 @@ let command = -1 === scriptIndex ? args[ 0 ] : args[ scriptIndex ];
 	let result;
 	switch ( command ) {
 		case 'check-types':
-			const svelteCheck = require( 'svelte-check' );
-			result = await svelteCheck();
+			process.argv.push( '--fail-on-warnings' );
+			result = await import( 'svelte-check' );
 			break;
 		default:
 			console.error( `Unknown command: ${command}` );
