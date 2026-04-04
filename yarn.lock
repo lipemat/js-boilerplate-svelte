@@ -2815,7 +2815,7 @@ __metadata:
     "@lipemat/js-boilerplate": ">=11.0.0-beta.4"
     eslint: ^9
   bin:
-    lipemat-js-boilerplate-svelte: ./bin/lipemat-js-boilerplate-svelte
+    lipemat-js-boilerplate-svelte: bin/lipemat-js-boilerplate-svelte.js
   languageName: unknown
   linkType: soft
 
