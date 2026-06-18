@@ -97,7 +97,7 @@ export function createTransformer(): SyncTransformer {
  * ```ts
  * import type {Config} from 'jest';
  * import config from '@lipemat/js-boilerplate-shared/config/jest.config.js';
- * import supportSvelteTests from '@lipemat/js-boilerplate-svelte/config/jest.config.mts';
+ * import supportSvelteTests from '@lipemat/js-boilerplate-svelte/config/jest.config.mjs';
  *
  * const jestConfig: Config = supportSvelteTests( config );
  *
