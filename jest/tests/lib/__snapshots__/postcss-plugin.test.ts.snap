@@ -35,16 +35,8 @@ exports[`postcss-plugin Does not change unexpectedly - Dev: config 1`] = `
         {
           "plugins": [
             {
-              "postcssPlugin": "postcss-normalize-display-values",
-              "prepare": [Function],
-            },
-            {
               "AtRule": [Function],
               "postcssPlugin": "postcss-font-format-keywords",
-            },
-            {
-              "Declaration": [Function],
-              "postcssPlugin": "postcss-oklab-function",
             },
             {
               "postcssPlugin": "postcss-text-decoration-shorthand",
@@ -64,20 +56,12 @@ exports[`postcss-plugin Does not change unexpectedly - Dev: config 1`] = `
               "postcssPlugin": "postcss-dir-pseudo-class",
             },
             {
-              "Declaration": [Function],
-              "postcssPlugin": "postcss-lab-function",
-            },
-            {
               "Rule": [Function],
               "postcssPlugin": "css-blank-pseudo",
             },
             {
               "Declaration": [Function],
               "postcssPlugin": "postcss-page-break",
-            },
-            {
-              "Once": [Function],
-              "postcssPlugin": "postcss-font-variant",
             },
             {
               "Declaration": [Function],
@@ -182,16 +166,8 @@ exports[`postcss-plugin Does not change unexpectedly - Dist: config 1`] = `
         {
           "plugins": [
             {
-              "postcssPlugin": "postcss-normalize-display-values",
-              "prepare": [Function],
-            },
-            {
               "AtRule": [Function],
               "postcssPlugin": "postcss-font-format-keywords",
-            },
-            {
-              "Declaration": [Function],
-              "postcssPlugin": "postcss-oklab-function",
             },
             {
               "postcssPlugin": "postcss-text-decoration-shorthand",
@@ -211,20 +187,12 @@ exports[`postcss-plugin Does not change unexpectedly - Dist: config 1`] = `
               "postcssPlugin": "postcss-dir-pseudo-class",
             },
             {
-              "Declaration": [Function],
-              "postcssPlugin": "postcss-lab-function",
-            },
-            {
               "Rule": [Function],
               "postcssPlugin": "css-blank-pseudo",
             },
             {
               "Declaration": [Function],
               "postcssPlugin": "postcss-page-break",
-            },
-            {
-              "Once": [Function],
-              "postcssPlugin": "postcss-font-variant",
             },
             {
               "Declaration": [Function],
