@@ -49,6 +49,7 @@
     "@types/postcss-modules-scope": "^3",
     "@typescript-eslint/parser": "^8.18.0",
     "@typescript-eslint/types": "^8.44.0",
+    "babel-jest": "^30.4.1",
     "cross-spawn": "^7.0.6",
     "eslint": "^9",
     "eslint-plugin-svelte": "^3.11.0",
