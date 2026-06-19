@@ -39,6 +39,27 @@ function polyfillElementAnimate(): void {
 polyfillElementAnimate();
 
 /**
+ * Mock `goto` to prevent SvelteKit's navigation from running during tests.
+ *
+ * Added via moduleNameMapper in the Jest config when `isSvelteKit` is true, so it only applies in SvelteKit projects.
+ */
+export function goto(): Promise<void> {
+	return Promise.resolve();
+}
+
+/**
+ * Mock `resolve` to prevent SvelteKit's navigation from running during tests.
+ *
+ * Added via moduleNameMapper in the Jest config when `isSvelteKit` is true, so it only applies in SvelteKit projects.
+ */
+export function resolve( route: string, params: Record<string, string> = {} ): string {
+	return Object.entries( params ).reduce( ( path, [ key, value ] ) => {
+		return path.replace( `[${key}]`, value );
+	}, route );
+}
+
+
+/**
  * Jest transformer factory used for `.svelte`, `.svelte.js`, and `.svelte.ts` files.
  *
  * Jest discovers this by importing the file referenced in `config.transform` and calling its
@@ -107,9 +128,11 @@ export function createTransformer(): SyncTransformer {
  * @since 3.2.0
  *
  * @param {Config} config - The existing Jest configuration to enhance.
+ * @param {boolean} isSvelteKit - Whether the project is a SvelteKit project.
+ *
  * @return {Config} The enhanced Jest configuration with Svelte support.
  */
-export default function supportSvelteTests( config: Config ): Config {
+export default function supportSvelteTests( config: Config, isSvelteKit: boolean = false ): Config {
 	config.moduleFileExtensions = [ ...new Set( [
 		...config.moduleFileExtensions ?? [],
 		'ts',
@@ -124,6 +147,11 @@ export default function supportSvelteTests( config: Config ): Config {
 		...config.moduleNameMapper,
 		'^svelte$': svelteClient,
 	};
+	if ( isSvelteKit ) {
+		config.moduleNameMapper[ '\\$lib/(.*?)(?:\\.js)?$' ] = '<rootDir>/../src/lib/$1';
+		config.moduleNameMapper[ '^\\$app/navigation$' ] = thisFile;
+		config.moduleNameMapper[ '^\\$app/paths$' ] = thisFile;
+	}
 
 	config.transform = {
 		'^.+\\.svelte(\\.[jt]s)?$': thisFile,
