@@ -18,6 +18,8 @@ Add `worker-src 'self' blob:` to your `Content-Security-Policy` header.
 
 ### Support Svelete Language Server with Yarn PNP
 
+@notice Only works if the package.json is in the root of the project!
+
 1. Install the package to your project `yarn add svelte-language-server`.
 2. Generate the sdk `npx -y @yarnpkg/sdks base`.
 3. In PHPStorm settings
