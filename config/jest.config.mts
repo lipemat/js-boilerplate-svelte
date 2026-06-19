@@ -75,6 +75,7 @@ export function createTransformer(): SyncTransformer {
 		compileModule
 	} = require( 'svelte/compiler' ) as typeof import('svelte/compiler');
 	const babelJest = ( require( 'babel-jest' ) as typeof import('babel-jest') ).default;
+	const ts = require( 'typescript' ) as typeof import('typescript');
 
 
 	const babelTransformer = babelJest.createTransformer( {
@@ -88,11 +89,36 @@ export function createTransformer(): SyncTransformer {
 		],
 	} ) as SyncTransformer;
 
+	/**
+	 * Strip TypeScript from `.svelte.ts` module files before `compileModule`.
+	 *
+	 * Unlike `compile`, which detects `<script lang="ts">` and strips types itself,
+	 * `compileModule` has no TypeScript awareness and throws on any type syntax
+	 * (e.g. inline `type` imports, `enum`, `namespace`). `vite-plugin-svelte` solves
+	 * this by transpiling `.svelte.ts` with esbuild first; under Jest we use the
+	 * `typescript` compiler, which fully supports `enum`/`namespace` and leaves the
+	 * runes (`$state`, `$derived`, …) untouched for `compileModule` to process.
+	 */
+	function toJavaScript( source: string, filename: string ): string {
+		if ( ! filename.endsWith( '.ts' ) ) {
+			return source;
+		}
+		return ts.transpileModule( source, {
+			fileName: filename,
+			compilerOptions: {
+				isolatedModules: true,
+				module: ts.ModuleKind.ESNext,
+				target: ts.ScriptTarget.ESNext,
+				verbatimModuleSyntax: false,
+			},
+		} ).outputText;
+	}
+
 	return {
 		canInstrument: false,
 		process( source: string, filename: string, options: TransformOptions ) {
 			const {js} = moduleRegex.test( filename )
-				? compileModule( source, {filename, generate: 'client', dev: true} )
+				? compileModule( toJavaScript( source, filename ), {filename, generate: 'client', dev: true} )
 				: compile( source, {filename, generate: 'client', dev: true} );
 			return babelTransformer.process( js.code, filename, options );
 		},
