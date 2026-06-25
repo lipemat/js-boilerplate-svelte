@@ -47,6 +47,20 @@ Improvements to svelte TS definitions are included in this package. To use it, a
 import '@lipemat/js-boilerplate-svelte';
 ````
 
+## Supporting Svelte Components in Jest
+
+Add the following to your jest.config.ts file:
+
+```ts
+import config from '@lipemat/js-boilerplate-shared/config/jest.config.js';
+import supportSvelteTests from '@lipemat/js-boilerplate-svelte/config/jest.config.mjs';
+
+// pass `true` if you are using SvelteKit
+const jestConfig: Config = supportSvelteTests( config, false );
+
+export default jestConfig;
+```
+
 ## Commands
 
 `lipemat-js-boilerplate-svelte`
