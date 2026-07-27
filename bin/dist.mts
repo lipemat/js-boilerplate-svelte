@@ -3,7 +3,7 @@ process.env.NODE_ENV = 'production';
 import {build, type ConfigEnv, type UserConfig} from 'vite';
 import {existsSync} from 'node:fs';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
-import {removeTrailingSlash} from '@lipemat/js-boilerplate-shared/helpers/string.js';
+import {removeTrailingSlash} from '@lipemat/js-helpers';
 import {pathToFileURL} from 'node:url';
 
 import config from '../config/vite.config.mjs';

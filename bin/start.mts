@@ -1,6 +1,6 @@
 process.env.NODE_ENV = 'development';
 
-import {removeTrailingSlash} from '@lipemat/js-boilerplate-shared/helpers/string.js';
+import {removeTrailingSlash} from '@lipemat/js-helpers';
 import {type ConfigEnv, createServer, type UserConfig} from 'vite';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
 import {existsSync} from 'node:fs';
