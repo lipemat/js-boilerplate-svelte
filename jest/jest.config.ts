@@ -11,4 +11,8 @@ jestConfig.moduleNameMapper = {
 	'@sveltejs/vite-plugin-svelte': '<rootDir>/mocks/sveltejs__vite-plugin-svelte.ts',
 };
 
+jestConfig.transformIgnorePatterns = [
+	'node_modules/(?!@lipemat|@wordpress)',
+];
+
 export default jestConfig;

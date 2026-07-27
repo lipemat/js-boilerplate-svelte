@@ -30,8 +30,7 @@ export function svelteChecker(): Plugin {
 			if ( 'production' === process.env.NODE_ENV ) {
 				try {
 					createChecker();
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				} catch ( error ) {
+				} catch {
 					process.exit( 1 );
 				}
 			}

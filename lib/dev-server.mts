@@ -26,9 +26,9 @@ export default function devServer(): DevServerConfig {
 					 */
 					allow: [
 						searchForWorkspaceRoot( process.cwd() ),
-						'.yarn/__virtual__'
+						'.yarn/__virtual__',
 					],
-				}
+				},
 			};
 
 			if ( 'https:' === url.protocol &&

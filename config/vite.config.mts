@@ -20,7 +20,6 @@ export const DIST_DIR = packageConfig.workingDirectory + '/dist-svelte';
  * Finished configuration for Vite.
  */
 const viteConfig: UserConfigFnObject = defineConfig( ( env: ConfigEnv ): UserConfig => {
-
 	const plugins: UserConfig['plugins'] = [
 		svelte( {
 			...svelteConfig,
@@ -69,7 +68,7 @@ const viteConfig: UserConfigFnObject = defineConfig( ( env: ConfigEnv ): UserCon
 					format: 'module',
 				},
 			},
-		}
+		},
 	};
 } );
 

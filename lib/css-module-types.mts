@@ -91,12 +91,12 @@ export default function cssModuleTypes(): Plugin {
 				css: {
 					modules: {
 						getJSON: ( fileName, keys ): void => {
-							const typingsPath = fileName.replace( /\.pcss$/, '.pcss.d.ts' );
 							const cssModuleKeys = Object.keys( keys );
 							if ( 0 >= cssModuleKeys.length ) {
 								return;
 							}
 
+							const typingsPath = fileName.replace( /\.pcss$/, '.pcss.d.ts' );
 							const cssModuleDefinition = generateModuleTypeDefinition( cssModuleKeys, camelCase( basename( fileName ), true ) );
 
 							writeTypingsFile( typingsPath, cssModuleDefinition );

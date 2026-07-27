@@ -72,10 +72,10 @@ export function resolve( route: string, params: Record<string, string> = {} ): s
 export function createTransformer(): SyncTransformer {
 	const {
 		compile,
-		compileModule
-	} = require( 'svelte/compiler' ) as typeof import('svelte/compiler');
-	const babelJest = ( require( 'babel-jest' ) as typeof import('babel-jest') ).default;
-	const ts = require( 'typescript' ) as typeof import('typescript');
+		compileModule,
+	} = require( 'svelte/compiler' ) as typeof import( 'svelte/compiler' );
+	const babelJest = ( require( 'babel-jest' ) as typeof import( 'babel-jest' ) ).default;
+	const ts = require( 'typescript' ) as typeof import( 'typescript' );
 
 
 	const babelTransformer = babelJest.createTransformer( {
@@ -118,7 +118,11 @@ export function createTransformer(): SyncTransformer {
 		canInstrument: false,
 		process( source: string, filename: string, options: TransformOptions ) {
 			const {js} = moduleRegex.test( filename )
-				? compileModule( toJavaScript( source, filename ), {filename, generate: 'client', dev: true} )
+				? compileModule( toJavaScript( source, filename ), {
+					filename,
+					generate: 'client',
+					dev: true,
+				} )
 				: compile( source, {filename, generate: 'client', dev: true} );
 			return babelTransformer.process( js.code, filename, options );
 		},
@@ -153,7 +157,7 @@ export function createTransformer(): SyncTransformer {
  *
  * @since 3.2.0
  *
- * @param {Config} config - The existing Jest configuration to enhance.
+ * @param {Config}  config      - The existing Jest configuration to enhance.
  * @param {boolean} isSvelteKit - Whether the project is a SvelteKit project.
  *
  * @return {Config} The enhanced Jest configuration with Svelte support.

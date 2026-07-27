@@ -32,10 +32,10 @@ export function entrypoints( cb: EntriesCallback ): Plugin {
 			return {
 				build: {
 					rollupOptions: {
-						input: cb( getPackageConfig().workingDirectory )
-					}
-				}
+						input: cb( getPackageConfig().workingDirectory ),
+					},
+				},
 			};
-		}
+		},
 	};
 }
