@@ -7,8 +7,6 @@
     "node": ">=22.21.1"
   },
   "type": "module",
-  "types": "./types/index.d.ts",
-  "main": "./types/index.d.ts",
   "files": [
     "bin/",
     "config/",

@@ -35,17 +35,19 @@ Add `worker-src 'self' blob:` to your `Content-Security-Policy` header.
 ### Types
 
 Improvements to svelte TS definitions are included in this package. To use it, add it to your project:
+1. Copy the `types/svelte.d.ts` file to your project.
+2. Remove any dangling `import '@lipemat/js-boilerplate-svelte';` statements.
 
+#### Deprecated: Do NOT use like this anymore!
+```
 #### In a .d.ts file
-```
+
 /// <reference types="@lipemat/js-boilerplate-svelte" />
-```
 
 #### In any .ts file (preferrably svelte-index.ts)
 
-```ts
 import '@lipemat/js-boilerplate-svelte';
-````
+```
 
 ## Supporting Svelte Components in Jest
 
