@@ -4,6 +4,12 @@ import type {ExtensionConfigs} from '@lipemat/eslint-config/helpers/config.js';
 
 const requireModule = createRequire( import.meta.url );
 
+const PROJECT_PARSER = {
+	parse: () => ( {
+		type: 'Program',
+	} ),
+};
+
 const BASE = {
 	configs: [ {
 		languageOptions: {
@@ -45,7 +51,7 @@ describe( 'eslint.config', () => {
 
 	test( 'Overrides', () => {
 		const configs = mockExtension.default( BASE ).configs;
-		const svelteConfig = configs[ configs.length - 2 ];
+		const svelteConfig = configs[ configs.length - 3 ];
 
 		expect( svelteConfig.files ).toEqual( [
 			'**/*.svelte*',
@@ -60,17 +66,43 @@ describe( 'eslint.config', () => {
 			'svelte/no-useless-mustaches': 'off',
 		} );
 
-		expect( configs[ configs.length - 1 ].rules ).toEqual( {
+		expect( configs[ configs.length - 2 ].rules ).toEqual( {
 			'@lipemat/security/no-at-html-tags': 'error',
 		} );
+	} );
+
+
+	test( 'Rune Modules', () => {
+		const configs = mockExtension.default( BASE ).configs;
+		const moduleConfig = configs[ configs.length - 1 ];
+
+		expect( moduleConfig.files ).toEqual( [
+			'**/*.svelte.[jt]s',
+			'*.svelte.[jt]s',
+		] );
+		expect( JSON.stringify( moduleConfig.languageOptions?.parser ) ).toEqual( JSON.stringify( ts.parser ) );
+	} );
+
+
+	test( 'Rune Modules Prefer The Project Parser', () => {
+		const configs = mockExtension.default( {
+			configs: [ {
+				languageOptions: {
+					parser: PROJECT_PARSER,
+					parserOptions: {},
+				},
+			} ],
+		} ).configs;
+
+		expect( configs[ configs.length - 1 ].languageOptions?.parser ).toBe( PROJECT_PARSER );
 	} );
 
 
 	test( 'Merged', () => {
 		const config = requireModule( '@lipemat/eslint-config' );
 
-		const original = config.default[ config.default.length - 6 ];
-		const svelte = config.default[ config.default.length - 2 ];
+		const original = config.default[ config.default.length - 7 ];
+		const svelte = config.default[ config.default.length - 3 ];
 
 		expect( original.languageOptions.sourceType ).toEqual( 'module' );
 		expect( original.languageOptions.ecmaVersion ).toEqual( 7 );
