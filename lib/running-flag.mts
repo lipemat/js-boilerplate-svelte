@@ -3,6 +3,55 @@ import {mkdirSync, unlinkSync, writeFileSync} from 'node:fs';
 import type {Plugin, ViteDevServer} from 'vite';
 import {DIST_DIR} from '../config/vite.config.mjs';
 
+const PARENT_CHECK_INTERVAL = 3_000;
+
+/**
+ * SIGHUP fires when the terminal is closed (POSIX and Windows).
+ * SIGBREAK fires on Ctrl+Break (Windows).
+ */
+const EXIT_SIGNALS: NodeJS.Signals[] = [ 'SIGINT', 'SIGTERM', 'SIGHUP', 'SIGBREAK' ];
+
+
+function isProcessAlive( pid: number ): boolean {
+	try {
+		process.kill( pid, 0 );
+		return true;
+	} catch ( error ) {
+		return 'EPERM' === ( error as NodeJS.ErrnoException ).code;
+	}
+}
+
+
+function exit(): void {
+	process.exit();
+}
+
+
+function cleanup( flagPath: string ): () => void {
+	// Parent may be killed without forwarding a signal (e.g. terminal force-closed).
+	const parentPid = process.ppid;
+	const parentWatcher = setInterval( () => {
+		if ( ! isProcessAlive( parentPid ) ) {
+			exit();
+		}
+	}, PARENT_CHECK_INTERVAL );
+	parentWatcher.unref();
+
+	return function exitHandler() {
+		clearInterval( parentWatcher );
+		process.off( 'exit', exitHandler );
+		for ( const signal of EXIT_SIGNALS ) {
+			process.off( signal, exit );
+		}
+		try {
+			unlinkSync( flagPath );
+		} catch {
+			/* ignore if already gone */
+		}
+	};
+}
+
+
 export default function runningFlag(): Plugin {
 	return {
 		name: 'lipemat:running-flag',
@@ -10,32 +59,14 @@ export default function runningFlag(): Plugin {
 		configureServer( server: ViteDevServer ) {
 			const flagPath = resolve( DIST_DIR, '.running' );
 
-
 			mkdirSync( DIST_DIR, {recursive: true} );
 			writeFileSync( flagPath, '' );
 
-
-			const cleanup = () => {
-				try {
-					unlinkSync( flagPath );
-				} catch {
-					/* ignore if already gone */
-				}
-			};
-
-			// remove on server close (in-memory shutdown)
-			server.httpServer?.once( 'close', cleanup );
-
-			// also remove on process termination / exit
-			const signals: NodeJS.Signals[] = [ 'SIGINT', 'SIGTERM' ];
-			for ( const sig of signals ) {
-				process.once( sig, () => {
-					cleanup();
-					// if it's a signal rather than 'exit', re‐emit the default behavior
-					if ( 'SIGINT' === sig || 'SIGTERM' === sig ) {
-						process.exit();
-					}
-				} );
+			const exitHandler = cleanup( flagPath );
+			server.httpServer?.once( 'close', exitHandler );
+			process.once( 'exit', exitHandler );
+			for ( const signal of EXIT_SIGNALS ) {
+				process.once( signal, exit );
 			}
 		},
 	};
