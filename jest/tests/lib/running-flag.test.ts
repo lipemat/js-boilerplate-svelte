@@ -2,7 +2,7 @@ jest.mock( '../../../config/vite.config.mjs', () => ( {
 	DIST_DIR: require( 'path' ).join( require( 'os' ).tmpdir(), 'running-flag-test-' + process.pid, 'dist-svelte' ),
 } ) );
 
-import {existsSync, rmSync, unlinkSync} from 'node:fs';
+import {existsSync, readFileSync, rmSync, unlinkSync} from 'node:fs';
 import {Server} from 'node:http';
 import {dirname, join} from 'node:path';
 import type {MinimalPluginContextWithoutEnvironment, ViteDevServer} from 'vite';
@@ -38,10 +38,18 @@ function startServer(): Server {
 	const httpServer = new Server();
 	const hook = runningFlag().configureServer;
 	if ( 'function' === typeof hook ) {
-		hook.call( {} as MinimalPluginContextWithoutEnvironment, {httpServer} as ViteDevServer );
+		hook.call( {} as MinimalPluginContextWithoutEnvironment, {
+			config: {server: {port: 5173}},
+			httpServer,
+		} as ViteDevServer );
 		return httpServer;
 	}
 	throw new Error( 'configureServer is not a function.' );
+}
+
+
+function flagContents(): { pid: number, port: null | number, started: string } {
+	return JSON.parse( readFileSync( FLAG_PATH, 'utf8' ) );
 }
 
 
@@ -80,6 +88,39 @@ describe( 'runningFlag', () => {
 		startServer();
 
 		expect( existsSync( FLAG_PATH ) ).toBe( true );
+	} );
+
+
+	it( 'writes pid, configured port, and start date to the running flag', () => {
+		startServer();
+
+		const contents = flagContents();
+		expect( contents.pid ).toBe( process.pid );
+		expect( contents.port ).toBe( 5173 );
+		expect( new Date( contents.started ).getTime() ).not.toBeNaN();
+	} );
+
+
+	it( 'replaces the port with the actual port once listening', () => {
+		const httpServer = startServer();
+		jest.spyOn( httpServer, 'address' ).mockReturnValue( {
+			address: '::',
+			family: 'IPv6',
+			port: 5174,
+		} );
+
+		httpServer.emit( 'listening' );
+
+		expect( flagContents().port ).toBe( 5174 );
+	} );
+
+
+	it( 'keeps the configured port when the listening address is unavailable', () => {
+		const httpServer = startServer();
+
+		httpServer.emit( 'listening' );
+
+		expect( flagContents().port ).toBe( 5173 );
 	} );
 
 

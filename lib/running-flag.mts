@@ -12,6 +12,15 @@ const PARENT_CHECK_INTERVAL = 3_000;
 const EXIT_SIGNALS: NodeJS.Signals[] = [ 'SIGINT', 'SIGTERM', 'SIGHUP', 'SIGBREAK' ];
 
 
+function flagContents( port: null | number, started: string ): string {
+	return JSON.stringify( {
+		pid: process.pid,
+		port,
+		started,
+	} );
+}
+
+
 function isProcessAlive( pid: number ): boolean {
 	try {
 		process.kill( pid, 0 );
@@ -59,8 +68,18 @@ export default function runningFlag(): Plugin {
 		configureServer( server: ViteDevServer ) {
 			const flagPath = resolve( DIST_DIR, '.running' );
 
+			const started = new Date().toISOString();
+
 			mkdirSync( DIST_DIR, {recursive: true} );
-			writeFileSync( flagPath, '' );
+			writeFileSync( flagPath, flagContents( server.config.server.port ?? null, started ) );
+
+			// Actual port is only known once listening (strictPort may be off).
+			server.httpServer?.once( 'listening', () => {
+				const address = server.httpServer?.address();
+				if ( null !== address && 'object' === typeof address ) {
+					writeFileSync( flagPath, flagContents( address.port, started ) );
+				}
+			} );
 
 			const exitHandler = cleanup( flagPath );
 			server.httpServer?.once( 'close', exitHandler );
