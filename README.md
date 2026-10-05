@@ -8,13 +8,13 @@ Svelte extension for @lipemat/js-boilerplate
 ```json
 {
   "dependencies": {
-     "@testing-library/svelte": "5.3.1",
-     "svelte": "^5.53.12",
-     "vite": "^7.3.3"
-   },
-   "devDependencies": {
-      "@lipemat/js-boilerplate-svelte": "^3.4.3"
-   }
+    "@testing-library/svelte": "5.3.1",
+    "svelte": "^5.53.12",
+    "vite": "8.3.1"
+  },
+  "devDependencies": {
+    "@lipemat/js-boilerplate-svelte": "^4.0.0"
+  }
 }
 ```
 ### Index

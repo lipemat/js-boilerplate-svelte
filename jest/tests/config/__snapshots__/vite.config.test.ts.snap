@@ -6,7 +6,10 @@ exports[`vite config Matches snapshot during build 1`] = `
   "build": {
     "emptyOutDir": false,
     "manifest": "manifest.json",
-    "rollupOptions": {
+    "rolldownOptions": {
+      "checks": {
+        "pluginTimings": false,
+      },
       "input": {
         "svelte-index": "E:/SVN/the-boilerplate/packages/js-boilerplate-svelte/js/src/svelte-index.ts",
       },
@@ -18,6 +21,9 @@ exports[`vite config Matches snapshot during build 1`] = `
         "format": "module",
       },
     },
+  },
+  "customLogger": {
+    "warnOnce": [Function],
   },
   "plugins": [
     {
@@ -168,7 +174,10 @@ exports[`vite config Matches snapshot during dev 1`] = `
   "build": {
     "emptyOutDir": false,
     "manifest": "manifest.json",
-    "rollupOptions": {
+    "rolldownOptions": {
+      "checks": {
+        "pluginTimings": false,
+      },
       "input": {
         "svelte-index": "E:/SVN/the-boilerplate/packages/js-boilerplate-svelte/js/src/svelte-index.ts",
       },
@@ -180,6 +189,9 @@ exports[`vite config Matches snapshot during dev 1`] = `
         "format": "module",
       },
     },
+  },
+  "customLogger": {
+    "warnOnce": [Function],
   },
   "plugins": [
     {

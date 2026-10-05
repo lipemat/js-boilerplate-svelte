@@ -1,5 +1,5 @@
 import {type Plugin} from 'vite';
-import {type InputOption} from 'rollup';
+import {type InputOption} from 'rolldown';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
 
 export type EntriesCallback = ( workingDirectory: string ) => InputOption;
@@ -31,7 +31,10 @@ export function entrypoints( cb: EntriesCallback ): Plugin {
 		config() {
 			return {
 				build: {
-					rollupOptions: {
+					rolldownOptions: {
+						checks: {
+							pluginTimings: false,
+						},
 						input: cb( getPackageConfig().workingDirectory ),
 					},
 				},

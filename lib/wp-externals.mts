@@ -14,7 +14,7 @@ export default function wpExternals(): Plugin[] {
 					exclude: Object.keys( wpExports ),
 				},
 				build: {
-					rollupOptions: {
+					rolldownOptions: {
 						external: Object.keys( wpExports ),
 						output: {
 							globals: wpExports,

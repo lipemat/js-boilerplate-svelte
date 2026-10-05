@@ -11,6 +11,7 @@ import cssModuleTypes from '../lib/css-module-types.mjs';
 import postCssConfig from '../lib/postcss-plugin.js';
 import devServer from '../lib/dev-server.mjs';
 import brotliCompress from '../lib/brotli-compress.mjs';
+import yarnLogger from '../lib/yarn-pnp-warning.mjs';
 
 const packageConfig = getPackageConfig();
 
@@ -56,7 +57,10 @@ const viteConfig: UserConfigFnObject = defineConfig( ( env: ConfigEnv ): UserCon
 		build: {
 			emptyOutDir: false,
 			manifest: 'manifest.json',
-			rollupOptions: {
+			rolldownOptions: {
+				checks: {
+					pluginTimings: false,
+				},
 				input: {
 					'svelte-index': packageConfig.workingDirectory + '/src/' + 'svelte-index.ts',
 				},
@@ -69,6 +73,7 @@ const viteConfig: UserConfigFnObject = defineConfig( ( env: ConfigEnv ): UserCon
 				},
 			},
 		},
+		customLogger: yarnLogger,
 	};
 } );
 
