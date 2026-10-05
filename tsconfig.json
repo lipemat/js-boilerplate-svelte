@@ -15,14 +15,8 @@
     ],
     "verbatimModuleSyntax": true,
     "paths": {
-      "@typescript-eslint/utils/ts-eslint": [
-        "./node_modules/@typescript-eslint/utils/dist/ts-eslint"
-      ],
       "svelte-preprocess-cssmodules": [
         "./node_modules/svelte-preprocess-cssmodules/dist/index.d.ts"
-      ],
-      "svelte-preprocess-cssmodules/*": [
-        "./node_modules/svelte-preprocess-cssmodules/*"
       ]
     }
   },
