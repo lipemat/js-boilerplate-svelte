@@ -9,8 +9,6 @@ type SvelteParser = NonNullable<SvelteConfig['languageOptions']>['parser'];
 
 /**
  * Eslint override for svelte files
- *
- * @requires @lipemat/eslint-config
  */
 const SVELTE_CONFIG: Linter.Config = {
 	files: [ '**/*.svelte*', '*.svelte*' ],

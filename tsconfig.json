@@ -4,15 +4,19 @@
     "declaration": false,
     "esModuleInterop": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "ES2024",
+    "types": [
+      "jest",
+      "node"
+    ],
     "verbatimModuleSyntax": true,
     "paths": {
-      "@typescript-eslint/utils/ts-eslint": [
-        "./node_modules/@typescript-eslint/utils/dist/ts-eslint"
+      "svelte-preprocess-cssmodules": [
+        "./node_modules/svelte-preprocess-cssmodules/dist/index.d.ts"
       ]
     }
   },

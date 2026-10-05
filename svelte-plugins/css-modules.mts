@@ -1,7 +1,8 @@
 import {cssModules} from 'svelte-preprocess-cssmodules';
 import {getLocalIdentName, maybeGetLocalIdent} from '../helpers/postcss.mjs';
 import type {PreprocessorGroup} from 'svelte/compiler';
-import type {PluginOptions} from 'svelte-preprocess-cssmodules/dist/types/index';
+
+type CssModulesOptions = NonNullable<Parameters<typeof cssModules>[0]>;
 
 /**
  * CSS module support for local <style> tags.
@@ -16,7 +17,7 @@ export default function cssModulesPlugin(): PreprocessorGroup {
 }
 
 
-export function config(): Partial<PluginOptions> {
+export function config(): CssModulesOptions {
 	return {
 		localIdentName: getLocalIdentName( false ),
 		useAsDefaultScoping: true,

@@ -101,7 +101,7 @@ describe( 'eslint.config', () => {
 	test( 'Merged', () => {
 		const config = requireModule( '@lipemat/eslint-config' );
 
-		const original = config.default[ config.default.length - 7 ];
+		const original = config.default[ config.default.length - 8 ];
 		const svelte = config.default[ config.default.length - 3 ];
 
 		expect( original.languageOptions.sourceType ).toEqual( 'module' );

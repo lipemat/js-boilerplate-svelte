@@ -1,9 +1,11 @@
 import type {Config} from 'jest';
-import type {SyncTransformer, TransformOptions} from '@jest/transform';
 import {dirname, join} from 'path';
 import {fileURLToPath} from 'node:url';
 import {getPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
 import {createRequire} from 'node:module';
+
+type BabelTransformer = Awaited<ReturnType<typeof import( 'babel-jest' ).createTransformer>>;
+type TransformOptions = Parameters<BabelTransformer['process']>[2];
 
 const require = createRequire( import.meta.url );
 const thisFile = fileURLToPath( import.meta.url );
@@ -69,7 +71,7 @@ export function resolve( route: string, params: Record<string, string> = {} ): s
  *
  * @since 3.2.0
  */
-export function createTransformer(): SyncTransformer {
+export function createTransformer(): BabelTransformer {
 	const {
 		compile,
 		compileModule,
@@ -87,7 +89,11 @@ export function createTransformer(): SyncTransformer {
 		plugins: [
 			[ 'babel-plugin-transform-import-meta', {module: 'ES6'} ],
 		],
-	} ) as SyncTransformer;
+	} );
+
+	if ( babelTransformer instanceof Promise ) {
+		throw new TypeError( 'Expected a synchronous Babel Jest transformer.' );
+	}
 
 	/**
 	 * Strip TypeScript from `.svelte.ts` module files before `compileModule`.
