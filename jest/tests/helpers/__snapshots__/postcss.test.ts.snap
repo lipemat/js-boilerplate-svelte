@@ -29,6 +29,10 @@ exports[`getPostCssConfig should return a valid PostCSS configuration object 1`]
           "postcssPlugin": "postcss-font-format-keywords",
         },
         {
+          "Declaration": [Function],
+          "postcssPlugin": "postcss-oklab-function",
+        },
+        {
           "postcssPlugin": "postcss-text-decoration-shorthand",
           "prepare": [Function],
         },
@@ -46,12 +50,20 @@ exports[`getPostCssConfig should return a valid PostCSS configuration object 1`]
           "postcssPlugin": "postcss-dir-pseudo-class",
         },
         {
+          "Declaration": [Function],
+          "postcssPlugin": "postcss-lab-function",
+        },
+        {
           "Rule": [Function],
           "postcssPlugin": "css-blank-pseudo",
         },
         {
           "Declaration": [Function],
           "postcssPlugin": "postcss-page-break",
+        },
+        {
+          "Once": [Function],
+          "postcssPlugin": "postcss-font-variant",
         },
         {
           "Declaration": [Function],
