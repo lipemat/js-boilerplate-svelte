@@ -31,7 +31,7 @@ describe( 'Format CSS Module Typings', () => {
 
 
 	test( 'Empty files are not generated', async () => {
-		const pcssFile = join( 'jest/fixtures/postcss-modules/default.pcss' );
+		const pcssFile = join( 'jest/fixtures/postcss-modules/default.module.pcss' );
 		await triggerWatcher( pcssFile );
 
 		expect( fs.writeFileSync ).not.toHaveBeenCalled();
@@ -74,6 +74,6 @@ describe( 'Format CSS Module Typings', () => {
 			today: 'red',
 			tomorrow: 'green',
 		} );
-		expect( fs.writeFileSync ).toHaveBeenCalledWith( resolve( pcssFile.replace( /\.pcss$/, '.pcss.d.ts' ) ), fs.readFileSync( join( 'jest/fixtures/postcss-modules/results/json-callback.d.ts' ), 'utf8' ) );
+		expect( fs.writeFileSync ).toHaveBeenCalledWith( resolve( pcssFile.replace( /\.pcss$/, '.pcss.d.ts' ) ), fs.readFileSync( join( 'jest/fixtures/postcss-modules/results/json-callback.module.d.ts' ), 'utf8' ) );
 	} );
 } );

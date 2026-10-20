@@ -1,5 +1,5 @@
 .share {
-	composes: shared from '../postcss-modules/content.pcss';
+	composes: shared from '../postcss-modules/content.module.pcss';
 	font-weight: 700;
 
 	a {
@@ -9,3 +9,6 @@
 		padding: 15px;
 	}
 }
+
+@import 'globals/variables.pcss';
+@import 'globals/media-queries.pcss';
