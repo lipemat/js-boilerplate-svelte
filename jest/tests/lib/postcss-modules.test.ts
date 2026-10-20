@@ -32,6 +32,23 @@ function getBuild( env: BuildEnv ): BuildResult {
 	return result;
 }
 
+describe.each( [ 'development', 'production' ] as BuildEnv[] )( 'PostCSS Resulting CSS: %s', env => {
+	let result: BuildResult;
+
+	beforeAll( () => {
+		result = getBuild( env );
+	}, BUILD_TIMEOUT );
+
+
+	it( 'preserves global class names', () => {
+		expect( result.css ).toMatch( /\.not-module\s*\{/ );
+		expect( result.css ).toMatch( /\.share\s*\{/ );
+		expect( result.css ).toMatch( /\.share a\s*\{/ );
+		expect( result.css ).toMatch( /\.global-class-name\s*\{/ );
+		expect( result.css ).toMatch( /\.parent-class-name \.child-class-name\s*\{/ );
+	} );
+} );
+
 
 describe( 'PostCSS Modules compiled CSS: development', () => {
 	let result: BuildResult;
@@ -40,17 +57,9 @@ describe( 'PostCSS Modules compiled CSS: development', () => {
 		result = getBuild( 'development' );
 	}, BUILD_TIMEOUT );
 
-
 	it( 'resolves custom media queries from the global data files', () => {
 		expect( result.css ).toContain( '@media (max-width: 800px)' );
 		expect( result.css ).toContain( '@media (max-width: 960px)' );
-	} );
-
-
-	it( 'only includes media adjustments once', () => {
-		const mediaCount = ( result.css.match( /@media\s*\(\s*max-width:\s*960px\s*\)\s*\{\s*:root\s*\{\s*--content-width:\s*800px;?\s*}\s*}/g ) ?? [] ).length;
-
-		expect( mediaCount ).toBe( 1 );
 	} );
 
 
@@ -95,15 +104,6 @@ describe( 'PostCSS Modules compiled CSS: development', () => {
 	} );
 
 
-	it( 'preserves global class names', () => {
-		expect( result.css ).toContain( '.not-module {' );
-		expect( result.css ).toContain( '.share {' );
-		expect( result.css ).toContain( '.share a {' );
-		expect( result.css ).toContain( '.global-class-name {' );
-		expect( result.css ).toContain( '.parent-class-name .child-class-name {' );
-	} );
-
-
 	it( 'leaves no unprocessed nested syntax behind', () => {
 		expect( result.css ).not.toMatch( /;[^{};]*\{/ );
 		expect( result.css ).not.toContain( '( --mobile )' );
@@ -113,6 +113,25 @@ describe( 'PostCSS Modules compiled CSS: development', () => {
 	it( 'pretty prints the output', () => {
 		expect( result.css ).toContain( '{\n\t' );
 		expect( result.css.split( '\n' ).length ).toBeGreaterThan( 10 );
+	} );
+
+	/**
+	 * Targeting the `--tablet` media query as only the "mulitple-media-queries.module.pcss" file uses it.
+	 *
+	 * Media queries are combined by file, not application.
+	 */
+	it( 'combines same media queries into one block', () => {
+		const mediaCount = ( result.css.match( /@media\s*\(\s*max-width:\s*1200px\s*\)\s*and\s*\(\s*min-width:\s*800px\s*\)\s*\{/g ) ?? [] ).length;
+		expect( mediaCount ).toBe( 1 );
+
+		const hoverCount = ( result.css.match( /@media\s*\(\s*hover:\s*hover\s*\)\s*\{/g ) ?? [] ).length;
+		expect( hoverCount ).toBe( 1 );
+	} );
+
+	it( 'only includes media adjustments once', () => {
+		const mediaCount = ( result.css.match( /@media\s*\(\s*max-width:\s*960px\s*\)\s*\{\s*:root\s*\{\s*--content-width:\s*800px;?\s*}\s*}/g ) ?? [] ).length;
+
+		expect( mediaCount ).toBe( 1 );
 	} );
 } );
 
@@ -152,4 +171,26 @@ describe( 'PostCSS Modules compiled CSS: production', () => {
 		expect( js ).toContain( 'site-title' );
 		expect( css ).not.toContain( 'site-title' );
 	}, BUILD_TIMEOUT );
+
+	/**
+	 * Targeting the `--tablet` media query as only the "mulitple-media-queries.module.pcss" file uses it.
+	 *
+	 * Media queries are combined by file, not application.
+	 */
+	it( 'combines same media queries into one block', () => {
+		const {css} = getBuild( 'production' );
+		const mediaCount = ( css.match( /@media\s*\(width<=1200px\)\s*and\s*\(width>=800px\)\s*\{/g ) ?? [] ).length;
+		expect( mediaCount ).toBe( 1 );
+
+		const hoverCount = ( css.match( /@media\s*\(\s*hover:\s*hover\s*\)\s*\{/g ) ?? [] ).length;
+		expect( hoverCount ).toBe( 1 );
+	} );
+
+
+	it( 'only includes media adjustments once', () => {
+		const {css} = getBuild( 'production' );
+		const mediaCount = ( css.match( /@media\s*\(width<=960px\)\s*\{\s*:root\s*\{\s*--content-width:\s*800px;?\s*}\s*}/g ) ?? [] ).length;
+
+		expect( mediaCount ).toBe( 1 );
+	} );
 } );

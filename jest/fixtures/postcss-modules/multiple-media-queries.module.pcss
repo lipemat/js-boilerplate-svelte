@@ -1,0 +1,35 @@
+.hover-and-tablet {
+	background: #32cd32;
+
+	a {
+		font-weight: 700;
+	}
+
+	@media ( --tablet ) {
+		padding: 7px;
+	}
+
+	@media (hover: hover) {
+		&:hover {
+			background-color: rgba(0, 0, 0, 2.3);
+		}
+	}
+}
+
+.hover-two {
+	background: #ff0;
+
+	@media (hover: hover) {
+		&:hover {
+			background: #32cd32;
+		}
+	}
+}
+
+.tablet-two {
+	background: var(--c-yellow);
+
+	@media ( --tablet ) {
+		background: var(--c-black);
+	}
+}

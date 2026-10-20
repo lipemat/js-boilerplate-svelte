@@ -134,7 +134,9 @@ exports[`vite config Matches snapshot during build 1`] = `
     },
     {
       "config": [Function],
+      "enforce": "post",
       "name": "lipemat:postcss-config",
+      "transform": [Function],
     },
     {
       "apply": "build",
@@ -302,7 +304,9 @@ exports[`vite config Matches snapshot during dev 1`] = `
     },
     {
       "config": [Function],
+      "enforce": "post",
       "name": "lipemat:postcss-config",
+      "transform": [Function],
     },
     {
       "apply": "serve",

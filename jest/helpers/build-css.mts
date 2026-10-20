@@ -49,6 +49,7 @@ writeFileSync( join( work, 'index.js' ), [
 	'import \'./pcss/global.pcss\';',
 	'import * as content from \'./content.module.pcss\';',
 	'import * as composed from \'./composed.module.pcss\';',
+	'import * as multipleMQ from \'./multiple-media-queries.module.pcss\';',
 	'import * as shared from \'./shared.module.pcss\';',
 	'import \'./default.module.pcss\';',
 

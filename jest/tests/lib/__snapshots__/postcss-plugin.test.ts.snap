@@ -5,6 +5,7 @@ exports[`postcss-plugin Does not change unexpectedly - Dev: config 1`] = `
   "css": {
     "devSourcemap": true,
     "modules": {
+      "Loader": [Function],
       "generateScopedName": "§Ⓜ[name]__[local]__[contenthash:base52:2]",
       "globalModulePaths": [
         /\\[/\\\\\\\\\\]pcss\\[/\\\\\\\\\\]\\.\\*/,
@@ -139,7 +140,9 @@ exports[`postcss-plugin Does not change unexpectedly - Dev: config 1`] = `
 exports[`postcss-plugin Does not change unexpectedly - Dev: plugin 1`] = `
 {
   "config": [Function],
+  "enforce": "post",
   "name": "lipemat:postcss-config",
+  "transform": [Function],
 }
 `;
 
@@ -148,6 +151,7 @@ exports[`postcss-plugin Does not change unexpectedly - Dist: config 1`] = `
   "css": {
     "devSourcemap": false,
     "modules": {
+      "Loader": [Function],
       "generateScopedName": [Function],
       "globalModulePaths": [
         /\\[/\\\\\\\\\\]pcss\\[/\\\\\\\\\\]\\.\\*/,
@@ -282,6 +286,8 @@ exports[`postcss-plugin Does not change unexpectedly - Dist: config 1`] = `
 exports[`postcss-plugin Does not change unexpectedly - Dist: plugin 1`] = `
 {
   "config": [Function],
+  "enforce": "post",
   "name": "lipemat:postcss-config",
+  "transform": [Function],
 }
 `;
