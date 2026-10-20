@@ -1,0 +1,10 @@
+.imported {
+	composes: shared from './shared.module.pcss';
+	border: 1px solid #000;
+}
+
+.chained {
+	composes: imported;
+	composes: heading from './shared.module.pcss';
+	color: #008000;
+}

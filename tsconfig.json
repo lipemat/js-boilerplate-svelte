@@ -25,6 +25,7 @@
     "config/**/*ts",
     "helpers/**/*ts",
     "lib/**/*ts",
+    "jest/helpers/**/*ts",
     "jest/jest.config.ts",
     "jest/tests/**/*ts",
     "svelte-plugins/**/*ts",

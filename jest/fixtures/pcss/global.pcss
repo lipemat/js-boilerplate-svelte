@@ -1,5 +1,8 @@
+@import './globals/media-queries.pcss';
+@import './globals/variables.pcss';
+@import './globals/variable-adjustments.pcss';
+
 .share {
-	composes: shared from '../postcss-modules/content.module.pcss';
 	font-weight: 700;
 
 	a {
@@ -10,5 +13,12 @@
 	}
 }
 
-@import 'globals/variables.pcss';
-@import 'globals/media-queries.pcss';
+.global-class-name {
+	background: #9acd32;
+}
+
+.parent-class-name {
+	.child-class-name {
+		background: var(--c-yellow);
+	}
+}
