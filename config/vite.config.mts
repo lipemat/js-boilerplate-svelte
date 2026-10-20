@@ -39,11 +39,10 @@ const viteConfig: UserConfigFnObject = defineConfig( ( env: ConfigEnv ): UserCon
 		plugins.push( manifestHash() );
 		plugins.push( cleanExceptRunning() );
 		plugins.push( brotliCompress() );
-	} else {
+	} else if ( 'serve' === env.command && 'true' !== process.env.LIPEMAT_SVELTE_CHECK ) {
 		plugins.push( runningFlag() );
 		plugins.push( devServer() );
 	}
-
 
 	return {
 		plugins,
