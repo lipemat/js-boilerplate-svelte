@@ -7,6 +7,11 @@ type ModulesOptions = CSSModulesOptions & {
 	Loader: LoaderConstructor;
 };
 
+type TransformResult = undefined | {
+	code: string;
+	moduleSideEffects: 'no-treeshake';
+};
+
 /**
  * Vite Plugin for PostCSS support.
  *
@@ -38,6 +43,17 @@ export default function postCssConfig(): Plugin {
 					devSourcemap: postcssOptions.map,
 				},
 			};
+		},
+
+		/**
+		 * Keep CSS of `.module.pcss` files which only export global or
+		 * no classes. Vite marks CSS modules as side-effect free, so a
+		 * bare import gets tree-shaken along with its styles.
+		 */
+		transform: ( code: string, id: string ): TransformResult => {
+			if ( /\.module\.pcss($|\?)/.test( id ) ) {
+				return {code, moduleSideEffects: 'no-treeshake'};
+			}
 		},
 	};
 }

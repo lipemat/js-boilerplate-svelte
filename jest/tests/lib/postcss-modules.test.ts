@@ -166,6 +166,14 @@ describe( 'PostCSS Modules compiled CSS: production', () => {
 	}, BUILD_TIMEOUT );
 
 
+	// Guards the `moduleSideEffects: 'no-treeshake'` transform in lib/postcss-plugin.ts.
+	it( 'keeps CSS of bare-imported module files which export no classes', () => {
+		const {css} = getBuild( 'production' );
+		expect( css ).toMatch( /body\s*\{[^}]*direction:\s*ltr/ );
+		expect( css ).toMatch( /\.not-module\s*\{/ );
+	}, BUILD_TIMEOUT );
+
+
 	it( 'keeps global composes unscoped', () => {
 		const {css, js} = getBuild( 'production' );
 		expect( js ).toContain( 'site-title' );
