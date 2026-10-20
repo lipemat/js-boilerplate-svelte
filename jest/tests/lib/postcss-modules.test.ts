@@ -7,6 +7,7 @@ type BuildEnv = 'development' | 'production';
 interface BuildResult {
 	css: string;
 	js: string;
+	warnings: string[];
 }
 
 const builds = new Map<BuildEnv, BuildResult>();
@@ -46,6 +47,16 @@ describe.each( [ 'development', 'production' ] as BuildEnv[] )( 'PostCSS Resulti
 		expect( result.css ).toMatch( /\.share a\s*\{/ );
 		expect( result.css ).toMatch( /\.global-class-name\s*\{/ );
 		expect( result.css ).toMatch( /\.parent-class-name \.child-class-name\s*\{/ );
+	} );
+
+
+	/**
+	 * Composed-from files must keep their `from` source when
+	 * prepended to the stylesheet, or Vite's asset rewriting warns
+	 * and cannot resolve relative url() in those files.
+	 */
+	it( 'does not warn about a missing `from` option', () => {
+		expect( result.warnings ).not.toContainEqual( expect.stringContaining( 'did not pass the `from` option' ) );
 	} );
 } );
 

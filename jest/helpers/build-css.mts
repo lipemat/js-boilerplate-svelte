@@ -33,7 +33,10 @@ modifyPackageConfig( {
 	shortCssClasses: false,
 } );
 
-const {build}: typeof import( 'vite' ) = await import( pathToFileURL( join( repoRoot, 'node_modules/vite/dist/node/index.js' ) ).href );
+const {
+	build,
+	createLogger,
+}: typeof import( 'vite' ) = await import( pathToFileURL( join( repoRoot, 'node_modules/vite/dist/node/index.js' ) ).href );
 const postCssConfig: typeof import( '../../lib/postcss-plugin.js' ).default = ( await import( pathToFileURL( join( repoRoot, 'lib/postcss-plugin.js' ) ).href ) ).default;
 const cssModuleTypes: typeof import( '../../lib/css-module-types.mjs' ).default = ( await import( pathToFileURL( join( repoRoot, 'lib/css-module-types.mjs' ) ).href ) ).default;
 
@@ -57,6 +60,15 @@ writeFileSync( join( work, 'index.js' ), [
 	'',
 ].join( '\n' ) );
 
+// Capture warnings instead of printing them, so tests can assert on them.
+const warnings: string[] = [];
+const logger = createLogger( 'silent' );
+const warnOnce = logger.warnOnce;
+logger.warnOnce = ( msg, options ): void => {
+	warnings.push( msg );
+	warnOnce( msg, options );
+};
+
 await build( {
 	build: {
 		emptyOutDir: true,
@@ -65,6 +77,7 @@ await build( {
 		rollupOptions: {input: join( work, 'index.js' )},
 	},
 	configFile: false,
+	customLogger: logger,
 	logLevel: 'silent',
 	plugins: [ postCssConfig(), cssModuleTypes() ],
 	root: work,
@@ -83,4 +96,5 @@ function readAssets( extension: string ): string {
 process.stdout.write( JSON.stringify( {
 	css: readAssets( '.css' ),
 	js: readAssets( '.js' ),
+	warnings,
 } ) );
