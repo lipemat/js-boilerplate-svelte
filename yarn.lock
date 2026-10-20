@@ -2337,7 +2337,7 @@ __metadata:
     jest: "npm:30.4.2"
     loader-utils: "npm:^3.3.1"
     postcss: "npm:^8.5.28"
-    postcss-modules: "npm:9.0.1"
+    postcss-modules: "npm:^9.0.1"
     postcss-modules-extract-imports: "npm:^3.1.0"
     postcss-modules-local-by-default: "npm:^4.2.0"
     postcss-modules-scope: "npm:^3.2.1"
@@ -9160,7 +9160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-modules@npm:9.0.1":
+"postcss-modules@npm:^9.0.1":
   version: 9.0.1
   resolution: "postcss-modules@npm:9.0.1"
   dependencies:
