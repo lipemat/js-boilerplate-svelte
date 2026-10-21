@@ -1,8 +1,10 @@
-import {execFileSync} from 'node:child_process';
+import {execFileSync, spawnSync, type SpawnSyncReturns} from 'node:child_process';
 import {join} from 'node:path';
+import {AtRule, Declaration, parse, Rule} from 'postcss';
 
 
 type BuildEnv = 'development' | 'production';
+type Target = BuildEnv | 'serve';
 
 interface BuildResult {
 	css: string;
@@ -33,6 +35,43 @@ function getBuild( env: BuildEnv ): BuildResult {
 	return result;
 }
 
+
+/**
+ * Compile a single fixture module, through the dev server when
+ * `target` is `serve`, without throwing when it fails.
+ */
+function compileModule( target: Target, module: string ): SpawnSyncReturns<string> {
+	return spawnSync( process.execPath, [ join( 'jest', 'helpers', 'build-css.mts' ), target, module ], {
+		encoding: 'utf8',
+	} );
+}
+
+
+function getAncestors( rule: Rule ): string[] {
+	const ancestors: string[] = [];
+	let parent = rule.parent;
+	while ( parent instanceof AtRule || parent instanceof Rule ) {
+		ancestors.unshift( parent instanceof AtRule ? `@${parent.name} ${parent.params}` : parent.selector );
+		parent = parent.parent;
+	}
+	return ancestors;
+}
+
+
+/**
+ * Each rule as its ancestors, selector, and declarations.
+ */
+function getRuleSignatures( css: string ): string[] {
+	const signatures: string[] = [];
+	parse( css ).walkRules( rule => {
+		const declarations = rule.nodes
+			.filter( ( node ): node is Declaration => node instanceof Declaration )
+			.map( declaration => `${declaration.prop}:${declaration.value}${declaration.important ? '!important' : ''}` );
+		signatures.push( [ ...getAncestors( rule ), rule.selector, ...declarations ].join( ' ' ) );
+	} );
+	return signatures;
+}
+
 describe.each( [ 'development', 'production' ] as BuildEnv[] )( 'PostCSS Resulting CSS: %s', env => {
 	let result: BuildResult;
 
@@ -51,12 +90,13 @@ describe.each( [ 'development', 'production' ] as BuildEnv[] )( 'PostCSS Resulti
 
 
 	/**
-	 * Composed-from files must keep their `from` source when
-	 * prepended to the stylesheet, or Vite's asset rewriting warns
-	 * and cannot resolve relative url() in those files.
+	 * Modules are imported from two JS modules so a regression in
+	 * deduplication or inlining would emit the same rule twice.
 	 */
-	it( 'does not warn about a missing `from` option', () => {
-		expect( result.warnings ).not.toContainEqual( expect.stringContaining( 'did not pass the `from` option' ) );
+	it( 'includes each rule once', () => {
+		const signatures = getRuleSignatures( result.css );
+		expect( signatures.length ).toBeGreaterThan( 20 );
+		expect( signatures.filter( ( signature, index ) => signatures.indexOf( signature ) !== index ) ).toEqual( [] );
 	} );
 } );
 
@@ -90,22 +130,12 @@ describe( 'PostCSS Modules compiled CSS: development', () => {
 
 	it( 'scopes classnames with the Ⓜ pattern', () => {
 		expect( result.css ).toContain( '.§Ⓜshared-module__shared__' );
-		expect( result.js ).toContain( '§Ⓜcomposed-module__imported__' );
+		expect( result.js ).toContain( '§Ⓜcontent-module__header__' );
 	} );
 
 
 	it( 'resolves composes within the same file', () => {
 		expect( result.js ).toMatch( /var shared = "§Ⓜshared-module__shared__[^" ]+ §Ⓜshared-module__home__[^" ]+"/ );
-	} );
-
-
-	it( 'resolves composes from another module file', () => {
-		expect( result.js ).toMatch( /var imported = "§Ⓜcomposed-module__imported__[^" ]+ §Ⓜshared-module__shared__[^" ]+ §Ⓜshared-module__home__[^" ]+"/ );
-	} );
-
-
-	it( 'resolves chained composes across files', () => {
-		expect( result.js ).toMatch( /var chained = "§Ⓜcomposed-module__chained__[^" ]+ §Ⓜcomposed-module__imported__[^" ]+ §Ⓜshared-module__shared__[^" ]+ §Ⓜshared-module__home__[^" ]+ §Ⓜshared-module__heading__[^" ]+"/ );
 	} );
 
 
@@ -172,11 +202,6 @@ describe( 'PostCSS Modules compiled CSS: production', () => {
 	}, BUILD_TIMEOUT );
 
 
-	it( 'resolves chained composes across files', () => {
-		expect( getBuild( 'production' ).js ).toMatch( /["'`]([A-Za-z]{5} ){4}[A-Za-z]{5}["'`]/ );
-	}, BUILD_TIMEOUT );
-
-
 	// Guards the `moduleSideEffects: 'no-treeshake'` transform in lib/postcss-plugin.ts.
 	it( 'keeps CSS of bare-imported module files which export no classes', () => {
 		const {css} = getBuild( 'production' );
@@ -211,5 +236,48 @@ describe( 'PostCSS Modules compiled CSS: production', () => {
 		const mediaCount = ( css.match( /@media\s*\(width<=960px\)\s*\{\s*:root\s*\{\s*--content-width:\s*800px;?\s*}\s*}/g ) ?? [] ).length;
 
 		expect( mediaCount ).toBe( 1 );
+	} );
+} );
+
+
+describe.each( [ 'development', 'production', 'serve' ] as Target[] )( 'PostCSS cross-file composes: %s', target => {
+	let result: SpawnSyncReturns<string>;
+
+	beforeAll( () => {
+		result = compileModule( target, 'composed.module.pcss' );
+	}, BUILD_TIMEOUT );
+
+
+	it( 'fails to compile', () => {
+		expect( result.status ).toBe( 1 );
+	} );
+
+
+	it( 'reports the composed-from file and the importing file', () => {
+		expect( result.stderr ).toMatch( /Cross-file composes is not supported: "\.\/shared\.module\.pcss" in [^\n]*composed\.module\.pcss/ );
+	} );
+} );
+
+
+describe( 'PostCSS composes: serve', () => {
+	let result: SpawnSyncReturns<string>;
+
+	beforeAll( () => {
+		result = compileModule( 'serve', 'shared.module.pcss' );
+	}, BUILD_TIMEOUT );
+
+
+	it( 'compiles same-file and global composes', () => {
+		expect( result.status ).toBe( 0 );
+	} );
+
+
+	it( 'resolves composes within the same file', () => {
+		expect( ( JSON.parse( result.stdout ) as BuildResult ).js ).toMatch( /"§Ⓜshared-module__shared__[^" ]+ §Ⓜshared-module__home__[^" ]+"/ );
+	} );
+
+
+	it( 'keeps global composes unscoped', () => {
+		expect( ( JSON.parse( result.stdout ) as BuildResult ).js ).toMatch( / site-title"/ );
 	} );
 } );

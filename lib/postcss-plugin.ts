@@ -1,10 +1,9 @@
 import type {CSSModulesOptions, Plugin, UserConfig} from 'vite';
-import type {LoaderConstructor} from '../helpers/postcss-modules-loader.mjs';
-import {createPostcssModulesLoader} from '../helpers/postcss-modules-loader.mjs';
+import {NoCrossFileComposesLoader} from '../helpers/postcss-modules-loader.mjs';
 import {getGeneratedScopedName, getPostCssConfig} from '../helpers/postcss.mjs';
 
 type ModulesOptions = CSSModulesOptions & {
-	Loader: LoaderConstructor;
+	Loader: typeof NoCrossFileComposesLoader;
 };
 
 type TransformResult = undefined | {
@@ -32,7 +31,7 @@ export default function postCssConfig(): Plugin {
 				globalModulePaths: [
 					/[/\\]pcss[/\\].*/,
 				],
-				Loader: createPostcssModulesLoader( postcssOptions.plugins ?? [] ),
+				Loader: NoCrossFileComposesLoader,
 				localsConvention: 'camelCase',
 			};
 
