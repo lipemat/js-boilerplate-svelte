@@ -162,6 +162,9 @@ describe.each( [
 		'.{outer} .inner .{leaf} {',
 		'\n.{local-fn}:not(div) {',
 		'.{outer-fn} .inner-fn .{leaf-fn} .tail-fn {',
+		'.{mid} .mid-g.{mid-l} {',
+		'\n.{mid-c}.mid-x {',
+		'\n.{mid-c}.mid-x.{local-v} {',
 	] )( 'emits `%s`', selector => {
 		expect( css ).toContain( selector );
 	} );
@@ -203,6 +206,9 @@ describe.each( [
 			'class="inner-fn"',
 			'class="{leaf-fn}"',
 			'class="tail-fn"',
+			'class="{mid}"',
+			'class="mid-g {mid-l}"',
+			'class="{mid-c} mid-x"',
 		] );
 	} );
 

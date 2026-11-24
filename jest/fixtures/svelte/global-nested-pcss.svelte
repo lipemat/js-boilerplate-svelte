@@ -1,3 +1,6 @@
+<script>
+</script>
+
 <form class="form">
 	<h3 class="title">
 		Title
@@ -65,6 +68,14 @@
 		</div>
 	</div>
 </div>
+<div class="mid">
+	<span class="mid-g mid-l">
+		Mid
+	</span>
+</div>
+<span class="mid-c mid-x">
+	Mid function
+</span>
 
 <style lang="pcss">
 	.form {
@@ -141,5 +152,17 @@
 
 	.outer-fn :global .inner-fn :local(.leaf-fn) .tail-fn {
 		color: lime;
+	}
+
+	.mid :global .mid-g:local(.mid-l) {
+		color: fuchsia;
+	}
+
+	.mid-c:global(.mid-x) {
+		color: fuchsia;
+	}
+
+	.mid-c:global(.mid-x).local-v {
+		color: fuchsia;
 	}
 </style>
