@@ -1,0 +1,17 @@
+.form {
+	:global {
+		h3.title { color: red; }
+		.b, .c { .d { color: blue; } }
+	}
+	&:hover :global .e { color: green; }
+}
+:global { .top { color: black; } }
+.x { :global .y { color: pink; } }
+.z { :global(.w) { color: gray; } }
+.m {
+	@media (any-hover: hover) {
+		&:hover :global .f { color: purple; }
+		:global { .g { color: orange; } }
+	}
+}
+@media (any-hover: hover) { :global { .h:hover { color: teal; } } }

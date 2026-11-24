@@ -1,24 +1,20 @@
-import {execFileSync, spawnSync, type SpawnSyncReturns} from 'node:child_process';
-import {join} from 'node:path';
+import type {SpawnSyncReturns} from 'node:child_process';
 import {AtRule, Declaration, parse, Rule} from 'postcss';
+import type {BuildResult, Target} from '../../helpers/build-css.mjs';
+import {BUILD_TIMEOUT, runBuildCss, spawnBuildCss} from '../../helpers/run-build-css';
 
 
-type BuildEnv = 'development' | 'production';
-type Target = BuildEnv | 'serve';
+type BuildEnv = Exclude<Target, 'serve'>;
 
-interface BuildResult {
-	css: string;
-	js: string;
-	warnings: string[];
+interface SelectorCase {
+	selector: string;
+	pattern: RegExp;
 }
 
 const builds = new Map<BuildEnv, BuildResult>();
-const BUILD_TIMEOUT = 120000;
 
 /**
- * Compile the postcss-modules fixtures with the same Vite plugin
- * chain as `dist` in a child process, which uses the real `vite`
- * module (`vite` is mapped to a mock within Jest).
+ * Compile the postcss-modules fixtures with the same Vite plugin chain as `dist`.
  *
  * @throws When the build fails, including the build output.
  */
@@ -27,23 +23,9 @@ function getBuild( env: BuildEnv ): BuildResult {
 	if ( undefined !== cached ) {
 		return cached;
 	}
-	const output = execFileSync( process.execPath, [ join( 'jest', 'helpers', 'build-css.mts' ), env ], {
-		encoding: 'utf8',
-	} );
-	const result = JSON.parse( output ) as BuildResult;
+	const result = runBuildCss( env );
 	builds.set( env, result );
 	return result;
-}
-
-
-/**
- * Compile a single fixture module, through the dev server when
- * `target` is `serve`, without throwing when it fails.
- */
-function compileModule( target: Target, module: string ): SpawnSyncReturns<string> {
-	return spawnSync( process.execPath, [ join( 'jest', 'helpers', 'build-css.mts' ), target, module ], {
-		encoding: 'utf8',
-	} );
 }
 
 
@@ -174,6 +156,35 @@ describe( 'PostCSS Modules compiled CSS: development', () => {
 
 		expect( mediaCount ).toBe( 1 );
 	} );
+
+
+	it( 'hashes local classes around nested :global', () => {
+		expect( result.css ).toContain( '.§Ⓜglobal-nested-module__form__' );
+		expect( result.css ).toContain( '.§Ⓜglobal-nested-module__x__' );
+		expect( result.css ).toContain( '.§Ⓜglobal-nested-module__z__' );
+		expect( result.css ).toContain( '.§Ⓜglobal-nested-module__m__' );
+		expect( result.css ).not.toMatch( /\.(?:form|x|z|m)[\s{:,.]/ );
+	} );
+
+
+	it.each<SelectorCase>( [
+		{selector: 'h3.title', pattern: /\.§Ⓜglobal-nested-module__form__\S+ h3\.title \{/},
+		{selector: '.b .d, .c .d', pattern: /\.§Ⓜglobal-nested-module__form__\S+ \.b \.d, \.§Ⓜglobal-nested-module__form__\S+ \.c \.d \{/},
+		{selector: '.e', pattern: /\.§Ⓜglobal-nested-module__form__\S+:hover \.e \{/},
+		{selector: '.top', pattern: /\n\.top \{/},
+		{selector: '.y', pattern: /\.§Ⓜglobal-nested-module__x__\S+ \.y \{/},
+		{selector: '.w', pattern: /\.§Ⓜglobal-nested-module__z__\S+ \.w \{/},
+		{selector: '.f', pattern: /@media \(any-hover: hover\) \{\n\t\.§Ⓜglobal-nested-module__m__\S+:hover \.f \{/},
+		{selector: '.g', pattern: /\n\t\.§Ⓜglobal-nested-module__m__\S+ \.g \{/},
+		{selector: '.h', pattern: /\n\t\.h:hover \{/},
+	] )( 'leaves nested :global $selector unhashed', ( {pattern} ) => {
+		expect( result.css ).toMatch( pattern );
+	} );
+
+
+	it( 'exports only the local classes of nested :global files', () => {
+		expect( result.js ).toContain( 'var global_nested_module_default = {\n\tform,\n\tx,\n\tz,\n\tm\n};' );
+	} );
 } );
 
 
@@ -237,6 +248,33 @@ describe( 'PostCSS Modules compiled CSS: production', () => {
 
 		expect( mediaCount ).toBe( 1 );
 	} );
+
+
+	it( 'hashes local classes around nested :global', () => {
+		const {css} = getBuild( 'production' );
+		expect( css ).toMatch( /\.[A-Za-z]{5} h3\.title\{/ );
+		expect( css ).not.toMatch( /\.(?:form|x|z|m)[\s{:,.]/ );
+	}, BUILD_TIMEOUT );
+
+
+	it.each<SelectorCase>( [
+		{selector: 'h3.title', pattern: /\.([A-Za-z]{5}) h3\.title\{/},
+		{selector: '.b .d, .c .d', pattern: /\.([A-Za-z]{5}) \.b \.d,\.\1 \.c \.d\{/},
+		{selector: '.e', pattern: /\.[A-Za-z]{5}:hover \.e\{/},
+		{selector: '.top', pattern: /}\.top\{/},
+		{selector: '.y', pattern: /\.[A-Za-z]{5} \.y\{/},
+		{selector: '.w', pattern: /\.[A-Za-z]{5} \.w\{/},
+		{selector: '.f', pattern: /@media \(any-hover:hover\)\{\.[A-Za-z]{5}:hover \.f\{/},
+		{selector: '.g', pattern: /}\.[A-Za-z]{5} \.g\{/},
+		{selector: '.h', pattern: /}\.h:hover\{/},
+	] )( 'leaves nested :global $selector unhashed', ( {pattern} ) => {
+		expect( getBuild( 'production' ).css ).toMatch( pattern );
+	}, BUILD_TIMEOUT );
+
+
+	it( 'exports only the local classes of nested :global files', () => {
+		expect( getBuild( 'production' ).js ).toMatch( /=\{form:\w+,x:\w+,z:\w+,m:\w+}/ );
+	}, BUILD_TIMEOUT );
 } );
 
 
@@ -244,7 +282,7 @@ describe.each( [ 'development', 'production', 'serve' ] as Target[] )( 'PostCSS 
 	let result: SpawnSyncReturns<string>;
 
 	beforeAll( () => {
-		result = compileModule( target, 'composed.module.pcss' );
+		result = spawnBuildCss( target, 'composed.module.pcss' );
 	}, BUILD_TIMEOUT );
 
 
@@ -263,7 +301,7 @@ describe( 'PostCSS composes: serve', () => {
 	let result: SpawnSyncReturns<string>;
 
 	beforeAll( () => {
-		result = compileModule( 'serve', 'shared.module.pcss' );
+		result = spawnBuildCss( 'serve', 'shared.module.pcss' );
 	}, BUILD_TIMEOUT );
 
 
