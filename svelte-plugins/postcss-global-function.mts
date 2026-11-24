@@ -26,6 +26,7 @@ const processor = selectorParser( root => {
  *
  * - Expects flattened CSS, after `postcss-nested`.
  * - A bare `:local` ends the global run and is dropped.
+ * - A `:local(…)` is unwrapped, and the global run resumes after its compound.
  * - Within pseudo arguments of a top-level compound holding a class, mixed
  *   wraps the whole compound, so every `:global` inside is stripped.
  * - Within other pseudo arguments, bare `:global` is wrapped the same way.
@@ -73,7 +74,11 @@ function rewriteNodes( nodes: Child[], topLevel: boolean ): Child[] {
  */
 function rewriteRun( nodes: Child[], global: Pseudo, topLevel: boolean ): Child[] {
 	const start = nodes.indexOf( global );
-	const localIndex = nodes.findIndex( ( node, index ) => index > start && isBare( node, ':local' ) );
+	const localIndex = nodes.findIndex( ( node, index ) => index > start && ( isBare( node, ':local' ) || isFunction( node, ':local' ) ) );
+	const local = nodes[ localIndex ];
+	if ( isFunction( local, ':local' ) ) {
+		return rewriteRun( expandLocal( nodes, local ), global, topLevel );
+	}
 	const end = -1 === localIndex ? nodes.length : localIndex;
 	const run = splitRun( nodes.slice( 0, start ), nodes.slice( start + 1, end ) );
 
@@ -89,6 +94,44 @@ function rewriteRun( nodes: Child[], global: Pseudo, topLevel: boolean ): Child[
 		return [ ...before, global ];
 	}
 	return [ ...before, global, ...afterLocal( nodes.slice( localIndex + 1 ), run.separator, topLevel ) ];
+}
+
+
+/**
+ * Spell `:local(<x>)` as a bare `:local <x>`, with a bare `:global` after the compound.
+ */
+function expandLocal( nodes: Child[], local: Pseudo ): Child[] {
+	const index = nodes.indexOf( local );
+	const next = nodes.findIndex( ( node, position ) => position > index && selectorParser.isCombinator( node ) );
+	const inner: Child[] = [ ...local.first.nodes ];
+	inner[ 0 ].spaces.before = '';
+	const head: Child[] = [ ...nodes.slice( 0, index ), selectorParser.pseudo( {
+		value: ':local',
+	} ) ];
+	if ( selectorParser.isCombinator( nodes[ index - 1 ] ) ) {
+		head.push( descendant() );
+	}
+
+	if ( -1 === next ) {
+		return [ ...head, ...inner, ...nodes.slice( index + 1 ) ];
+	}
+	return [
+		...head,
+		...inner,
+		...nodes.slice( index + 1, next + 1 ),
+		selectorParser.pseudo( {
+			value: ':global',
+		} ),
+		descendant(),
+		...nodes.slice( next + 1 ),
+	];
+}
+
+
+function descendant(): Combinator {
+	return selectorParser.combinator( {
+		value: ' ',
+	} );
 }
 
 
@@ -239,7 +282,7 @@ function stripNode( selector: Selector, node: Child ): void {
 	if ( selectorParser.isPseudo( node ) ) {
 		if ( isBare( node, ':global' ) ) {
 			removeBare( selector, node );
-		} else if ( isGlobalFunction( node ) ) {
+		} else if ( isFunction( node, ':global' ) ) {
 			const inner: Child[] = [ ...node.first.nodes ];
 			inner[ 0 ].spaces.before = node.spaces.before;
 			node.replaceWith( ...inner );
@@ -270,8 +313,8 @@ function removeBare( selector: Selector, node: Pseudo ): void {
 }
 
 
-function isGlobalFunction( node: Pseudo ): boolean {
-	return ':global' === node.value && 1 === node.nodes.length && 0 < node.first.nodes.length;
+function isFunction( node: Child | undefined, value: ScopePseudo ): node is Pseudo {
+	return selectorParser.isPseudo( node ) && value === node.value && 1 === node.nodes.length && 0 < node.first.nodes.length;
 }
 
 

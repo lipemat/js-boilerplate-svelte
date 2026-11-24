@@ -160,14 +160,17 @@ describe.each( [
 		'\t.h:hover {',
 		'\n.list-global, .{list-local} {',
 		'.{outer} .inner .{leaf} {',
+		'\n.{local-fn}:not(div) {',
+		'.{outer-fn} .inner-fn .{leaf-fn} .tail-fn {',
 	] )( 'emits `%s`', selector => {
 		expect( css ).toContain( selector );
 	} );
 
 
-	it( 'emits no literal :global', () => {
+	it( 'emits no literal :global or :local', () => {
 		expect( css ).toContain( '.top' );
 		expect( css ).not.toContain( ':global' );
+		expect( css ).not.toContain( ':local' );
 	} );
 
 
@@ -195,6 +198,11 @@ describe.each( [
 			'class="{outer}"',
 			'class="inner"',
 			'class="{leaf}"',
+			'class="{local-fn}"',
+			'class="{outer-fn}"',
+			'class="inner-fn"',
+			'class="{leaf-fn}"',
+			'class="tail-fn"',
 		] );
 	} );
 

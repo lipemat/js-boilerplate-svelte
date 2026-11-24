@@ -86,6 +86,43 @@ describe( 'postcssGlobalFunction', () => {
 
 	it.each( [
 		{
+			input: ':global :local(.a):not(div) { color: olive; }',
+			output: ':global :local .a:not(div) { color: olive; }',
+		},
+		{
+			input: '.a :global .b :local(.c) { color: olive; }',
+			output: '.a :global(.b) .c { color: olive; }',
+		},
+		{
+			input: '.a :global .b :local(.c) .d { color: olive; }',
+			output: '.a :global(.b) .c :global(.d) { color: olive; }',
+		},
+		{
+			input: '.a :global .b :local(.c) > .d { color: olive; }',
+			output: '.a :global(.b) .c > :global(.d) { color: olive; }',
+		},
+		{
+			input: '.a :global .b:local(.c) .d { color: olive; }',
+			output: '.a :global(.b).c :global(.d) { color: olive; }',
+		},
+		{
+			input: '.a :global .b > :local(.c .e) .d { color: olive; }',
+			output: '.a :global(.b) > .c .e :global(.d) { color: olive; }',
+		},
+		{
+			input: '.a :global .b :local(.c) .d :local .e { color: olive; }',
+			output: '.a :global(.b) .c :global(.d) .e { color: olive; }',
+		},
+	] )( 'unwraps :local(…) and resumes the global run after its compound in `$input`', ( {
+		input,
+		output,
+	} ) => {
+		expect( rewrite( input ) ).toBe( output );
+	} );
+
+
+	it.each( [
+		{
 			input: '.a :global > .b { color: red; }',
 			output: '.a > :global(.b) { color: red; }',
 		},

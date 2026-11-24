@@ -53,6 +53,18 @@
 		</span>
 	</div>
 </div>
+<button class="local-fn">
+	Local function
+</button>
+<div class="outer-fn">
+	<div class="inner-fn">
+		<div class="leaf-fn">
+			<span class="tail-fn">
+				Tail
+			</span>
+		</div>
+	</div>
+</div>
 
 <style lang="pcss">
 	.form {
@@ -119,5 +131,15 @@
 
 	.outer :global .inner :local .leaf {
 		color: olive;
+	}
+
+	:global {
+		:local(.local-fn):not(div) {
+			color: maroon;
+		}
+	}
+
+	.outer-fn :global .inner-fn :local(.leaf-fn) .tail-fn {
+		color: lime;
 	}
 </style>
