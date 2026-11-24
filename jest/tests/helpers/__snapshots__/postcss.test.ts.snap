@@ -47,6 +47,10 @@ exports[`getPostCssConfig should return a valid PostCSS configuration object 1`]
         },
         {
           "Rule": [Function],
+          "postcssPlugin": "postcss-selector-not",
+        },
+        {
+          "Rule": [Function],
           "postcssPlugin": "postcss-dir-pseudo-class",
         },
         {

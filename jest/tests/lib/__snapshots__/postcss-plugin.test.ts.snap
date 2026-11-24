@@ -58,6 +58,10 @@ exports[`postcss-plugin Does not change unexpectedly - Dev: config 1`] = `
             },
             {
               "Rule": [Function],
+              "postcssPlugin": "postcss-selector-not",
+            },
+            {
+              "Rule": [Function],
               "postcssPlugin": "postcss-dir-pseudo-class",
             },
             {
@@ -201,6 +205,10 @@ exports[`postcss-plugin Does not change unexpectedly - Dist: config 1`] = `
             {
               "Rule": [Function],
               "postcssPlugin": "postcss-nesting",
+            },
+            {
+              "Rule": [Function],
+              "postcssPlugin": "postcss-selector-not",
             },
             {
               "Rule": [Function],
