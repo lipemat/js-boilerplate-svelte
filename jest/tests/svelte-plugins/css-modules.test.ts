@@ -1,5 +1,6 @@
 import cssModulesPlugin, {config} from '../../../svelte-plugins/css-modules.mjs';
 import {modifyPackageConfig} from '@lipemat/js-boilerplate-shared/helpers/package-config.js';
+import type {Processed} from 'svelte/compiler';
 import type {BuildResult} from '../../helpers/build-css.mjs';
 import {BUILD_TIMEOUT, runBuildCss} from '../../helpers/run-build-css';
 
@@ -9,6 +10,14 @@ import {BUILD_TIMEOUT, runBuildCss} from '../../helpers/run-build-css';
  */
 function buildComponent( fixture: string ): BuildResult {
 	return runBuildCss( 'development', fixture );
+}
+
+
+/**
+ * Replace each hashed class with `{<local name>}`.
+ */
+function unhash( value: string ): string {
+	return value.replace( /_§[\w-]+__([\w-]+)__[A-Za-z]+/g, '{$1}' );
 }
 
 
@@ -58,6 +67,132 @@ describe( 'CSS Modules - Svelte Plugin', () => {
 			shortCssClasses: false,
 		} );
 		expect( config() ).not.toHaveProperty( 'getLocalIdent' );
+	} );
+} );
+
+
+describe( 'CSS Modules - Svelte Plugin markup', () => {
+	const component = '<div class="a"><span class="b">B</span></div>\n<style>\n\t.a :global .b {\n\t\tcolor: red;\n\t}\n</style>\n';
+
+	beforeEach( () => {
+		process.env.NODE_ENV = 'development';
+		modifyPackageConfig( {
+			shortCssClasses: false,
+		} );
+	} );
+
+
+	/**
+	 * Run the plugin's markup step the way Svelte does.
+	 */
+	async function runMarkup( content: string, filename: string | undefined ): Promise<Processed> {
+		const {markup} = cssModulesPlugin();
+		if ( 'function' === typeof markup ) {
+			const processed = await markup( {
+				content,
+				filename,
+			} );
+			if ( 'object' === typeof processed ) {
+				return processed;
+			}
+		}
+		throw new Error( 'The plugin has no markup step.' );
+	}
+
+
+	it( 'rewrites bare :global before hashing local classes', async () => {
+		const {code} = await runMarkup( component, '/project/src/Component.svelte' );
+		expect( code ).toMatch( /\t:global\(\._§Component__a__[A-Za-z]+\) :global\(\.b\) \{/ );
+		expect( code ).toMatch( /<div class="_§Component__a__[A-Za-z]+"><span class="b">/ );
+	} );
+
+
+	it( 'returns a source map pointing to the component', async () => {
+		const {map} = await runMarkup( component, '/project/src/Component.svelte' );
+		expect( map ).toMatchObject( {
+			sources: [ 'Component.svelte' ],
+		} );
+		expect( map ).toHaveProperty( 'mappings', expect.stringMatching( /[A-Za-z]/ ) );
+	} );
+
+
+	it( 'leaves component untouched without filename', async () => {
+		expect( await runMarkup( component, undefined ) ).toEqual( {
+			code: component,
+		} );
+	} );
+} );
+
+
+/**
+ * Rewriting bare `:global` keeps classes after it unhashed in both CSS and markup.
+ */
+describe.each( [
+	'global-nested.svelte',
+	'global-nested-pcss.svelte',
+] )( 'CSS Modules - Svelte Plugin bare :global in %s', fixture => {
+	let result: BuildResult;
+	let css: string;
+
+	beforeAll( () => {
+		result = buildComponent( fixture );
+		css = unhash( result.css );
+	}, BUILD_TIMEOUT );
+
+
+	it.each( [
+		'.{form} h3.title {',
+		'.{form} .b .d, .{form} .c .d {',
+		'.{form}:hover .e {',
+		'\n.top {',
+		'.{x} .y {',
+		'.{z} .w {',
+		'\t.{m}:hover .f {',
+		'\t.{m} .g {',
+		'\t.h:hover {',
+		'\n.list-global, .{list-local} {',
+		'.{outer} .inner .{leaf} {',
+	] )( 'emits `%s`', selector => {
+		expect( css ).toContain( selector );
+	} );
+
+
+	it( 'emits no literal :global', () => {
+		expect( css ).toContain( '.top' );
+		expect( css ).not.toContain( ':global' );
+	} );
+
+
+	it( 'hashes local markup classes and leaves global ones raw', () => {
+		const classes: string[] = result.js.match( /class="[^"]*"/g ) ?? [];
+		expect( classes.map( unhash ) ).toEqual( [
+			'class="{form}"',
+			'class="title"',
+			'class="b"',
+			'class="d"',
+			'class="c"',
+			'class="d"',
+			'class="e"',
+			'class="top"',
+			'class="{x}"',
+			'class="y"',
+			'class="{z}"',
+			'class="w"',
+			'class="{m}"',
+			'class="f"',
+			'class="g"',
+			'class="h"',
+			'class="list-global"',
+			'class="{list-local}"',
+			'class="{outer}"',
+			'class="inner"',
+			'class="{leaf}"',
+		] );
+	} );
+
+
+	it( 'compiles without warnings', () => {
+		expect( result.warnings ).toEqual( [] );
 	} );
 } );
 

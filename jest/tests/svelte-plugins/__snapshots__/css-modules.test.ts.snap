@@ -11,5 +11,6 @@ exports[`CSS Modules - Svelte Plugin Should not change unexpectedly: config 1`] 
 exports[`CSS Modules - Svelte Plugin Should not change unexpectedly: plugin 1`] = `
 {
   "markup": [Function],
+  "name": "lipemat:css-modules",
 }
 `;

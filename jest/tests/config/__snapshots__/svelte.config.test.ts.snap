@@ -10,6 +10,7 @@ exports[`svelte.config it is a module 1`] = `
       undefined,
       {
         "markup": [Function],
+        "name": "lipemat:css-modules",
       },
     ],
   },

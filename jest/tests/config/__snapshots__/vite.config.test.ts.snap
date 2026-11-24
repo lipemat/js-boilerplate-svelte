@@ -36,6 +36,7 @@ exports[`vite config Matches snapshot during build 1`] = `
           undefined,
           {
             "markup": [Function],
+            "name": "lipemat:css-modules",
           },
         ],
       },
@@ -206,6 +207,7 @@ exports[`vite config Matches snapshot during dev 1`] = `
           undefined,
           {
             "markup": [Function],
+            "name": "lipemat:css-modules",
           },
         ],
       },
