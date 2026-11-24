@@ -3,15 +3,19 @@ import type {Plugin, Root} from 'postcss';
 
 type Child = Selector['nodes'][number];
 
+type ScopePseudo = ':global' | ':local';
+
 interface Run {
 	before: Child[];
 	inner: Child[];
 	separator: Child | undefined;
 }
 
+const SCOPE_PSEUDOS: string[] = [ ':global', ':local' ] satisfies ScopePseudo[];
+
 const processor = selectorParser( root => {
 	root.each( selector => {
-		rewriteSelector( selector );
+		rewriteSelector( selector, true );
 	} );
 } );
 
@@ -22,7 +26,10 @@ const processor = selectorParser( root => {
  *
  * - Expects flattened CSS, after `postcss-nested`.
  * - A bare `:local` ends the global run and is dropped.
- * - Pseudo arguments are left as is.
+ * - Within pseudo arguments of a top-level compound holding a class, mixed
+ *   wraps the whole compound, so every `:global` inside is stripped.
+ * - Within other pseudo arguments, bare `:global` is wrapped the same way.
+ * - Within a `:global(…)` argument, `:global` inside pseudos is stripped.
  */
 export default function postcssGlobalFunction(): Plugin {
 	return {
@@ -40,42 +47,48 @@ export default function postcssGlobalFunction(): Plugin {
 postcssGlobalFunction.postcss = true;
 
 
-function rewriteSelector( selector: Selector ): void {
+/**
+ * @param selector - Rewritten in place.
+ * @param topLevel - Mixed mode wraps compounds holding a class in `:global(…)`.
+ */
+function rewriteSelector( selector: Selector, topLevel: boolean ): void {
 	const original: Child[] = [ ...selector.nodes ];
 	selector.removeAll();
-	rewriteNodes( original ).forEach( node => selector.append( node ) );
+	rewriteNodes( original, topLevel ).forEach( node => selector.append( node ) );
 }
 
 
-function rewriteNodes( nodes: Child[] ): Child[] {
+function rewriteNodes( nodes: Child[], topLevel: boolean ): Child[] {
 	const global = nodes.find( ( node ): node is Pseudo => isBare( node, ':global' ) );
 
 	if ( selectorParser.isPseudo( global ) ) {
-		return rewriteRun( nodes, global );
+		return rewriteRun( nodes, global, topLevel );
 	}
-	return nodes;
+	return rewritePseudos( nodes, topLevel );
 }
 
 
 /**
  * Wrap everything after `global`, up to the next bare `:local`.
  */
-function rewriteRun( nodes: Child[], global: Pseudo ): Child[] {
+function rewriteRun( nodes: Child[], global: Pseudo, topLevel: boolean ): Child[] {
 	const start = nodes.indexOf( global );
 	const localIndex = nodes.findIndex( ( node, index ) => index > start && isBare( node, ':local' ) );
 	const end = -1 === localIndex ? nodes.length : localIndex;
 	const run = splitRun( nodes.slice( 0, start ), nodes.slice( start + 1, end ) );
 
 	if ( 0 === run.inner.length ) {
-		return [ ...nodes.slice( 0, end ), ...rewriteNodes( nodes.slice( end ) ) ];
+		return [ ...rewritePseudos( nodes.slice( 0, end ), topLevel ), ...rewriteNodes( nodes.slice( end ), topLevel ) ];
 	}
 
+	run.inner.forEach( stripArguments );
 	wrapGlobal( global, run.inner );
+	const before = rewritePseudos( run.before, topLevel );
 
 	if ( -1 === localIndex ) {
-		return [ ...run.before, global ];
+		return [ ...before, global ];
 	}
-	return [ ...run.before, global, ...afterLocal( nodes.slice( localIndex + 1 ), run.separator ) ];
+	return [ ...before, global, ...afterLocal( nodes.slice( localIndex + 1 ), run.separator, topLevel ) ];
 }
 
 
@@ -114,7 +127,7 @@ function trimRun( before: Child[], nodes: Child[] ): Run {
 /**
  * Nodes following a dropped `:local`, joined by the strongest combinator around it.
  */
-function afterLocal( nodes: Child[], separator: Child | undefined ): Child[] {
+function afterLocal( nodes: Child[], separator: Child | undefined, topLevel: boolean ): Child[] {
 	const after: Child[] = [ ...nodes ];
 	const next = after[ 0 ];
 	let joiner = separator;
@@ -128,9 +141,9 @@ function afterLocal( nodes: Child[], separator: Child | undefined ): Child[] {
 		return [];
 	}
 	if ( selectorParser.isCombinator( joiner ) ) {
-		return [ joiner, ...rewriteNodes( after ) ];
+		return [ joiner, ...rewriteNodes( after, topLevel ) ];
 	}
-	return rewriteNodes( after );
+	return rewriteNodes( after, topLevel );
 }
 
 
@@ -147,7 +160,122 @@ function wrapGlobal( global: Pseudo, nodes: Child[] ): void {
 }
 
 
-function isBare( node: Child, value: ':global' | ':local' ): node is Pseudo {
+/**
+ * Strip or wrap `:global` within the pseudo arguments of each compound.
+ */
+function rewritePseudos( nodes: Child[], topLevel: boolean ): Child[] {
+	splitCompounds( nodes ).forEach( compound => {
+		rewriteCompound( compound, topLevel );
+	} );
+	return nodes;
+}
+
+
+function rewriteCompound( compound: Child[], topLevel: boolean ): void {
+	const rewrite = topLevel && hasClass( compound ) ? stripArguments : wrapArguments;
+	compound.forEach( rewrite );
+}
+
+
+function hasClass( compound: Child[] ): boolean {
+	return compound.some( node => selectorParser.isClassName( node ) );
+}
+
+
+function splitCompounds( nodes: Child[] ): Child[][] {
+	const compounds: Child[][] = [ [] ];
+	nodes.forEach( node => {
+		if ( selectorParser.isCombinator( node ) ) {
+			compounds.push( [] );
+		} else {
+			compounds[ compounds.length - 1 ].push( node );
+		}
+	} );
+	return compounds;
+}
+
+
+function wrapArguments( node: Child ): void {
+	eachArgument( node, selector => {
+		rewriteSelector( selector, false );
+	} );
+}
+
+
+function stripArguments( node: Child ): void {
+	eachArgument( node, stripSelector );
+}
+
+
+/**
+ * Run `callback` on each pseudo argument, or strip `:global` within a `:global(…)` argument.
+ */
+function eachArgument( node: Child, callback: ( selector: Selector ) => void ): void {
+	if ( selectorParser.isPseudo( node ) && 0 < node.nodes.length ) {
+		if ( ':global' === node.value ) {
+			node.each( selector => {
+				selector.nodes.forEach( stripArguments );
+			} );
+		} else if ( ! SCOPE_PSEUDOS.includes( node.value ) ) {
+			node.each( selector => {
+				callback( selector );
+			} );
+		}
+	}
+}
+
+
+/**
+ * Remove every `:global` within the selector, recursively, keeping a function form's argument.
+ */
+function stripSelector( selector: Selector ): void {
+	[ ...selector.nodes ].forEach( node => {
+		stripNode( selector, node );
+	} );
+}
+
+
+function stripNode( selector: Selector, node: Child ): void {
+	if ( selectorParser.isPseudo( node ) ) {
+		if ( isBare( node, ':global' ) ) {
+			removeBare( selector, node );
+		} else if ( isGlobalFunction( node ) ) {
+			const inner: Child[] = [ ...node.first.nodes ];
+			inner[ 0 ].spaces.before = node.spaces.before;
+			node.replaceWith( ...inner );
+			inner.forEach( stripArguments );
+		} else {
+			stripArguments( node );
+		}
+	}
+}
+
+
+/**
+ * Remove a bare pseudo along with the descendant combinator it leaves dangling.
+ */
+function removeBare( selector: Selector, node: Pseudo ): void {
+	const index = selector.index( node );
+	const next: Child | undefined = selector.nodes[ index + 1 ];
+	const prev: Child | undefined = selector.nodes[ index - 1 ];
+	if ( isDescendant( next ) && ( undefined === prev || selectorParser.isCombinator( prev ) ) ) {
+		next.remove();
+	} else if ( isDescendant( prev ) ) {
+		prev.remove();
+	}
+	node.remove();
+	if ( undefined === prev && 0 < selector.nodes.length ) {
+		selector.first.spaces.before = node.spaces.before;
+	}
+}
+
+
+function isGlobalFunction( node: Pseudo ): boolean {
+	return ':global' === node.value && 1 === node.nodes.length && 0 < node.first.nodes.length;
+}
+
+
+function isBare( node: Child, value: ScopePseudo ): boolean {
 	return selectorParser.isPseudo( node ) && value === node.value && 0 === node.nodes.length;
 }
 

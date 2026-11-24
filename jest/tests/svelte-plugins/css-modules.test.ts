@@ -21,6 +21,14 @@ function unhash( value: string ): string {
 }
 
 
+/**
+ * Replace each Svelte scope class with `{scope}`.
+ */
+function unscope( value: string ): string {
+	return value.replace( /svelte-[a-z0-9]+/g, '{scope}' );
+}
+
+
 describe( 'CSS Modules - Svelte Plugin', () => {
 	it( 'Should not change unexpectedly', () => {
 		expect( cssModulesPlugin() ).toMatchSnapshot( 'plugin' );
@@ -187,6 +195,95 @@ describe.each( [
 			'class="{outer}"',
 			'class="inner"',
 			'class="{leaf}"',
+		] );
+	} );
+
+
+	it( 'compiles without warnings', () => {
+		expect( result.warnings ).toEqual( [] );
+	} );
+} );
+
+
+/**
+ * `:global` inside pseudo arguments is stripped in a class compound and wrapped elsewhere.
+ */
+describe.each( [
+	'global-pseudo.svelte',
+	'global-pseudo-pcss.svelte',
+] )( 'CSS Modules - Svelte Plugin :global in pseudo arguments in %s', fixture => {
+	let result: BuildResult;
+	let css: string;
+
+	beforeAll( () => {
+		result = buildComponent( fixture );
+		css = unscope( unhash( result.css ) );
+	}, BUILD_TIMEOUT );
+
+
+	it.each( [
+		'\n.{strip-not}:not(.g-not) {',
+		'\n.{strip-not-fn}:not(.g-not-fn) {',
+		'\n.{strip-nested}:not(:is(.g-nested)) {',
+		'\n.{strip-has}:has(.g-has) {',
+		'\n.{strip-is}:is(.g-is, .g-is-fn) {',
+		'\n.{strip-amp}:where(.g-amp) {',
+		'\np.{scope}:not(.g-tag-not) {',
+		'\n.{wrap-is} :is(.g-wrap-is, .local-is.{scope}) {',
+		'\n:is(.g-lead) .{wrap-lead} {',
+		'\n.{wrap-where} :where(.g-where) {',
+		'\n.{wrap-local} :is(.g-local .local-leaf.{scope}) {',
+		'\nsection.{scope}:not(:is(.g-section-not)) {',
+		'\n.{wrap-fn} :is(.g-wrap-fn, .local-fn.{scope}) {',
+		'\ndiv.{scope}:has(.g-div-has) {',
+		'\n.{wrap-fn-strip} .g-fn-host:not(.g-fn-not) {',
+	] )( 'emits `%s`', selector => {
+		expect( `\n${css}` ).toContain( selector );
+	} );
+
+
+	it( 'emits no literal :global', () => {
+		expect( css ).toContain( '.g-not' );
+		expect( css ).not.toContain( ':global' );
+	} );
+
+
+	/**
+	 * Svelte scopes every element, global ones included, because `p:not(…)` and `:is(…)` may match any of them.
+	 */
+	it( 'hashes local markup classes and leaves global ones raw', () => {
+		const classes: string[] = result.js.match( /class="[^"]*"/g ) ?? [];
+		expect( classes.map( value => unscope( unhash( value ) ) ) ).toEqual( [
+			'class="{strip-not} {scope}"',
+			'class="g-not {scope}"',
+			'class="{strip-not-fn} {scope}"',
+			'class="g-not-fn {scope}"',
+			'class="{strip-nested} {scope}"',
+			'class="g-nested {scope}"',
+			'class="{strip-has} {scope}"',
+			'class="g-has {scope}"',
+			'class="{strip-is} g-is {scope}"',
+			'class="{strip-amp} {scope}"',
+			'class="g-amp {scope}"',
+			'class="g-tag {scope}"',
+			'class="{wrap-is} {scope}"',
+			'class="g-wrap-is {scope}"',
+			'class="local-is {scope}"',
+			'class="g-lead {scope}"',
+			'class="{wrap-lead} {scope}"',
+			'class="{wrap-where} {scope}"',
+			'class="g-where {scope}"',
+			'class="{wrap-local} {scope}"',
+			'class="g-local {scope}"',
+			'class="local-leaf {scope}"',
+			'class="g-section {scope}"',
+			'class="{wrap-fn} {scope}"',
+			'class="g-wrap-fn {scope}"',
+			'class="local-fn {scope}"',
+			'class="{scope}"',
+			'class="g-div-has {scope}"',
+			'class="{wrap-fn-strip} {scope}"',
+			'class="g-fn-host {scope}"',
 		] );
 	} );
 

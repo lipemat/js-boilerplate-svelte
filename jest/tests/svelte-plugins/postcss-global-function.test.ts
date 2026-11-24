@@ -136,6 +136,180 @@ describe( 'postcssGlobalFunction', () => {
 	} );
 
 
+	it.each( [
+		{
+			input: '.a:not(:global .b) { color: red; }',
+			output: '.a:not(.b) { color: red; }',
+		},
+		{
+			input: '.a:not(:global(.b)) { color: red; }',
+			output: '.a:not(.b) { color: red; }',
+		},
+		{
+			input: '.a:is(:global .b, :global(.c)) { color: red; }',
+			output: '.a:is(.b, .c) { color: red; }',
+		},
+		{
+			input: '.a:has(:global .b) { color: red; }',
+			output: '.a:has(.b) { color: red; }',
+		},
+		{
+			input: '.a:has(> :global .b) { color: red; }',
+			output: '.a:has(> .b) { color: red; }',
+		},
+		{
+			input: '.a:where(.x :global .b) { color: red; }',
+			output: '.a:where(.x .b) { color: red; }',
+		},
+		{
+			input: '.a:not(.x :global > .b) { color: red; }',
+			output: '.a:not(.x > .b) { color: red; }',
+		},
+		{
+			input: '.a:not(.x :global) { color: red; }',
+			output: '.a:not(.x) { color: red; }',
+		},
+		{
+			input: '.a:not(:global.b) { color: red; }',
+			output: '.a:not(.b) { color: red; }',
+		},
+		{
+			input: 'div.a:not(:global .b) { color: red; }',
+			output: 'div.a:not(.b) { color: red; }',
+		},
+		{
+			input: '.x .a:not(:global .b) { color: red; }',
+			output: '.x .a:not(.b) { color: red; }',
+		},
+		{
+			input: '.a:not(:is(:global .b)) { color: red; }',
+			output: '.a:not(:is(.b)) { color: red; }',
+		},
+		{
+			input: '.a:not(:is(:global(.b))) { color: red; }',
+			output: '.a:not(:is(.b)) { color: red; }',
+		},
+		{
+			input: '.a:not(:global(.b:is(:global .c))) { color: red; }',
+			output: '.a:not(.b:is(.c)) { color: red; }',
+		},
+	] )( 'strips :global inside pseudo arguments of a class compound in `$input`', ( {
+		input,
+		output,
+	} ) => {
+		expect( rewrite( input ) ).toBe( output );
+	} );
+
+
+	it.each( [
+		{
+			input: 'div:not(:global .b) { color: red; }',
+			output: 'div:not(:global(.b)) { color: red; }',
+		},
+		{
+			input: ':not(:global .b) { color: red; }',
+			output: ':not(:global(.b)) { color: red; }',
+		},
+		{
+			input: '.a :is(:global .b, .c) { color: red; }',
+			output: '.a :is(:global(.b), .c) { color: red; }',
+		},
+		{
+			input: ':is(:global .b) .a { color: red; }',
+			output: ':is(:global(.b)) .a { color: red; }',
+		},
+		{
+			input: '.a :where(:global .b) { color: red; }',
+			output: '.a :where(:global(.b)) { color: red; }',
+		},
+		{
+			input: 'div:has(> :global .b .c) { color: red; }',
+			output: 'div:has(> :global(.b .c)) { color: red; }',
+		},
+		{
+			input: '.a :is(.x :global .b) { color: red; }',
+			output: '.a :is(.x :global(.b)) { color: red; }',
+		},
+		{
+			input: '.a :is(:global .b :local .c, .d) { color: red; }',
+			output: '.a :is(:global(.b) .c, .d) { color: red; }',
+		},
+		{
+			input: 'div:not(:is(:global .b)) { color: red; }',
+			output: 'div:not(:is(:global(.b))) { color: red; }',
+		},
+		{
+			input: 'div:not(.x:is(:global .b)) { color: red; }',
+			output: 'div:not(.x:is(:global(.b))) { color: red; }',
+		},
+	] )( 'wraps bare :global inside pseudo arguments of other compounds in `$input`', ( {
+		input,
+		output,
+	} ) => {
+		expect( rewrite( input ) ).toBe( output );
+	} );
+
+
+	it.each( [
+		{
+			input: '.a :global .b:not(:global .c) { color: red; }',
+			output: '.a :global(.b:not(.c)) { color: red; }',
+		},
+		{
+			input: ':global div :is(:global(.c)) { color: red; }',
+			output: ':global(div :is(.c)) { color: red; }',
+		},
+		{
+			input: '.a:not(:global .b) :global .c { color: red; }',
+			output: '.a:not(.b) :global(.c) { color: red; }',
+		},
+		{
+			input: '.a :global .b :local div:not(:global .c) { color: red; }',
+			output: '.a :global(.b) div:not(:global(.c)) { color: red; }',
+		},
+	] )( 'combines pseudo arguments with a top-level global run in `$input`', ( {
+		input,
+		output,
+	} ) => {
+		expect( rewrite( input ) ).toBe( output );
+	} );
+
+
+	it.each( [
+		{
+			input: ':global(.a:not(:global .b)) { color: red; }',
+			output: ':global(.a:not(.b)) { color: red; }',
+		},
+		{
+			input: '.x :global(.a:is(:global(.b), :global .c)) { color: red; }',
+			output: '.x :global(.a:is(.b, .c)) { color: red; }',
+		},
+		{
+			input: 'div :is(:global(.a:not(:global .b))) { color: red; }',
+			output: 'div :is(:global(.a:not(.b))) { color: red; }',
+		},
+	] )( 'strips :global inside pseudo arguments of a function form in `$input`', ( {
+		input,
+		output,
+	} ) => {
+		expect( rewrite( input ) ).toBe( output );
+	} );
+
+
+	it.each( [
+		{
+			case: 'function form inside a non-class compound',
+			input: 'div:not(:global(.b)) { color: red; }',
+		},
+		{
+			case: 'function form inside a descendant pseudo',
+			input: '.a :is(:global(.b), .c) { color: red; }',
+		},
+	] )( 'leaves $case untouched', ( {input} ) => {
+		expect( rewrite( input ) ).toBe( input );
+	} );
+
+
 	it( 'rewrites selectors inside at-rules', () => {
 		expect( rewrite( '@media (any-hover: hover) {\n\t.m:hover :global .f { color: purple; }\n\t:global .h:hover { color: teal; }\n}' ) )
 			.toBe( '@media (any-hover: hover) {\n\t.m:hover :global(.f) { color: purple; }\n\t:global(.h:hover) { color: teal; }\n}' );
